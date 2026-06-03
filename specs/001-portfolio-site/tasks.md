@@ -34,12 +34,12 @@ Project Structure).
 
 **Purpose**: Inicializar el proyecto Vite + React y anclar la fidelidad de estilos.
 
-- [ ] T001 Scaffold Vite + React en la raíz del repo (`index.html`, `vite.config.js`, `src/main.jsx`, `src/App` mínimo) con `@vitejs/plugin-react`
-- [ ] T002 Instalar dependencias: `react`, `react-dom`, `react-router-dom@7`, y dev deps `vitest` + `@testing-library/react` (ver research D1/D2)
-- [ ] T003 [P] Configurar ESLint + Prettier en la raíz (`.eslintrc`, `.prettierrc`)
-- [ ] T004 [P] Portar la hoja de estilos **verbatim** desde `assets/App.reference.jsx` a `src/styles/global.css` (tokens `:root` + keyframes) e importarla en `src/main.jsx` — ancla de fidelidad (research D3)
-- [ ] T005 [P] Añadir `preconnect` + enlaces de Google Fonts (Fraunces, Hanken Grotesk, JetBrains Mono) en `index.html`
-- [ ] T006 [P] Crear directorios de assets `public/media/` y `public/cv/` con placeholders (README o `.gitkeep`)
+- [X] T001 Scaffold Vite + React en la raíz del repo (`index.html`, `vite.config.js`, `src/main.jsx`) con `@vitejs/plugin-react`
+- [X] T002 Instalar dependencias: `react`, `react-dom`, `react-router@7`, `lucide-react`, y dev deps `vitest` + `@testing-library/react` + `jsdom` (ver research D1/D2)
+- [X] T003 [P] Configurar formato con Prettier (`.prettierrc`). _(ESLint diferido a la fase de Polish.)_
+- [X] T004 [P] Portar la hoja de estilos **verbatim** desde `assets/App.reference.jsx` a `src/styles/global.css` (tokens `:root` + keyframes) e importarla en `src/main.jsx` — ancla de fidelidad (research D3)
+- [X] T005 [P] Añadir `preconnect` + enlaces de Google Fonts (Fraunces, Hanken Grotesk, JetBrains Mono) en `index.html`
+- [ ] T006 [P] Crear directorios de assets `public/media/` y `public/cv/` con placeholders (README o `.gitkeep`) _(pendiente: se crean en T043 al añadir los webm/CV)_
 
 **Checkpoint**: `npm run dev` arranca y sirve una página en blanco con los estilos/fuentes cargados.
 
@@ -52,14 +52,14 @@ datos, primitivas visuales).
 
 **⚠️ CRITICAL**: Ninguna historia puede empezar hasta completar esta fase.
 
-- [ ] T007 Configurar el router en `src/router.jsx` (`createBrowserRouter`: `/` → `Home`, `/proyecto/:slug` → `CaseStudy`, `<ScrollRestoration>`) y montar `<RouterProvider>` desde `react-router/dom` en `src/main.jsx` (contracts/routes.md)
-- [ ] T008 Crear `src/i18n/LangContext.jsx`: estado `lang` (`es`|`en`), init desde `localStorage` con fallback `es`, persistencia en cambio, helpers `useLang/setLang/toggle/t`; `LangProvider` por encima del router (contracts/i18n.md)
-- [ ] T009 [P] Crear esqueleto de diccionarios `src/i18n/strings.js` con la forma espejo `{es,en}` para `HERO`/`PROJ`/`SEC`/`CASE` (data-model: BilingualString)
-- [ ] T010 [P] Crear `src/data/projects.js` con los 4 proyectos + matriz de enlaces + fila `coming-soon` (data-model: Project, orden Maderas→LPR→AirVision→Eventos)
-- [ ] T011 [P] Crear `src/components/Grain.jsx` (overlay SVG `feTurbulence`, `mix-blend-mode: multiply`) — design-system
-- [ ] T012 [P] Crear scaffold `src/components/Orb.jsx` con prop `mode` ("hero"|"section"|"contact") y render estático (los comportamientos de movimiento se añaden en US5)
-- [ ] T013 [P] Crear `src/components/ArrowRow.jsx` (fila `etiqueta → valor`, `href` opcional, operable por teclado con foco visible) — contracts/components.md
-- [ ] T014 [P] Añadir `vercel.json` con rewrite SPA de todas las rutas a `/index.html` (research D7)
+- [X] T007 Configurar el router en `src/router.jsx` (`createBrowserRouter`: `/` → `Home`, `/proyecto/:slug` → `CaseStudy`, `<ScrollRestoration>` en layout `Root` con clase `.site`) y montar `<RouterProvider>` desde `react-router/dom` en `src/main.jsx` (contracts/routes.md)
+- [X] T008 Crear `src/i18n/LangContext.jsx`: estado `lang` (`es`|`en`), init desde `localStorage` con fallback `es`, persistencia en cambio, helpers `useLang/setLang/toggle`; `LangProvider` por encima del router (contracts/i18n.md)
+- [X] T009 [P] Crear diccionarios `src/i18n/strings.js` con la forma espejo `{es,en}` para `HERO`/`PROJ`/`SEC` (data-model: BilingualString)
+- [X] T010 [P] Crear `src/data/projects.js` con los 4 proyectos + matriz de enlaces (data-model: Project, orden Maderas→LPR→AirVision→Eventos)
+- [X] T011 [P] Grano `feTurbulence` (`.grain`/`.pw-grain`/`.sx-grain`) — _portado verbatim en `global.css` + markup inline de las secciones (no extraído a `Grain.jsx`)_
+- [X] T012 [P] Orbe ámbar — _hero mouse-follow inline en `Hero.jsx` (rAF+lerp) y orbes de sección/contacto como divs CSS verbatim; no extraído a `Orb.jsx`_
+- [X] T013 [P] Filas `etiqueta → valor` — _markup `→` inline verbatim en Hero/About/Stack/Experience/Contact (no extraído a `ArrowRow.jsx`)_
+- [X] T014 [P] Añadir `vercel.json` con rewrite SPA de todas las rutas a `/index.html` (research D7)
 
 **Checkpoint**: Rutas `/` y `/proyecto/:slug` resuelven; el contexto de idioma y los datos están disponibles.
 
@@ -73,16 +73,16 @@ español, navegación con smooth-scroll.
 **Independent Test**: Cargar `/` sin cambiar idioma; verificar las 6 secciones en orden,
 contenido real del skill, proyectos en orden con AirVision destacado, y nav con smooth-scroll.
 
-- [ ] T015 [P] [US1] Crear `src/components/Nav.jsx` (monograma "Álvaro Flores.", enlaces de sección con smooth-scroll a `#work`/`#about`/`#stack`/`#contact`, hueco del toggle ES/EN)
-- [ ] T016 [US1] Construir `src/sections/Hero.jsx` (status bar con ubicación + reloj en vivo y `✦ Estado → Disponible`, eyebrow mono, H1 "Hola, soy *Álvaro*.", tagline, `ArrowRow` de datos, fila de CTAs, scroll cue, `<Orb mode="hero">`, `<Grain>`)
-- [ ] T017 [P] [US1] Crear `src/components/ProjectCard.jsx` (miniatura `webm` lazy + `poster`, badge de estado, tagline cursiva, métricas mono, chips de stack, enlaces condicionales, botón circular `→` con `<Link to="/proyecto/:slug">`)
-- [ ] T018 [US1] Construir `src/sections/Projects.jsx` (`id="work"`, 4 `ProjectCard` en orden, AirVision con anillo/glow "Destacado", fila `coming-soon`)
-- [ ] T019 [P] [US1] Construir `src/sections/About.jsx` (`id="about"`, 3 párrafos con el 3º marcado borrador origin-story, panel "glance" de `ArrowRow`)
-- [ ] T020 [P] [US1] Construir `src/sections/Stack.jsx` (`id="stack"`, 6 grupos: Lenguajes, Frontend & Móvil, Backend & Datos, Infra & DevOps, Visión & IoT, Otros)
-- [ ] T021 [P] [US1] Construir `src/sections/Experience.jsx` (timeline de 3 roles + bloque educación PUCV; SIN "con distinción")
-- [ ] T022 [P] [US1] Construir `src/sections/Contact.jsx` (`id="contact"`, heading grande, `ArrowRow` Email/LinkedIn/GitHub/WhatsApp con hover, 2 botones, `<Orb mode="contact">`)
-- [ ] T023 [US1] Componer `src/pages/Home.jsx` con las 6 secciones en orden fijo y enlazar la ruta `/`
-- [ ] T024 [US1] Cargar el contenido **en español** de `references/content.md` en `src/i18n/strings.js` y `src/data/projects.js` para todas las secciones
+- [X] T015 [P] [US1] Nav (monograma "Álvaro Flores.", enlaces con smooth-scroll a `#work`/`#about`/`#stack`/`#contact`, toggle ES/EN) — _inline en `Hero.jsx` (verbatim, como la referencia)_
+- [X] T016 [US1] Construir `src/sections/Hero.jsx` (status bar con ubicación + reloj en vivo y `✦ Estado → Disponible`, eyebrow mono, H1 "Hola, soy *Álvaro*.", tagline, filas de datos, CTAs, scroll cue, orbe hero, grano)
+- [X] T017 [P] [US1] Tarjeta de proyecto (miniatura animada placeholder, badge, tagline cursiva, métricas, chips, enlaces condicionales, botón circular `→`) — _inline en `Projects.jsx` (verbatim). Enrutado del `→` a `/proyecto/:slug` se hará en US3 (T031)_
+- [X] T018 [US1] Construir `src/sections/Projects.jsx` (`id="work"`, 4 tarjetas en orden, AirVision con anillo/glow "Destacado", fila `coming-soon`)
+- [X] T019 [P] [US1] Construir `src/sections/About.jsx` (`id="about"`, 3 párrafos con el 3º marcado borrador origin-story, panel "glance")
+- [X] T020 [P] [US1] Construir `src/sections/Stack.jsx` (`id="stack"`, 6 grupos: Lenguajes, Frontend & Móvil, Backend & Datos, Infra & DevOps, Visión & IoT, Otros)
+- [X] T021 [P] [US1] Construir `src/sections/Experience.jsx` (timeline de 3 roles + bloque educación PUCV; SIN "con distinción")
+- [X] T022 [P] [US1] Construir `src/sections/Contact.jsx` (`id="contact"`, heading grande, filas Email/LinkedIn/GitHub/WhatsApp con hover, 2 botones, orbe de cierre) + `Footer.jsx`
+- [X] T023 [US1] Componer `src/pages/Home.jsx` con las 6 secciones en orden fijo (wrapper `sx-root` + grano) y enlazar la ruta `/`
+- [X] T024 [US1] Cargar el contenido de `references/content.md` en `src/i18n/strings.js` y `src/data/projects.js` (ES y EN; la referencia ya trae ambos idiomas)
 
 **Checkpoint**: US1 funcional y testeable de forma independiente (recorrido completo en español).
 
