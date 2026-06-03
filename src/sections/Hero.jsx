@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { useLang } from "../i18n/LangContext";
 import { HERO } from "../i18n/strings";
-import { CV_URL, GITHUB_URL, LINKEDIN_URL } from "../data/site";
+import { CV_URL, CV_FILENAME, GITHUB_URL, LINKEDIN_URL } from "../data/site";
 
 export default function Hero() {
   const { lang, toggle } = useLang();
@@ -70,7 +70,7 @@ export default function Hero() {
           <div className="ctas" style={{ animationDelay: ".36s" }}>
             <a className="btn btn-primary" href="#work">{t.cta1}<ArrowUpRight size={16} /></a>
             <a className="btn btn-ghost" href="#contact"><Mail size={16} />{t.cta2}</a>
-            <a className="btn btn-ghost" href={CV_URL} target="_blank" rel="noreferrer"><FileText size={16} />{t.cta3}</a>
+            <a className="btn btn-ghost" href={CV_URL} download={CV_FILENAME} target="_blank" rel="noreferrer"><FileText size={16} />{t.cta3}</a>
             <a className="btn btn-ghost btn-icon" href={GITHUB_URL} target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={16} /></a>
             <a className="btn btn-ghost btn-icon" href={LINKEDIN_URL} target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin size={16} /></a>
           </div>

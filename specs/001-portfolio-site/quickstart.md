@@ -94,6 +94,14 @@ miniatura en vídeo de un proyecto:
 Mientras siga en `false`, la tarjeta muestra el placeholder animado de la referencia (sin
 peticiones 404).
 
+## Reemplazar el CV
+
+Los botones "CV" (Hero) y "Descargar CV" (Contacto) descargan
+`public/cv/Alvaro-Flores-Rocha-CV.pdf` (hoy un placeholder válido generado por
+`scripts/make-placeholder-cv.mjs`). Para poner el real: **reemplaza ese archivo por tu PDF
+con el mismo nombre** — no hay que tocar código. Si prefieres otro nombre, actualiza
+`CV_URL` y `CV_FILENAME` en `src/data/site.js`.
+
 ## Puerta de fidelidad antes de "hecho"
 
 Recorrer la checklist de fidelidad del skill (`references/speckit-workflow.md`): paleta y

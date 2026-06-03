@@ -5,7 +5,7 @@
 import { Mail, FileText } from "lucide-react";
 import { useLang } from "../i18n/LangContext";
 import { SEC } from "../i18n/strings";
-import { CV_URL } from "../data/site";
+import { CV_URL, CV_FILENAME } from "../data/site";
 
 export default function Contact() {
   const { lang } = useLang();
@@ -24,7 +24,7 @@ export default function Contact() {
         </div>
         <div className="btns">
           <a className="btn btn-primary" href="mailto:f.alvaro.ro@gmail.com"><Mail size={16} />{t.write}</a>
-          <a className="btn btn-ghost" href={CV_URL} target="_blank" rel="noreferrer"><FileText size={16} />{t.cv}</a>
+          <a className="btn btn-ghost" href={CV_URL} download={CV_FILENAME} target="_blank" rel="noreferrer"><FileText size={16} />{t.cv}</a>
         </div>
       </div>
     </section>
