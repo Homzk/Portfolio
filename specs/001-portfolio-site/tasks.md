@@ -95,10 +95,10 @@ contenido real del skill, proyectos en orden con AirVision destacado, y nav con 
 **Independent Test**: Togglear a EN y recorrer todo verificando 100% en inglés; recargar y
 seguir en EN; limpiar `localStorage` y volver a español.
 
-- [ ] T025 [US2] Cablear el toggle ES/EN del `src/components/Nav.jsx` a `useLang().toggle()` (único toggle global, R-I4)
-- [ ] T026 [US2] Añadir las contrapartes **EN** de cada cadena en `src/i18n/strings.js` (paridad total desde la referencia)
-- [ ] T027 [US2] Hacer que todas las secciones consuman `t()`/`lang` para que el toggle cambie el sitio entero sin recarga ni fragmentos
-- [ ] T028 [P] [US2] Test de paridad de claves en `tests/unit/i18n-parity.test.js` (falla si alguna clave existe en un solo idioma) — Constitución III (AC-I4)
+- [X] T025 [US2] Cablear el toggle ES/EN a `useLang().toggle()` en el Nav del Hero (único toggle global, R-I4)
+- [X] T026 [US2] Contrapartes **EN** de cada cadena en `src/i18n/strings.js` (paridad total; verificada por T028)
+- [X] T027 [US2] Todas las secciones consumen `lang` vía `useLang()`/diccionarios → el toggle cambia el sitio entero sin recarga
+- [X] T028 [P] [US2] Test de paridad de claves en `tests/unit/i18n-parity.test.js` (3 tests; falla si alguna clave existe en un solo idioma) — Constitución III (AC-I4)
 
 **Checkpoint**: US1 + US2 funcionan; el sitio es bilingüe con persistencia.
 
@@ -111,10 +111,10 @@ seguir en EN; limpiar `localStorage` y volver a español.
 **Independent Test**: Abrir los 4 casos desde su tarjeta; verificar plantilla completa,
 "Decisiones técnicas", enlace de retorno y deep-link recargable.
 
-- [ ] T029 [US3] Construir `src/pages/CaseStudy.jsx` desde `assets/CaseStudy.reference.jsx` (back link → title block → cover `webm` → Contexto → Problema → Rol → Solución → **Decisiones técnicas (¿Por qué X?)** → Resultados (tiles) → Stack → Aprendizajes [borrador] → next project con orbe de cierre)
-- [ ] T030 [P] [US3] Añadir contenido de caso de estudio (ES+EN) de los 4 proyectos a `src/i18n/strings.js` (Maderas, LPR, AirVision, Eventos) con `decisions` y `stats` (data-model: CaseStudy)
-- [ ] T031 [US3] Cablear la matriz de enlaces por proyecto (live/repo/CTA primaria) en `ProjectCard.jsx` y `CaseStudy.jsx` según `data-model.md`
-- [ ] T032 [P] [US3] Test de matriz de enlaces en `tests/unit/link-matrix.test.js` (cada proyecto expone exactamente los enlaces de la matriz; el `→` siempre abre el caso)
+- [X] T029 [US3] Construir `src/pages/CaseStudy.jsx` desde `assets/CaseStudy.reference.jsx` (back link → title block → cover → Contexto → Problema → Rol → Solución → **Decisiones técnicas (¿Por qué X?)** → Resultados (tiles) → Stack → Aprendizajes [borrador] → next project con orbe de cierre). Estilos en `src/styles/case-study.css` acotados bajo `.cs-root`
+- [X] T030 [P] [US3] Contenido de caso de estudio (ES+EN) de los 4 proyectos en `src/data/caseStudies.js` (Maderas verbatim; LPR/AirVision/Eventos desde `content.md`) con `decisions` y `results`; Aprendizajes marcados BORRADOR (data-model: CaseStudy)
+- [X] T031 [US3] Cablear la matriz de enlaces por proyecto en `Projects.jsx` y `CaseStudy.jsx`: el circular `→` y la miniatura enrutan a `/proyecto/:slug`; demo/repo externos; "caso de estudio" como `<Link>` interno (data-model.md)
+- [X] T032 [P] [US3] Test de matriz de enlaces en `tests/unit/link-matrix.test.js` (11 tests: orden, destacado, enlaces exactos, caso enrutable, paridad de enlaces)
 
 **Checkpoint**: US1–US3 funcionan; los 4 casos de estudio son navegables.
 

@@ -1,0 +1,86 @@
+/* ============================================================
+   CASO DE ESTUDIO — estilos portados verbatim desde
+   assets/CaseStudy.reference.jsx, ACOTADOS bajo .cs-root para no
+   colisionar con la home (que redefine .container/.sec/.h1/.h2/
+   .badge/.eyebrow/.btn/.chip/.draft con otros valores). El keyframe
+   `drift` de la referencia se renombra `driftCS` para no pisar el de
+   las secciones. `sweep` se reutiliza del global (idéntico).
+   ============================================================ */
+
+.cs-root{position:relative; overflow:hidden; background:var(--paper); color:var(--ink); font-family:var(--body); padding-bottom:0}
+.cs-root .cs-grain{position:fixed; inset:0; pointer-events:none; z-index:1; opacity:.30; mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.cs-root .cs-orb{position:absolute; border-radius:50%; pointer-events:none; z-index:0; filter:blur(10px);
+  background:radial-gradient(circle,rgba(242,162,60,.55),rgba(232,119,14,0) 70%);
+  animation:driftCS 16s ease-in-out infinite}
+@keyframes driftCS{0%{transform:translate(0,0) scale(1)}50%{transform:translate(-20px,18px) scale(1.05)}100%{transform:translate(0,0) scale(1)}}
+@media(prefers-reduced-motion:reduce){.cs-root .cs-orb,.cs-root .cover-anim{animation:none}}
+.cs-root .cs-orb.top{width:420px; height:420px; right:-150px; top:-120px; opacity:.6}
+.cs-root .container{position:relative; z-index:2; width:100%; max-width:880px; margin:0 auto; padding:0 36px}
+@media(max-width:640px){.cs-root .container{padding:0 22px}}
+.cs-root .wide{max-width:1080px}
+
+.cs-root .back{padding:30px 0 0}
+.cs-root .back a{display:inline-flex; align-items:center; gap:7px; font-family:var(--mono); font-size:13px; color:var(--muted); text-decoration:none}
+.cs-root .back a:hover{color:var(--ink)}
+
+/* title block */
+.cs-root .titleblk{padding:44px 0 30px}
+.cs-root .badge{font-family:var(--mono); font-size:11px; display:inline-flex; align-items:center; gap:6px; padding:5px 11px; border-radius:100px; border:1px solid var(--line-2); color:var(--muted); margin-bottom:20px}
+.cs-root .badge .dot{width:6px; height:6px; border-radius:50%; background:#4FB477}
+.cs-root .h1{font-family:var(--display); font-weight:600; font-size:clamp(40px,7vw,68px); letter-spacing:-.025em; line-height:1; margin-bottom:18px}
+.cs-root .lead{font-family:var(--display); font-style:italic; font-size:clamp(18px,2.4vw,23px); color:var(--muted); max-width:600px; line-height:1.45; margin-bottom:30px}
+
+.cs-root .meta{font-family:var(--mono); font-size:13.5px; line-height:2.1; margin-bottom:28px}
+.cs-root .meta .ar{color:var(--accent)}
+.cs-root .meta b{font-weight:500}
+
+.cs-root .actions{display:flex; flex-wrap:wrap; gap:12px}
+.cs-root .btn{display:inline-flex; align-items:center; gap:8px; font-family:var(--body); font-size:14.5px; font-weight:600; text-decoration:none; padding:12px 20px; border-radius:10px; transition:all .2s; border:1px solid transparent; color:var(--ink)}
+.cs-root .btn-primary{background:var(--ink); color:var(--paper)}
+.cs-root .btn-primary:hover{background:#000; transform:translateY(-1px)}
+.cs-root .btn-dim{font-family:var(--mono); font-size:12.5px; color:var(--dim); display:inline-flex; align-items:center; gap:7px; padding:12px 4px}
+
+/* cover */
+.cs-root .cover{position:relative; height:380px; border-radius:16px; overflow:hidden; border:1px solid var(--line-2); margin:8px 0 50px; background:#16181c}
+.cs-root .cover-anim{position:absolute; inset:0; background:linear-gradient(120deg,#15171c,#23262d 35%,#2c2620 50%,#23262d 65%,#15171c); background-size:300% 100%; animation:sweep 5s linear infinite}
+.cs-root .cover-orb{position:absolute; width:520px; height:520px; border-radius:50%; left:55%; top:30%; transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(242,162,60,.6),rgba(232,119,14,0) 68%); filter:blur(12px)}
+.cs-root .cover-cap{position:absolute; left:0; bottom:0; right:0; padding:14px 18px; font-family:var(--mono); font-size:11.5px; color:#cfc9bd; background:linear-gradient(transparent,rgba(0,0,0,.6)); display:flex; align-items:center; gap:8px}
+.cs-root .cover-cap .d{width:7px;height:7px;border-radius:50%;background:var(--accent-2)}
+
+/* body sections */
+.cs-root .sec{padding:0 0 44px}
+.cs-root .eyebrow{font-family:var(--mono); font-size:12px; letter-spacing:.13em; text-transform:uppercase; color:var(--accent); margin-bottom:16px; display:flex; align-items:center; gap:10px}
+.cs-root .eyebrow::before{content:""; width:20px; height:1px; background:var(--accent)}
+.cs-root .sec h2{font-family:var(--display); font-weight:600; font-size:28px; letter-spacing:-.02em; margin-bottom:16px}
+.cs-root .sec p{font-size:16.5px; color:#3f3b32; line-height:1.7; margin-bottom:14px; max-width:660px}
+.cs-root .sec p b{color:var(--ink); font-weight:600}
+
+/* technical decisions */
+.cs-root .dec{background:var(--card); border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:0 12px 12px 0; padding:22px 24px; margin-bottom:14px}
+.cs-root .dec h3{font-family:var(--mono); font-size:14px; font-weight:500; color:var(--ink); margin-bottom:9px}
+.cs-root .dec p{font-size:15px; color:#4a463c; line-height:1.65; margin:0; max-width:none}
+
+/* results */
+.cs-root .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:6px}
+@media(max-width:680px){.cs-root .stats{grid-template-columns:repeat(2,1fr)}}
+.cs-root .stat{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:20px 18px}
+.cs-root .stat .v{font-family:var(--display); font-weight:600; font-size:32px; letter-spacing:-.02em; line-height:1}
+.cs-root .stat .v small{font-size:16px; color:var(--accent)}
+.cs-root .stat .k{font-family:var(--mono); font-size:11.5px; color:var(--muted); margin-top:8px; line-height:1.4}
+
+/* stack */
+.cs-root .chips{display:flex; flex-wrap:wrap; gap:8px}
+.cs-root .chip{font-family:var(--mono); font-size:12.5px; color:var(--ink); background:var(--card); border:1px solid var(--line); padding:6px 12px; border-radius:8px}
+
+.cs-root .draft{display:inline-block; font-family:var(--mono); font-size:11px; color:var(--accent); background:var(--accent-dim); border:1px solid rgba(232,119,14,.25); padding:3px 8px; border-radius:6px; margin-bottom:12px}
+
+/* next */
+.cs-root .next{position:relative; margin-top:30px; border-top:1px solid var(--line); padding:40px 0 70px; overflow:hidden}
+.cs-root .next-orb{position:absolute; right:-80px; top:-40px; width:360px; height:360px; border-radius:50%; background:radial-gradient(circle,rgba(242,162,60,.45),rgba(232,119,14,0) 68%); filter:blur(10px); pointer-events:none}
+.cs-root .next a{position:relative; z-index:1; display:flex; align-items:center; justify-content:space-between; text-decoration:none; color:inherit}
+.cs-root .next .lbl{font-family:var(--mono); font-size:12px; color:var(--muted)}
+.cs-root .next .nm{font-family:var(--display); font-weight:600; font-size:30px; letter-spacing:-.02em}
+.cs-root .next .circ{width:56px;height:56px;border-radius:50%;border:1px solid var(--line-2);display:flex;align-items:center;justify-content:center;transition:all .25s}
+.cs-root .next a:hover .circ{background:var(--ink);color:var(--paper);border-color:var(--ink)}
