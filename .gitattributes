@@ -1,0 +1,16 @@
+# Normalizar finales de línea de texto a LF en el repo; el working copy
+# en Windows puede usar CRLF sin afectar el blob almacenado.
+* text=auto eol=lf
+
+# Binarios: nunca aplicar conversión de finales de línea (evita corrupción).
+*.pdf   -text
+*.webm  -text
+*.mp4   -text
+*.png   -text
+*.jpg   -text
+*.jpeg  -text
+*.gif   -text
+*.ico   -text
+*.svg   -text
+*.woff  -text
+*.woff2 -text
