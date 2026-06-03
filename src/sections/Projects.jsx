@@ -29,11 +29,11 @@ export default function Projects() {
           {rows.map((p) => (
             <article className={`row ${p.feat ? "feat" : ""}`} key={p.n}>
               <Link className={`thumb ${p.feat ? "feat" : ""}`} to={`/proyecto/${p.slug}`} aria-label={p.name}>
-                <div className="thumb-anim" /><div className="thumb-dots" /><div className="thumb-cap"><span className="ti" />{p.cap}</div>
+                <div className="thumb-anim" /><div className="thumb-dots" /><div className="thumb-cap" aria-hidden="true"><span className="ti" />{p.cap}</div>
               </Link>
               <div className="body">
                 <div className="num">{p.n} / 04</div>
-                <div className="head"><span className="name">{p.name}</span>{p.feat && <span className="feat-tag"><Star size={10} fill="#fff" />{t.feat}</span>}<span className={`badge ${p.live ? "" : "cap"}`}><span className="dot" />{p.badge}</span></div>
+                <div className="head"><span className="name">{p.name}</span>{p.feat && <span className="feat-tag"><Star size={10} fill="currentColor" />{t.feat}</span>}<span className={`badge ${p.live ? "" : "cap"}`}><span className="dot" />{p.badge}</span></div>
                 <div className="desc">{p.desc}</div>
                 <div className="metrics">{p.metrics.map((m, i) => <Fragment key={m}>{i > 0 && <span className="sep">·</span>}{m}</Fragment>)}</div>
                 <div className="chips">{p.chips.map((c) => <span className="chip" key={c}>{c}</span>)}</div>

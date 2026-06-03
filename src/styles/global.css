@@ -5,8 +5,10 @@
    ============================================================ */
 
 :root{
-  --paper:#E9E7E0; --paper-2:#EFEDE7; --card:#F3F1EB; --ink:#18160F; --muted:#6f6a5d; --dim:#9b968a;
+  --paper:#E9E7E0; --paper-2:#EFEDE7; --card:#F3F1EB; --ink:#18160F; --muted:#6f6a5d; --dim:#6c675a;
   --line:#cfcabc; --line-2:#bdb7a8; --accent:#E8770E; --accent-2:#F2A23C; --accent-dim:rgba(232,119,14,.10);
+  /* --dim oscurecido de #9b968a a #6c675a para cumplir WCAG AA (Const. V),
+     con aprobación explícita del autor (Const. I). Sigue siendo gris terciario. */
   --display:'Fraunces',serif; --body:'Hanken Grotesk',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -107,7 +109,7 @@ html{scroll-behavior:smooth}
 .badge{font-family:var(--mono); font-size:11px; display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:100px; border:1px solid var(--line-2); color:var(--muted); white-space:nowrap}
 .badge .dot{width:6px; height:6px; border-radius:50%; background:#4FB477}
 .badge.cap .dot{background:var(--dim)}
-.feat-tag{font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; background:var(--accent); color:#fff; padding:4px 9px; border-radius:6px; display:inline-flex; align-items:center; gap:5px}
+.feat-tag{font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; background:var(--accent); color:var(--ink); padding:4px 9px; border-radius:6px; display:inline-flex; align-items:center; gap:5px}
 .desc{font-style:italic; font-family:var(--display); font-size:16px; color:var(--muted); margin-bottom:14px; max-width:560px}
 .metrics{font-family:var(--mono); font-size:12.5px; color:var(--ink); margin-bottom:14px}
 .metrics .sep{color:var(--accent); margin:0 8px}
@@ -148,7 +150,7 @@ html{scroll-behavior:smooth}
 @media(max-width:820px){.stack{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:520px){.stack{grid-template-columns:1fr}}
 .sg{background:var(--card); border:1px solid var(--line); border-radius:13px; padding:20px}
-.sg h4{font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--dim); margin-bottom:13px; display:flex; align-items:center; gap:8px}
+.sg h3{font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--dim); margin-bottom:13px; display:flex; align-items:center; gap:8px}
 .sg .items{display:flex; flex-wrap:wrap; gap:7px}
 .sg .items span{font-size:13px; color:var(--ink); background:var(--paper-2); border:1px solid var(--line); padding:4px 10px; border-radius:7px}
 .tl{border-left:1px solid var(--line-2); margin-left:6px; margin-top:8px}

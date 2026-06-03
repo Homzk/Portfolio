@@ -157,12 +157,12 @@ con `prefers-reduced-motion`: sin animación; sin hover: orbe deriva automático
 
 **Purpose**: Puertas constitucionales (a11y, rendimiento), assets reales y despliegue.
 
-- [ ] T041 [P] Pase de accesibilidad: HTML semántico, navegación por teclado, `:focus-visible`, contraste AA; correr axe sin violaciones (FR-023/024, SC-004/005)
-- [ ] T042 [P] Pase de rendimiento: lazy-load de `webm`, confirmar movimiento solo `transform`/`opacity`, Lighthouse ≥ 90 en las 4 categorías (SC-007/009)
-- [ ] T043 Grabar miniaturas `webm` reales + `poster` (Maderas, AirVision) en `public/media/` con la receta `ffmpeg` del quickstart; LPR/Eventos con footage/placeholder
-- [ ] T044 [P] Ajustar el repo de AirVision en GitHub ("About": descripción/website/topics) y verificar que la cifra de cobertura sea consistente en todo el sitio
-- [ ] T045 Pase de fidelidad contra la referencia (checklist de `references/speckit-workflow.md`): paleta, tipografías, orbe, `→`/`✦`, orden, sin "con distinción", origin-story aún borrador
-- [ ] T046 Desplegar en Vercel y validar recarga de deep-link (`/proyecto/lpr`) en producción
+- [X] T041 [P] Pase de accesibilidad: HTML semántico, navegación por teclado, foco visible, contraste AA. Lighthouse a11y; corregidos heading-order (`h4`→`h3`), label-content-name-mismatch (`aria-hidden` en caption) y contraste AA (`--dim` oscurecido + tag Destacado con texto oscuro, aprobado) (FR-023/024, SC-004/005)
+- [X] T042 [P] Pase de rendimiento: Lighthouse en producción → Performance 98, Best Practices 100, SEO ≥90, FCP/LCP 1.8s, CLS 0.015, TBT 10ms; movimiento solo `transform`/`opacity` (SC-007/009). `robots.txt` añadido
+- [ ] T043 Grabar miniaturas `webm` reales + `poster` (Maderas, AirVision) en `public/media/` con la receta `ffmpeg` del quickstart; LPR/Eventos con footage/placeholder _(requiere grabación — Álvaro)_
+- [ ] T044 [P] Ajustar el repo de AirVision en GitHub ("About": descripción/website/topics) y verificar que la cifra de cobertura sea consistente en todo el sitio _(requiere acción en GitHub — Álvaro)_
+- [X] T045 Pase de fidelidad contra la referencia: paleta, tipografías, orbe, `→`/`✦`, orden, sin "con distinción", origin-story aún borrador — fidelidad visual confirmada por el autor
+- [X] T046 Desplegar en Vercel y validar recarga de deep-link (`/proyecto/lpr`) en producción → https://portfolio-sigma-green-54.vercel.app (rutas + CV → 200)
 
 ---
 

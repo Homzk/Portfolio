@@ -12,7 +12,7 @@ export default function Stack() {
       <div className="sx-orb orb-b" />
       <div className="container">
         <div className="eyebrow">{t.stackE}</div><h2 className="h2">{t.stackT}</h2>
-        <div className="stack">{t.stack.map(([h, items]) => <div className="sg" key={h}><h4><span className="ar">→</span> {h}</h4><div className="items">{items.map((it) => <span key={it}>{it}</span>)}</div></div>)}</div>
+        <div className="stack">{t.stack.map(([h, items]) => <div className="sg" key={h}><h3><span className="ar">→</span> {h}</h3><div className="items">{items.map((it) => <span key={it}>{it}</span>)}</div></div>)}</div>
       </div>
     </section>
   );
