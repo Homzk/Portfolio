@@ -24,6 +24,10 @@ html{scroll-behavior:smooth}
 @keyframes pulse{0%,100%{opacity:.3}50%{opacity:.7}}
 @media(prefers-reduced-motion:reduce){
   .grain,.pw-orb,.sx-orb,.orb-c,.thumb-anim,.thumb-dots,.cover-anim{animation:none!important}
+  /* Extensión (Constitución II/V): también frenar entrada y scroll cue.
+     .enter > * arranca en opacity:0 vía animación → forzarlo visible. */
+  .enter > *{opacity:1!important; animation:none!important}
+  .cue svg{animation:none!important}
 }
 
 /* shared utils */

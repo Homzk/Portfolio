@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { useLang } from "../i18n/LangContext";
 import { HERO } from "../i18n/strings";
+import { CV_URL, GITHUB_URL, LINKEDIN_URL } from "../data/site";
 
 export default function Hero() {
   const { lang, toggle } = useLang();
@@ -24,6 +25,12 @@ export default function Hero() {
 
   useEffect(() => {
     const root = rootRef.current, orb = orbRef.current; if (!root || !orb) return;
+    // Respetar prefers-reduced-motion: orbe estático, sin rAF ni seguimiento (FR-020).
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const x = root.clientWidth * 0.62, y = root.clientHeight * 0.5;
+      orb.style.transform = `translate(${x - 360}px,${y - 360}px)`;
+      return;
+    }
     const hasHover = window.matchMedia("(hover: hover)").matches;
     let tx = root.clientWidth * 0.62, ty = root.clientHeight * 0.5, cx = tx, cy = ty, raf, t0 = performance.now();
     const onMove = (e) => { const r = root.getBoundingClientRect(); tx = e.clientX - r.left; ty = e.clientY - r.top; };
@@ -63,9 +70,9 @@ export default function Hero() {
           <div className="ctas" style={{ animationDelay: ".36s" }}>
             <a className="btn btn-primary" href="#work">{t.cta1}<ArrowUpRight size={16} /></a>
             <a className="btn btn-ghost" href="#contact"><Mail size={16} />{t.cta2}</a>
-            <a className="btn btn-ghost" href="#"><FileText size={16} />{t.cta3}</a>
-            <a className="btn btn-ghost btn-icon" href="https://github.com/Homzk" target="_blank" rel="noreferrer"><Github size={16} /></a>
-            <a className="btn btn-ghost btn-icon" href="https://linkedin.com/in/alvaro-flores-rocha" target="_blank" rel="noreferrer"><Linkedin size={16} /></a>
+            <a className="btn btn-ghost" href={CV_URL} target="_blank" rel="noreferrer"><FileText size={16} />{t.cta3}</a>
+            <a className="btn btn-ghost btn-icon" href={GITHUB_URL} target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={16} /></a>
+            <a className="btn btn-ghost btn-icon" href={LINKEDIN_URL} target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin size={16} /></a>
           </div>
         </div></div>
         <div className="container"><div className="cue"><ArrowDown size={14} />{t.cue}</div></div>

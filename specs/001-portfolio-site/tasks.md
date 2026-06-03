@@ -39,7 +39,7 @@ Project Structure).
 - [X] T003 [P] Configurar formato con Prettier (`.prettierrc`). _(ESLint diferido a la fase de Polish.)_
 - [X] T004 [P] Portar la hoja de estilos **verbatim** desde `assets/App.reference.jsx` a `src/styles/global.css` (tokens `:root` + keyframes) e importarla en `src/main.jsx` — ancla de fidelidad (research D3)
 - [X] T005 [P] Añadir `preconnect` + enlaces de Google Fonts (Fraunces, Hanken Grotesk, JetBrains Mono) en `index.html`
-- [ ] T006 [P] Crear directorios de assets `public/media/` y `public/cv/` con placeholders (README o `.gitkeep`) _(pendiente: se crean en T043 al añadir los webm/CV)_
+- [X] T006 [P] Crear directorios de assets `public/media/` (`.gitkeep`) y `public/cv/` (PDF placeholder generado por `scripts/make-placeholder-cv.mjs`)
 
 **Checkpoint**: `npm run dev` arranca y sirve una página en blanco con los estilos/fuentes cargados.
 
@@ -127,9 +127,9 @@ seguir en EN; limpiar `localStorage` y volver a español.
 **Independent Test**: Activar cada CTA/enlace del Hero y de Contacto y verificar destino
 correcto (email, LinkedIn, GitHub, WhatsApp, CV, demos).
 
-- [ ] T033 [US4] Cablear las CTAs del Hero en `src/sections/Hero.jsx` (Ver proyectos → `#work`, Contacto → `#contact`, CV, GitHub, LinkedIn) con datos reales del skill
-- [ ] T034 [US4] Cablear filas y botones de `src/sections/Contact.jsx` (Email `f.alvaro.ro@gmail.com`, LinkedIn, GitHub `Homzk`, WhatsApp `wa.me/56963505529`) con reacción al hover
-- [ ] T035 [P] [US4] Enlazar placeholder del CV (`public/cv/`) y enlaces en vivo (Maderas → maderasponotro.cl; AirVision → demo + GitHub) en datos/secciones
+- [X] T033 [US4] Cablear las CTAs del Hero en `src/sections/Hero.jsx` (Ver proyectos → `#work`, Contacto → `#contact`, CV → `CV_URL`, GitHub, LinkedIn vía `src/data/site.js`)
+- [X] T034 [US4] Filas y botones de `src/sections/Contact.jsx` (Email, LinkedIn, GitHub `Homzk`, WhatsApp `wa.me/56963505529`) con hover; botón CV → `CV_URL`
+- [X] T035 [P] [US4] Placeholder del CV en `public/cv/` enlazado en Hero y Contacto; enlaces en vivo (Maderas → maderasponotro.cl; AirVision → demo + GitHub) en `projData` y casos de estudio
 
 **Checkpoint**: US1–US4 funcionan; el portafolio convierte.
 
@@ -143,11 +143,11 @@ todo respetando `prefers-reduced-motion` y dispositivos sin hover.
 **Independent Test**: Con hover/movimiento: orbe sigue el mouse, deriva, cierra grande;
 con `prefers-reduced-motion`: sin animación; sin hover: orbe deriva automático.
 
-- [ ] T036 [US5] Implementar el mouse-follow del Hero en `src/components/Orb.jsx` (rAF + lerp ~0.07 escribiendo `style.transform`; **sin** `setState` por mousemove) — research D5, AC-C2
-- [ ] T037 [US5] Implementar modos `section` (keyframe `drift`) y `contact` (keyframe `driftC`, grande/centrado) en `src/components/Orb.jsx`
-- [ ] T038 [US5] Añadir fallback sin hover (`matchMedia('(hover: hover)')===false` → trayectoria seno/coseno) en `src/components/Orb.jsx` (FR-021)
-- [ ] T039 [US5] Añadir guardas `@media (prefers-reduced-motion: reduce)` para orbe, grano y animaciones de entrada/scroll-cue (FR-020, SC-006)
-- [ ] T040 [P] [US5] Verificar grano (`Grain.jsx`) + entrada escalonada (`up`) y scroll cue (`bob`) contra la referencia
+- [X] T036 [US5] Mouse-follow del Hero (rAF + lerp ~0.07 escribiendo `style.transform`; **sin** `setState` por mousemove) — inline en `Hero.jsx` (verbatim, AC-C2)
+- [X] T037 [US5] Orbe de sección (keyframe `drift`, `.orb-a`/`.orb-b`) y de contacto (`driftC`, `.orb-c` grande/centrado) en `global.css` + markup de secciones
+- [X] T038 [US5] Fallback sin hover (`matchMedia('(hover: hover)')===false` → trayectoria seno/coseno) en el efecto del orbe de `Hero.jsx` (FR-021)
+- [X] T039 [US5] Guardas `prefers-reduced-motion`: CSS para grano/orbes/entrada/scroll-cue en `global.css` **+ corte del rAF del orbe JS** en `Hero.jsx` (FR-020, SC-006) — extiende la referencia
+- [X] T040 [P] [US5] Grano + entrada escalonada (`up`) y scroll cue (`bob`) presentes y conformes a la referencia (verificado en build/preview)
 
 **Checkpoint**: Las 5 historias funcionan de forma independiente.
 
