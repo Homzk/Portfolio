@@ -83,8 +83,16 @@ Tras el scaffold, portar `src/styles/global.css` **verbatim** desde
 ffmpeg -i input.mov -t 5 -an -c:v libvpx-vp9 -b:v 0 -crf 34 -vf "scale=720:-2,fps=24" public/media/<slug>.webm
 ```
 
-Usar `<video autoplay loop muted playsinline poster="...">`. Hasta tener los clips, dejar
-el placeholder animado de la referencia.
+El componente `src/components/ProjectThumb.jsx` ya renderiza el `<video>` (loop, muted,
+playsInline, lazy, con poster y respeto a `prefers-reduced-motion`). Para **activar** la
+miniatura en vídeo de un proyecto:
+
+1. Deja el clip en `public/media/<slug>.webm` (slug = `maderas` · `lpr` · `airvision` ·
+   `eventos`) y, opcional, un poster estático en `public/media/<slug>.jpg`.
+2. En `src/data/projects.js`, cambia ese slug a `true` en `VIDEO_READY`.
+
+Mientras siga en `false`, la tarjeta muestra el placeholder animado de la referencia (sin
+peticiones 404).
 
 ## Puerta de fidelidad antes de "hecho"
 

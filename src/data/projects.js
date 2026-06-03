@@ -6,6 +6,19 @@
    construyan los casos de estudio (tasks T029–T031). En este MVP la
    fila mantiene el comportamiento de la referencia (`open`). */
 
+/* Activar la miniatura en vídeo de un proyecto:
+   1) Deja el clip en  public/media/<slug>.webm  (y opcional un poster
+      estático en  public/media/<slug>.jpg).
+   2) Cambia su slug a `true` aquí abajo.
+   Mientras siga en `false`, la tarjeta muestra el placeholder animado.
+   Slugs: maderas · lpr · airvision · eventos. */
+export const VIDEO_READY = {
+  maderas: false,
+  lpr: false,
+  airvision: false,
+  eventos: false,
+};
+
 export const projData = (lang) => [
   { n:"01", slug:"maderas", name:"Maderas Ponotro", badge: lang==="es"?"En producción · Cliente real":"In production · Real client", live:true,
     desc: lang==="es"?"Sitio corporativo y plataforma de cotizaciones para una maderera chilena, end-to-end como freelance.":"Corporate site and quotation platform for a Chilean timber company, end-to-end as a freelancer.",
