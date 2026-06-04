@@ -1,6 +1,6 @@
 /* ---------------- HOME ----------------
-   Compone la página principal en el orden fijo de la referencia:
-   Hero → Proyectos → (Sobre mí → Stack → Experiencia → Contacto) → Footer.
+   Orden de la página (ajustado por el autor respecto a la referencia):
+   Hero → Proyectos → (Experiencia → Stack → Sobre mí → Contacto) → Footer.
    El bloque sx-root agrupa las cuatro secciones bajo un único grano,
    igual que assets/App.reference.jsx. */
 
@@ -19,9 +19,9 @@ export default function Home() {
       <Projects />
       <div className="sx-root">
         <div className="sx-grain" />
-        <About />
-        <Stack />
         <Experience />
+        <Stack />
+        <About />
         <Contact />
         <Footer />
       </div>

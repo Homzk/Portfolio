@@ -79,7 +79,7 @@ export default function Hero() {
     };
   }, []);
 
-  const ids = ["work", "about", "stack", "contact"];
+  const ids = ["work", "stack", "about", "contact"];
   return (
     <header className="hero-root" ref={rootRef}>
       <div className="orb" ref={orbRef} />
