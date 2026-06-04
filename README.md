@@ -7,7 +7,7 @@ de visión por computador en hardware a dashboards en tiempo real.**
 
 Ing. en Informática (PUCV) · Magíster en Informática en curso · Viña del Mar, Chile
 
-[Sitio en vivo](https://maderasponotro.cl) ·
+[Sitio en vivo](https://portfolio-sigma-green-54.vercel.app/) ·
 [GitHub](https://github.com/Homzk) ·
 [LinkedIn](https://linkedin.com/in/alvaro-flores-rocha) ·
 [Email](mailto:f.alvaro.ro@gmail.com)
