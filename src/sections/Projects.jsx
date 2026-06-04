@@ -24,7 +24,6 @@ export default function Projects() {
       <div className="container">
         <div className="pw-top">
           <div><div className="eyebrow">{t.eyebrow}</div><h2 className="pw-title">{t.title}</h2></div>
-          <p className="pw-intro">{t.intro}</p>
         </div>
         <div className="rows">
           {rows.map((p) => (

@@ -95,7 +95,7 @@ export default function Hero() {
         <div className="status"><div className="container">
           <div className="status-row">
             <span>{t.loc} <span className="arrow">→</span> <b>{clock}</b></span>
-            <span>✦ {t.sLabel} <span className="arrow">→</span> <b>{t.sValue}</b></span>
+            <a className="status-cta" href="#contact" onClick={(e) => goToHash(e, "#contact")}>✦ {t.sLabel} <span className="arrow">→</span> <b>{t.sValue}</b></a>
           </div><div className="rule" />
         </div></div>
         <div className="center"><div className="container enter">

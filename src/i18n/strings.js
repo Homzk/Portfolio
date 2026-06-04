@@ -4,7 +4,7 @@
    clave existe en ambos idiomas (Constitución III — paridad total). */
 
 export const HERO = {
-  es: { nav: ["Proyectos","Stack","Sobre mí","Contacto"], loc:"Viña del Mar, Chile", sLabel:"Estado", sValue:"Disponible para proyectos",
+  es: { nav: ["Proyectos","Stack","Sobre mí","Contacto"], loc:"Viña del Mar, Chile", sLabel:"Estado", sValue:"Disponible para trabajar",
     eyebrow:"Desarrollador Full Stack", h1a:"Hola, soy ", h1em:"Álvaro",
     tagline:"Construyo y llevo a producción productos de software, de extremo a extremo — de Chile 🇨🇱. Especializado en el desarrollo de aplicaciones web únicas.",
     facts:[["Base","Ing. en Informática · PUCV"],["Ahora","Magíster en Informática · en curso"],["Entrego","productos reales, en producción"]],
@@ -17,17 +17,17 @@ export const HERO = {
 };
 
 export const PROJ = {
-  es: { eyebrow:"Trabajo seleccionado", title:"Proyectos", intro:"Pocas piezas, todas terminadas. Productos reales antes que ejercicios.",
+  es: { eyebrow:"Trabajo seleccionado", title:"Proyectos",
     soon:"Próximo proyecto en construcción —", soonEm:"el portafolio es un proyecto vivo.", feat:"Destacado",
     L:{ live:"Sitio en vivo", demo:"Demo en vivo", code:"Código", case:"Caso de estudio", priv:"Repo privado (cliente)", intern:"Sistema interno" } },
-  en: { eyebrow:"Selected work", title:"Work", intro:"Few pieces, all finished. Real products over exercises.",
+  en: { eyebrow:"Selected work", title:"Work",
     soon:"Next project in the works —", soonEm:"this portfolio is a living project.", feat:"Featured",
     L:{ live:"Live site", demo:"Live demo", code:"Code", case:"Case study", priv:"Private repo (client)", intern:"Internal system" } },
 };
 
 export const SEC = {
-  es: { aboutE:"Sobre mí", aboutT:"Del desierto de Calama al código.",
-    aboutP:["Nací en Calama, en pleno desierto de Atacama. De ahí viene la inspiración de este sitio: un sol naranja sobre la arena. Crecí entre computadores, pero fue recién en la universidad —ya lejos de casa— donde me topé con la programación y encontré mi camino.","Hoy combino lo que aprendí en la ingeniería con creatividad —y todo lo que sigo aprendiendo cada día— para construir páginas y proyectos web únicos, no plantillas. Trabajo de forma independiente, pero también busco un equipo donde aportar y seguir creciendo.","Lo que me mueve es resolver problemas con software. Y soy perfeccionista: cuido cada detalle y lo entrego con cariño, como si el proyecto fuera mío."],
+  es: { aboutE:"Sobre mí", aboutT:"Del desierto al código.",
+    aboutP:["Nací en Calama, en pleno desierto de Atacama. Crecí entre computadores, pero fue recién en la universidad —ya lejos de casa— donde me topé con la programación y encontré mi camino.","Hoy combino lo que aprendí en la ingeniería con creatividad —y todo lo que sigo aprendiendo cada día— para construir páginas y proyectos web únicos, no plantillas. Trabajo de forma independiente, pero también busco un equipo donde aportar y seguir creciendo.","Lo que me mueve es resolver problemas con software. Soy perfeccionista: cuido cada detalle y lo entrego con cariño, como si el proyecto fuera mío."],
     glanceH:"En corto", glance:[["Rol","Full Stack Dev"],["Base","Ing. Informática · PUCV"],["Ahora","Magíster (en curso)"],["Origen","Calama, CL"],["Lugar","Viña del Mar, CL"],["Idiomas","ES · EN (B2)"]],
     stackE:"Herramientas", stackT:"Stack técnico",
     stack:[["Lenguajes",["JavaScript","TypeScript","Python","Java","C++"]],["Frontend & Móvil",["React 18","Vite","Tailwind","Flutter","HTML5","CSS3"]],["Backend & Datos",["Node.js","PostgreSQL","MySQL","Supabase","REST APIs"]],["Infra & DevOps",["Docker","Netlify","Vercel","Git/GitHub","CI/CD"]],["Visión & IoT",["OpenCV","Node-RED","Hikvision LPR"]],["Otros",["SEO técnico","EmailJS","Figma","Scrum/Agile"]]],
@@ -35,8 +35,8 @@ export const SEC = {
     exp:[["Feb 2026 — Actualidad","Desarrollador Web Freelance","Maderas Ponotro","Sitio corporativo y plataforma de cotizaciones end-to-end, en producción con dominio propio."],["Abr 2024 — Jul 2024","Ingeniero de Desarrollo y Sistemas (Proyecto IA)","Club Naval Las Salinas","Lideré un sistema LPR con visión por computador (95% detección) + plataforma de gestión y automatización IoT."],["Ene 2023 — Jun 2023","Desarrollador Web Full Stack","Slince Limitada","Modernización de plataforma escolar y optimización de base de datos MySQL."]],
     eduH:"Formación", edu:[["Magíster en Informática — PUCV","Jun 2025 — Actualidad"],["Ing. de Ejecución en Informática — PUCV","Dic 2024"]],
     contactE:"Hablemos", contactT:"¿Construimos algo?", contactSub:"Abierto a oportunidades full stack y proyectos freelance. La mejor vía es el correo.", write:"Escríbeme", cv:"Descargar CV" },
-  en: { aboutE:"About", aboutT:"From the Calama desert to code.",
-    aboutP:["I was born in Calama, deep in Chile's Atacama desert — that's where this site's look comes from: an orange sun over the sand. I grew up around computers, but it wasn't until university, already far from home, that I ran into programming and found my path.","Today I blend what I learned in engineering with creativity —and everything I keep learning every day— to build unique web pages and projects, never templates. I work independently, but I'm also looking to join a team where I can contribute and keep growing.","What drives me is solving problems with software. And I'm a perfectionist: I care for every detail and ship it with love, as if the project were my own."],
+  en: { aboutE:"About", aboutT:"From the desert to code.",
+    aboutP:["I was born in Calama, deep in Chile's Atacama desert. I grew up around computers, but it wasn't until university, already far from home, that I ran into programming and found my path.","Today I blend what I learned in engineering with creativity —and everything I keep learning every day— to build unique web pages and projects, never templates. I work independently, but I'm also looking to join a team where I can contribute and keep growing.","What drives me is solving problems with software. I'm a perfectionist: I care for every detail and ship it with love, as if the project were my own."],
     glanceH:"At a glance", glance:[["Role","Full Stack Dev"],["Base","Computer Eng. · PUCV"],["Now","MSc (in progress)"],["From","Calama, CL"],["Place","Viña del Mar, CL"],["Languages","ES · EN (B2)"]],
     stackE:"Tooling", stackT:"Tech stack",
     stack:[["Languages",["JavaScript","TypeScript","Python","Java","C++"]],["Frontend & Mobile",["React 18","Vite","Tailwind","Flutter","HTML5","CSS3"]],["Backend & Data",["Node.js","PostgreSQL","MySQL","Supabase","REST APIs"]],["Infra & DevOps",["Docker","Netlify","Vercel","Git/GitHub","CI/CD"]],["Vision & IoT",["OpenCV","Node-RED","Hikvision LPR"]],["Other",["Technical SEO","EmailJS","Figma","Scrum/Agile"]]],
