@@ -1,59 +1,15 @@
 /* ---------------- ProjectThumb ----------------
-   Miniatura de tarjeta de proyecto. Por defecto muestra el placeholder
-   animado de la referencia. Si el proyecto está activado en VIDEO_READY
-   (src/data/projects.js) y existe public/media/<slug>.webm, reproduce un
-   <video> en bucle, silenciado, lazy (solo en viewport) y con poster.
-   Respeta prefers-reduced-motion: en ese caso muestra el poster estático
-   (o el placeholder), sin autoplay (Constitución II/V). El vídeo es
-   decorativo (aria-hidden); el nombre accesible lo da el <Link> padre. */
+   Miniatura de tarjeta de proyecto. Si el proyecto tiene una imagen
+   asignada (THUMB_IMG en src/data/projects.js) la muestra como <img>
+   estática (lazy, object-fit:cover vía .thumb-video). Si no, cae al
+   placeholder animado de la referencia. La imagen es decorativa
+   (aria-hidden); el nombre accesible lo da el <Link> padre. */
 
-import { useRef, useEffect, useState } from "react";
-
-function prefersReducedMotion() {
-  return typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
-
-export default function ProjectThumb({ slug, cap, hasVideo }) {
-  const videoRef = useRef(null);
-  const [reduced] = useState(prefersReducedMotion);
-  const webm = `/media/${slug}.webm`;
-  const poster = `/media/${slug}.jpg`;
-
-  // Lazy: reproducir solo cuando la miniatura entra en el viewport.
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v || reduced) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) v.play().catch(() => {});
-        else v.pause();
-      },
-      { rootMargin: "200px" }
-    );
-    io.observe(v);
-    return () => io.disconnect();
-  }, [reduced]);
-
+export default function ProjectThumb({ img, cap }) {
   return (
     <>
-      {hasVideo ? (
-        reduced ? (
-          <img className="thumb-video" src={poster} alt="" />
-        ) : (
-          <video
-            ref={videoRef}
-            className="thumb-video"
-            muted
-            loop
-            playsInline
-            preload="none"
-            poster={poster}
-            aria-hidden="true"
-          >
-            <source src={webm} type="video/webm" />
-          </video>
-        )
+      {img ? (
+        <img className="thumb-video" src={img} alt="" loading="lazy" aria-hidden="true" />
       ) : (
         <>
           <div className="thumb-anim" />

@@ -11,7 +11,7 @@ import { Link } from "react-router";
 import { ArrowRight, Lock, Star } from "lucide-react";
 import { useLang } from "../i18n/LangContext";
 import { PROJ } from "../i18n/strings";
-import { projData, VIDEO_READY } from "../data/projects";
+import { projData, THUMB_IMG } from "../data/projects";
 import ProjectThumb from "../components/ProjectThumb";
 
 export default function Projects() {
@@ -29,7 +29,7 @@ export default function Projects() {
           {rows.map((p) => (
             <article className={`row ${p.feat ? "feat" : ""}`} key={p.n}>
               <Link className={`thumb ${p.feat ? "feat" : ""}`} to={`/proyecto/${p.slug}`} aria-label={p.name}>
-                <ProjectThumb slug={p.slug} cap={p.cap} hasVideo={VIDEO_READY[p.slug]} />
+                <ProjectThumb cap={p.cap} img={THUMB_IMG[p.slug]} />
               </Link>
               <div className="body">
                 <div className="num">{p.n} / 04</div>
