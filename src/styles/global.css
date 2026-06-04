@@ -24,8 +24,10 @@ html{scroll-behavior:smooth}
 @keyframes driftC{0%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-46%,-54%) scale(1.08)}100%{transform:translate(-50%,-50%) scale(1)}}
 @keyframes sweep{0%{background-position:0 0}100%{background-position:300% 0}}
 @keyframes pulse{0%,100%{opacity:.3}50%{opacity:.7}}
+@keyframes onlinePulse{0%{transform:scale(1);opacity:.5}70%{transform:scale(3.2);opacity:0}100%{transform:scale(3.2);opacity:0}}
 @media(prefers-reduced-motion:reduce){
-  .grain,.pw-orb,.sx-orb,.orb-c,.thumb-anim,.thumb-dots,.cover-anim{animation:none!important}
+  .grain,.pw-orb,.sx-orb,.orb-c,.thumb-anim,.thumb-dots,.cover-anim,.tli.now::after{animation:none!important}
+  .tli.now::after{display:none}
   /* Extensión (Constitución II/V): también frenar entrada y scroll cue.
      .enter > * arranca en opacity:0 vía animación → forzarlo visible. */
   .enter > *{opacity:1!important; animation:none!important}
@@ -162,6 +164,9 @@ html{scroll-behavior:smooth}
 .tli{position:relative; padding:0 0 34px 28px}
 .tli::before{content:""; position:absolute; left:-5px; top:6px; width:9px; height:9px; border-radius:50%; background:var(--accent)}
 .tli:last-child{padding-bottom:0}
+/* Experiencia actual ("Actualidad"): mismo punto ámbar que el resto, pero
+   con un halo pulsante "en línea". El punto hereda var(--accent) de .tli::before. */
+.tli.now::after{content:""; position:absolute; left:-5px; top:6px; width:9px; height:9px; border-radius:50%; background:var(--accent); animation:onlinePulse 1.8s ease-out infinite}
 .tld{font-family:var(--mono); font-size:12.5px; color:var(--dim); margin-bottom:5px}
 .tlr{font-size:16.5px; font-weight:600} .tlr .org{color:var(--accent)}
 .tln{color:var(--muted); font-size:14.5px; margin-top:4px; max-width:560px; line-height:1.55}
