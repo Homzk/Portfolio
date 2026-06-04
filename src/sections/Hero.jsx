@@ -39,22 +39,44 @@ export default function Hero() {
 
   useEffect(() => {
     const root = rootRef.current, orb = orbRef.current; if (!root || !orb) return;
+    // Medio tamaño real del orbe (lo lee del DOM, así el media query móvil
+    // puede achicarlo sin descentrar el seguimiento). Fallback 360 (=720/2).
+    const half = () => (orb.offsetWidth || 720) / 2;
     // Respetar prefers-reduced-motion: orbe estático, sin rAF ni seguimiento (FR-020).
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      const x = root.clientWidth * 0.62, y = root.clientHeight * 0.5;
-      orb.style.transform = `translate(${x - 360}px,${y - 360}px)`;
+      const h = half(), x = root.clientWidth * 0.62, y = root.clientHeight * 0.5;
+      orb.style.transform = `translate(${x - h}px,${y - h}px)`;
       return;
     }
     const hasHover = window.matchMedia("(hover: hover)").matches;
     let tx = root.clientWidth * 0.62, ty = root.clientHeight * 0.5, cx = tx, cy = ty, raf, t0 = performance.now();
-    const onMove = (e) => { const r = root.getBoundingClientRect(); tx = e.clientX - r.left; ty = e.clientY - r.top; };
-    if (hasHover) root.addEventListener("mousemove", onMove);
+    // Pointer Events (no mousemove): en touch siguen el dedo de forma continua
+    // durante el arrastre — antes solo se sintetizaba un mousemove al hacer tap.
+    // `active` = hay un puntero/dedo controlando el orbe; mientras tanto se sigue
+    // al puntero, y si no, en dispositivos sin hover el orbe deriva solo.
+    let active = false;
+    const setTarget = (clientX, clientY) => { const r = root.getBoundingClientRect(); tx = clientX - r.left; ty = clientY - r.top; };
+    const onPointerMove = (e) => { active = true; setTarget(e.clientX, e.clientY); };
+    const onPointerDown = (e) => { active = true; setTarget(e.clientX, e.clientY); };
+    // Al soltar el dedo (touch) se retoma la deriva automática; con mouse se
+    // mantiene en la última posición, como antes.
+    const onPointerEnd = () => { if (!hasHover) active = false; };
+    root.addEventListener("pointermove", onPointerMove, { passive: true });
+    root.addEventListener("pointerdown", onPointerDown, { passive: true });
+    root.addEventListener("pointerup", onPointerEnd, { passive: true });
+    root.addEventListener("pointercancel", onPointerEnd, { passive: true });
     const loop = (now) => {
-      if (!hasHover) { const el = (now - t0) / 1000; tx = root.clientWidth * (0.5 + 0.22 * Math.sin(el * 0.4)); ty = root.clientHeight * (0.45 + 0.18 * Math.cos(el * 0.31)); }
-      cx += (tx - cx) * 0.07; cy += (ty - cy) * 0.07; orb.style.transform = `translate(${cx - 360}px,${cy - 360}px)`; raf = requestAnimationFrame(loop);
+      if (!active && !hasHover) { const el = (now - t0) / 1000; tx = root.clientWidth * (0.5 + 0.22 * Math.sin(el * 0.4)); ty = root.clientHeight * (0.45 + 0.18 * Math.cos(el * 0.31)); }
+      const h = half(); cx += (tx - cx) * 0.07; cy += (ty - cy) * 0.07; orb.style.transform = `translate(${cx - h}px,${cy - h}px)`; raf = requestAnimationFrame(loop);
     };
     raf = requestAnimationFrame(loop);
-    return () => { cancelAnimationFrame(raf); root.removeEventListener("mousemove", onMove); };
+    return () => {
+      cancelAnimationFrame(raf);
+      root.removeEventListener("pointermove", onPointerMove);
+      root.removeEventListener("pointerdown", onPointerDown);
+      root.removeEventListener("pointerup", onPointerEnd);
+      root.removeEventListener("pointercancel", onPointerEnd);
+    };
   }, []);
 
   const ids = ["work", "about", "stack", "contact"];

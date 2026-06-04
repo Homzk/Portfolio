@@ -62,6 +62,10 @@ html{scroll-behavior:smooth}
 .nav-links a{font-family:var(--body); font-size:14px; color:var(--muted); text-decoration:none; transition:color .2s}
 .nav-links a:hover{color:var(--ink)}
 @media(max-width:680px){.nav-desktop{display:none}}
+/* Móvil: el orbe del hero se achica y baja intensidad para no opacar el
+   texto. Mismo color/identidad; solo escala y opacidad responsivas. El JS
+   centra el orbe leyendo su tamaño real, así que basta con cambiar width/height. */
+@media(max-width:680px){.orb{width:460px; height:460px; opacity:.5; filter:blur(14px)}}
 .status{padding:30px 0 0}
 .status-row{display:flex; align-items:center; justify-content:space-between; font-family:var(--mono); font-size:13px; flex-wrap:wrap; gap:8px}
 .status-row b{font-weight:500}
