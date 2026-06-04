@@ -13,9 +13,9 @@
    Mientras siga en `false`, la tarjeta muestra el placeholder animado.
    Slugs: maderas · lpr · airvision · eventos. */
 export const VIDEO_READY = {
-  maderas: false,
+  maderas: true,
   lpr: false,
-  airvision: false,
+  airvision: true,
   eventos: false,
 };
 
