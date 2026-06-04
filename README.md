@@ -1,65 +1,120 @@
-# Portafolio — Álvaro Flores Rocha
+<div align="center">
 
-Portafolio personal de **Álvaro Flores Rocha**, Desarrollador Full Stack. Una SPA en React + Vite con i18n ES/EN, un sistema visual propio (orbe naranja, grano y flechas) y casos de estudio dedicados por proyecto.
+# Álvaro Flores Rocha · Desarrollador Full Stack
 
-[![React](https://img.shields.io/badge/React-18-149ECA?logo=react&logoColor=white)](https://react.dev)
-[![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white)](https://vite.dev)
-[![React Router](https://img.shields.io/badge/React%20Router-7-CA4245?logo=reactrouter&logoColor=white)](https://reactrouter.com)
-[![Vitest](https://img.shields.io/badge/Vitest-2-6E9F18?logo=vitest&logoColor=white)](https://vitest.dev)
+**Construyo y llevo a producción productos de software, de extremo a extremo —
+de visión por computador en hardware a dashboards en tiempo real.**
 
-## Características
+Ing. en Informática (PUCV) · Magíster en Informática en curso · Viña del Mar, Chile
 
-- **Internacionalización ES/EN** con un layer propio y persistencia en `localStorage` (español por defecto).
-- **Sistema visual de alta fidelidad**: orbe naranja, textura de grano y flechas, portado verbatim desde el diseño aprobado.
-- **Casos de estudio por proyecto** servidos por React Router en modo librería (`/proyecto/:slug`).
-- **Miniaturas en vídeo opcionales** por proyecto, con placeholder animado mientras no hay clip.
-- **CV descargable** servido como activo estático, reemplazable sin tocar código.
-- **Accesibilidad y SEO** cuidados (WCAG AA, auditorías Lighthouse limpias).
-- **Sin analítica ni cookies.**
+[Sitio en vivo](https://maderasponotro.cl) ·
+[GitHub](https://github.com/Homzk) ·
+[LinkedIn](https://linkedin.com/in/alvaro-flores-rocha) ·
+[Email](mailto:f.alvaro.ro@gmail.com)
 
-## Stack
+</div>
 
-| Área         | Tecnología                                              |
-| ------------ | ------------------------------------------------------- |
-| UI           | React 18, Vite 7                                        |
-| Enrutado     | React Router v7 (modo librería)                         |
-| Iconografía  | lucide-react                                            |
-| i18n         | Layer propio ES/EN con persistencia en `localStorage`  |
-| Tipografías  | Fraunces, Hanken Grotesk, JetBrains Mono (Google Fonts) |
-| Tests        | Vitest + @testing-library/react (jsdom)                 |
-| Despliegue   | Vercel                                                  |
+---
 
-## Requisitos
+Este repositorio es mi portafolio personal: una SPA construida a mano en React + Vite,
+con i18n ES/EN, un sistema visual propio (orbe naranja que sigue el cursor, textura de
+grano, flechas) y un caso de estudio dedicado por proyecto. No es una plantilla — está
+diseñado y escrito de cero, y cuidado al detalle en accesibilidad (WCAG AA) y rendimiento
+(auditorías Lighthouse limpias, sin analítica ni cookies).
 
-- Node.js 18+ (recomendado 20+)
-- npm
+## Proyectos seleccionados
 
-## Puesta en marcha
+Pocas piezas, todas terminadas. Productos reales antes que ejercicios.
+
+### Maderas Ponotro — _en producción · cliente real_
+
+Sitio corporativo y plataforma de cotizaciones para una maderera chilena, construido
+end-to-end como freelance.
+
+`Lighthouse SEO 100` · `A11y 100` · `Perf 94` · `Hero 780 KB → 156 KB`
+**React 18 · Vite · Tailwind · EmailJS · Netlify**
+→ [maderasponotro.cl](https://maderasponotro.cl)
+
+### Sistema LPR — Club Naval Las Salinas — _desplegado en terreno_
+
+Reconocimiento de patentes con visión por computador sobre hardware Hikvision, más
+gestión de accesos y automatización IoT.
+
+`95% de detección` · `−40% tiempo de accesos`
+**Python · OpenCV · Flutter · Supabase · Node-RED · Hikvision**
+
+### AirVision — _en vivo_
+
+Dashboard de calidad del aire de Chile en tiempo real: 169 estaciones, mapa, alertas y
+una arquitectura realtime.
+
+`+97% cobertura` · `166 tests` · `CI/CD` · `E2E Playwright`
+**React · TypeScript · Supabase · Leaflet · Recharts · Vitest**
+→ [Demo](https://air-vision-xi.vercel.app/) · [Código](https://github.com/Homzk/AirVision)
+
+### Eventos Culturales PUCV — _proyecto de título_
+
+App multiplataforma para gestionar eventos universitarios, con preinscripción y control
+de acceso por QR.
+
+`Liderazgo técnico` · `3 roles: admin · monitor · usuario`
+**Flutter · Dart · Supabase**
+
+## Stack técnico
+
+| Área              | Tecnologías                                          |
+| ----------------- | ---------------------------------------------------- |
+| Lenguajes         | JavaScript, TypeScript, Python, Java, C++            |
+| Frontend & Móvil  | React 18, Vite, Tailwind, Flutter, HTML5, CSS3       |
+| Backend & Datos   | Node.js, PostgreSQL, MySQL, Supabase, REST APIs      |
+| Infra & DevOps    | Docker, Netlify, Vercel, Git/GitHub, CI/CD           |
+| Visión & IoT      | OpenCV, Node-RED, Hikvision LPR                      |
+| Otros             | SEO técnico, EmailJS, Figma, Scrum/Agile             |
+
+## Trayectoria
+
+- **Feb 2026 — Actualidad** · Desarrollador Web Freelance — _Maderas Ponotro_
+  Sitio corporativo y plataforma de cotizaciones end-to-end, en producción con dominio propio.
+- **Abr 2024 — Jul 2024** · Ingeniero de Desarrollo y Sistemas (Proyecto IA) — _Club Naval Las Salinas_
+  Lideré un sistema LPR con visión por computador (95% detección) + gestión y automatización IoT.
+- **Ene 2023 — Jun 2023** · Desarrollador Web Full Stack — _Slince Limitada_
+  Modernización de plataforma escolar y optimización de base de datos MySQL.
+
+## Contacto
+
+Abierto a oportunidades full stack y proyectos freelance. La mejor vía es el correo.
+
+- **Email** — [f.alvaro.ro@gmail.com](mailto:f.alvaro.ro@gmail.com)
+- **LinkedIn** — [alvaro-flores-rocha](https://linkedin.com/in/alvaro-flores-rocha)
+- **GitHub** — [Homzk](https://github.com/Homzk)
+- **WhatsApp** — [+56 9 6350 5529](https://wa.me/56963505529)
+
+---
+
+<details>
+<summary><b>Detalles técnicos del proyecto</b> (instalación y estructura)</summary>
+
+### Stack del sitio
+
+React 18 + Vite 7 · React Router v7 (modo librería) · lucide-react · i18n propio ES/EN con
+persistencia en `localStorage` · Vitest + @testing-library/react · desplegado en Vercel.
+
+### Puesta en marcha
+
+Requiere Node.js 18+ (recomendado 20+) y npm.
 
 ```bash
 npm install      # instalar dependencias
 npm run dev      # servidor de desarrollo → http://localhost:5173
 npm run build    # build de producción → dist/
 npm run preview  # previsualizar el build
+npm test         # suite de tests (paridad i18n + matriz de enlaces)
 ```
 
-## Tests
-
-```bash
-npm test         # ejecuta la suite una vez
-npm run test:watch
-```
-
-Pruebas actuales en `tests/unit/`:
-
-- `i18n-parity.test.js` — verifica la paridad de claves entre español e inglés.
-- `link-matrix.test.js` — valida la matriz de enlaces de los proyectos.
-
-## Estructura
+### Estructura
 
 ```
 src/
-├── main.jsx              # punto de entrada
 ├── router.jsx            # rutas (Home + casos de estudio)
 ├── pages/                # Home, CaseStudy
 ├── sections/             # Hero, Projects, About, Stack, Experience, Contact, Footer
@@ -67,32 +122,11 @@ src/
 ├── data/                 # site.js, projects.js, caseStudies.js
 ├── i18n/                 # LangContext.jsx, strings.js
 └── styles/               # global.css, case-study.css
-public/
-├── cv/                   # PDF del CV
-└── media/                # vídeos/posters de los proyectos
 ```
 
-## Personalización rápida
+> [!NOTE]
+> El diseño aprobado y los artefactos de especificación viven en `specs/001-portfolio-site/`.
+> La fidelidad a ese diseño (paleta, tipografía, sistema de orbe/grano/flechas, estructura y
+> contenido) es un requisito del proyecto.
 
-- **CV** — reemplaza `public/cv/Alvaro-Flores-Rocha-CV.pdf` por tu PDF (mismo nombre, sin tocar código). Si lo renombras, actualiza `CV_URL` y `CV_FILENAME` en `src/data/site.js`.
-- **Enlaces** (GitHub, LinkedIn) — `src/data/site.js`.
-- **Proyectos** — `src/data/projects.js`.
-- **Textos ES/EN** — `src/i18n/strings.js`.
-
-### Activar la miniatura en vídeo de un proyecto
-
-1. Deja el clip en `public/media/<slug>.webm` (poster opcional en `public/media/<slug>.jpg`).
-2. Cambia el slug a `true` dentro de `VIDEO_READY` en `src/data/projects.js`.
-
-Mientras el slug siga en `false`, la tarjeta muestra el placeholder animado. Slugs disponibles: `maderas`, `lpr`, `airvision`, `eventos`.
-
-## Despliegue
-
-Optimizado para **Vercel**. El `vercel.json` reescribe todas las rutas a `index.html` para soportar el enrutado del lado del cliente (SPA). Conecta el repositorio en Vercel y el build (`npm run build`) se ejecuta automáticamente.
-
-## Documentación de diseño
-
-> [!IMPORTANT]
-> La fidelidad al diseño aprobado es un requisito del proyecto: paleta, tipografía, sistema de orbe/grano/flechas, estructura, orden y contenido deben preservarse exactamente.
-
-El diseño aprobado y los artefactos de especificación viven en `specs/001-portfolio-site/` (spec, plan, research, data-model, contracts y quickstart).
+</details>
