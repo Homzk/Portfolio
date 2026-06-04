@@ -55,11 +55,31 @@ export default function CaseStudy() {
       {/* COVER */}
       <div className="container wide">
         <div className="cover">
-          <div className="cover-anim" />
-          <div className="cover-orb" />
+          {c.cover ? (
+            <img className="cover-img" src={c.cover} alt="" loading="lazy" />
+          ) : (
+            <>
+              <div className="cover-anim" />
+              <div className="cover-orb" />
+            </>
+          )}
           <div className="cover-cap"><span className="d" />{c.coverCap[lang]}</div>
         </div>
       </div>
+
+      {/* GALERÍA (solo si el caso tiene fotos) */}
+      {c.gallery && (
+        <div className="container wide">
+          <div className="gallery">
+            {c.gallery.map((g, i) => (
+              <figure className="shot" key={i}>
+                <img src={g.src} alt="" loading="lazy" />
+                <figcaption><span className="d" />{g.cap[lang]}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* CONTEXTO / PROBLEMA / ROL / SOLUCIÓN */}
       {c.sections.map((s) => (

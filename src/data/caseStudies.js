@@ -48,10 +48,25 @@ export const CASES = {
     },
     primary: { href: "https://maderasponotro.cl", label: { es: "Visitar maderasponotro.cl", en: "Visit maderasponotro.cl" } },
     privateNote: { es: "Repo privado (bajo contrato)", en: "Private repo (under contract)" },
+    cover: "/media/cases/maderas-cover.jpg",
     coverCap: {
-      es: "[webm] recorrido del sitio: hero, catálogo y carrito de cotización",
-      en: "[webm] site walkthrough: hero, catalog and quotation cart",
+      es: "Inicio del sitio: hero, catálogo y acceso a cotización",
+      en: "Site homepage: hero, catalog and quote access",
     },
+    gallery: [
+      { src: "/media/cases/maderas-cotizacion.jpg", cap: {
+        es: "Carrito de cotización persistente con los productos seleccionados",
+        en: "Persistent quotation cart with the selected products",
+      }},
+      { src: "/media/cases/maderas-producto.jpg", cap: {
+        es: "Configurador de producto: largo, cepillado e impregnado",
+        en: "Product configurator: length, planed and treated",
+      }},
+      { src: "/media/cases/maderas-proceso.jpg", cap: {
+        es: "Sección de proceso productivo en el aserradero",
+        en: "Production-process section at the sawmill",
+      }},
+    ],
     sections: [
       { k: "context", h2: { es: "El cliente", en: "The client" }, paras: {
         es: ["Maderas Ponotro es una empresa chilena de elaboración e impregnación de maderas con más de <b>21 años de trayectoria</b> en la Región del Bío-Bío. Pese a su recorrido, no tenía ninguna presencia digital: ni catálogo en línea, ni forma de recibir cotizaciones más allá del teléfono."],

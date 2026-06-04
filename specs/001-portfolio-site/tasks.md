@@ -159,10 +159,11 @@ con `prefers-reduced-motion`: sin animación; sin hover: orbe deriva automático
 
 - [X] T041 [P] Pase de accesibilidad: HTML semántico, navegación por teclado, foco visible, contraste AA. Lighthouse a11y; corregidos heading-order (`h4`→`h3`), label-content-name-mismatch (`aria-hidden` en caption) y contraste AA (`--dim` oscurecido + tag Destacado con texto oscuro, aprobado) (FR-023/024, SC-004/005)
 - [X] T042 [P] Pase de rendimiento: Lighthouse en producción → Performance 98, Best Practices 100, SEO ≥90, FCP/LCP 1.8s, CLS 0.015, TBT 10ms; movimiento solo `transform`/`opacity` (SC-007/009). `robots.txt` añadido
-- [~] T043 Miniaturas de proyecto (decisión: **imágenes estáticas** en vez de vídeo — más limpias). **Hecho: Maderas** (screenshot hero del repo `maderas-ponotro`), **AirVision** (screenshot del mapa del repo `AirVision`, recortado para quitar email/watermark) y **Eventos** (logo "App Cultura PUCV"). Todas 720×450 en `public/media/<slug>.jpg`, mapeadas en `THUMB_IMG`. **Pendiente: LPR** — sin foto disponible (el repo es interno y el informe PDF no tiene imágenes extraíbles); sigue con placeholder animado hasta tener una foto real del sistema en terreno
+- [X] T043 Miniaturas de proyecto (decisión: **imágenes estáticas** en vez de vídeo — más limpias). **Maderas** (screenshot hero), **AirVision** (mapa, recortado para quitar email/watermark), **Eventos** (logo "App Cultura PUCV") y **LPR** (screenshot del historial de patentes, con las patentes censuradas por blur). Todas 720×450 en `public/media/<slug>.jpg`, mapeadas en `THUMB_IMG`
 - [ ] T044 [P] Ajustar el repo de AirVision en GitHub ("About": descripción/website/topics) y verificar que la cifra de cobertura sea consistente en todo el sitio _(requiere acción en GitHub — Álvaro)_
 - [X] T045 Pase de fidelidad contra la referencia: paleta, tipografías, orbe, `→`/`✦`, orden, sin "con distinción", origin-story aún borrador — fidelidad visual confirmada por el autor
 - [X] T046 Desplegar en Vercel y validar recarga de deep-link (`/proyecto/lpr`) en producción → https://portfolio-sigma-green-54.vercel.app (rutas + CV → 200)
+- [X] T047 Fotos reales en el caso de estudio de Maderas Ponotro (screenshots del repo `maderas-ponotro`): `cover` (hero) + galería de 3 (carrito de cotización, configurador de producto, proceso en el aserradero) en `public/media/cases/`. `CaseStudy.jsx` muestra `<img>` de cover cuando hay `c.cover` (fallback a la animación) y una sección `gallery` condicional; estilos en `case-study.css`
 
 ---
 
