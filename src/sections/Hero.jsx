@@ -18,6 +18,20 @@ export default function Hero() {
   const rootRef = useRef(null), orbRef = useRef(null);
   const t = HERO[lang];
 
+  // Scroll interno a una sección por #hash. Lo hacemos a mano porque el
+  // <ScrollRestoration/> del router intercepta el cambio de URL del ancla
+  // y resetea el scroll a 0, anulando el salto nativo. Respeta
+  // prefers-reduced-motion (FR-020). Enlaces externos/descarga (sin #) no
+  // entran aquí y conservan su comportamiento nativo.
+  const goToHash = (e, hash) => {
+    const el = document.getElementById(hash.slice(1));
+    if (!el) return;
+    e.preventDefault();
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+    history.replaceState(null, "", hash);
+  };
+
   useEffect(() => {
     const tick = () => setClock(new Date().toLocaleTimeString(lang === "es" ? "es-CL" : "en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit" }));
     tick(); const id = setInterval(tick, 1000); return () => clearInterval(id);
@@ -52,7 +66,7 @@ export default function Hero() {
         <nav className="nav"><div className="container nav-in">
           <div className="logo">Álvaro Flores<span className="d">.</span></div>
           <div className="nav-links">
-            <div className="nav-desktop nav-links">{t.nav.map((n, i) => <a key={n} href={`#${ids[i]}`}>{n}</a>)}</div>
+            <div className="nav-desktop nav-links">{t.nav.map((n, i) => <a key={n} href={`#${ids[i]}`} onClick={(e) => goToHash(e, `#${ids[i]}`)}>{n}</a>)}</div>
             <button className="lang" onClick={toggle}><Languages size={14} />{lang === "es" ? "EN" : "ES"}</button>
           </div>
         </div></nav>
@@ -68,8 +82,8 @@ export default function Hero() {
           <p className="tagline" style={{ animationDelay: ".2s" }}>{t.tagline}</p>
           <div className="facts" style={{ animationDelay: ".28s" }}>{t.facts.map(([k, v]) => <div key={k}>{k} <span className="arrow">→</span> <b>{v}</b></div>)}</div>
           <div className="ctas" style={{ animationDelay: ".36s" }}>
-            <a className="btn btn-primary" href="#work">{t.cta1}<ArrowUpRight size={16} /></a>
-            <a className="btn btn-ghost" href="#contact"><Mail size={16} />{t.cta2}</a>
+            <a className="btn btn-primary" href="#work" onClick={(e) => goToHash(e, "#work")}>{t.cta1}<ArrowUpRight size={16} /></a>
+            <a className="btn btn-ghost" href="#contact" onClick={(e) => goToHash(e, "#contact")}><Mail size={16} />{t.cta2}</a>
             <a className="btn btn-ghost" href={CV_URL} download={CV_FILENAME} target="_blank" rel="noreferrer"><FileText size={16} />{t.cta3}</a>
             <a className="btn btn-ghost btn-icon" href={GITHUB_URL} target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={16} /></a>
             <a className="btn btn-ghost btn-icon" href={LINKEDIN_URL} target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin size={16} /></a>
