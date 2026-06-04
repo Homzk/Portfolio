@@ -8,13 +8,14 @@
 
 /* Miniatura de cada proyecto: imagen estática en public/media/<slug>.jpg.
    - maderas/airvision: screenshot del sitio/dashboard (repos de GitHub).
+   - lpr: screenshot del historial de patentes detectadas.
    - eventos: logo "App Cultura PUCV".
-   El slug sin entrada aquí (lpr) usa el placeholder animado de la
-   referencia hasta tener una foto real del sistema en terreno.
+   El slug sin entrada aquí usa el placeholder animado de la referencia.
    Para añadir/cambiar una miniatura: deja el .jpg en public/media/ y
    apunta su slug aquí. */
 export const THUMB_IMG = {
   maderas: "/media/maderas.jpg",
+  lpr: "/media/lpr.jpg",
   airvision: "/media/airvision.jpg",
   eventos: "/media/eventos.jpg",
 };
@@ -27,7 +28,7 @@ export const projData = (lang) => [
   { n:"02", slug:"lpr", name:"Sistema LPR — Club Naval", badge: lang==="es"?"Desplegado en terreno":"Deployed on-site", live:true,
     desc: lang==="es"?"Reconocimiento de patentes con visión por computador sobre hardware Hikvision + gestión de accesos e IoT.":"License-plate recognition with computer vision on Hikvision hardware + access management and IoT.",
     metrics: lang==="es"?["95% detección","−40% tiempo de accesos"]:["95% detection","−40% access time"], chips:["Python","OpenCV","Flutter","Supabase","Node-RED","Hikvision"],
-    cap:"sistema LPR detectando en terreno", links:[{k:"case"},{k:"intern"}], open:"#lpr" },
+    cap:"historial de patentes detectadas", links:[{k:"case"},{k:"intern"}], open:"#lpr" },
   { n:"03", slug:"airvision", name:"AirVision", feat:true, badge: lang==="es"?"En vivo":"Live", live:true,
     desc: lang==="es"?"Dashboard de calidad del aire de Chile en tiempo real: 169 estaciones, mapa, alertas y arquitectura realtime.":"Realtime air-quality dashboard for Chile: 169 stations, map, alerts and a realtime architecture.",
     metrics:["+97% cobertura","166 tests","CI/CD","E2E Playwright"], chips:["React","TypeScript","Supabase","Leaflet","Recharts","Vitest"],
