@@ -1,0 +1,1619 @@
+PONTIFICIA UNIVERSIDAD CATÓLICA DE VALPARAÍSO 
+FACULTAD DE INGENIERÍA 
+ESCUELA DE INGENIERÍA INFORMÁTICA 
+ 
+ 
+ 
+ 
+ 
+ 
+ParkVision 
+ 
+  
+ 
+ 
+ 
+ 
+ÁLVARO JOSÉ FLORES ROCHA 
+SEBASTIÁN ALEJANDRO QUIROGA VILLARROEL 
+JOSÉ FERNANDO URBINA MORENO 
+GONZALO VICENTE DÍAZ CARRANZA  
+SEBASTIÁN IGNACIO BRITO RAMOS 
+ 
+ 
+ 
+ 
+Profesor: Pamela Hermosilla Monckton 
+Ayudante: Miguel Angel Guerrero 
+ 
+ 
+ 
+ 
+Asignatura: TALLER DE INGENIERÍA DE SOFTWARE (INF 4540-1) 
+ 
+ 
+ 
+ 
+Junio, 2024 
+ 
+ 
+ 
+ 
+ 
+ 
+
+Índice  
+1.0 Marco general de trabajo​
+5 
+1.1 Descripción general de la situación en estudio​
+5 
+1.2 Objetivos del proyecto​
+5 
+1.2.1 Objetivo general​
+5 
+1.2.2 Objetivos específicos​
+5 
+2.0 Situación en estudio​
+6 
+2.1 Descripción de la situación actual​
+6 
+2.2 Identificación de los problemas detectados​
+6 
+2.3 Estado del arte​
+6 
+3.0 Propuesta de solución​
+8 
+3.1 Descripción general de la solución​
+8 
+3.2 Propuesta preliminar (por parte del cliente)​
+8 
+3.3 Aportes a la solución preliminar (por parte del equipo de desarrollo)​
+8 
+3.4 Modelo de proceso de desarrollo​
+9 
+3.5 Herramientas de desarrollo​
+9 
+3.5.1 Lenguaje de programación​
+9 
+3.5.2 Motor de base de datos​
+9 
+3.5.3 Modelado de sistema​
+9 
+3.5.4 Otros​
+10 
+3.6 Arquitectura de la solución​
+10 
+3.6.1 Arquitectura lógica​
+10 
+3.6.2 Arquitectura física​
+10 
+4.0 Gestión del proyecto​
+11 
+4.1 Estudio de factibilidad​
+11 
+4.2 Riesgos​
+12 
+4.3 Acciones de mitigación​
+14 
+4.3 Acciones de contingencia​
+14 
+4.4 Carta Gantt​
+16 
+4.5 Minutas​
+16 
+5.0 Desarrollo del proyecto​
+17 
+5.1 Identificación requerimientos​
+17 
+5.1.1 Requerimientos funcionales:​
+17 
+5.1.2 Requerimientos no funcionales:​
+17 
+5.2 Análisis de requerimientos (Modelado)​
+18 
+5.3 Diseño​
+19 
+5.3.1 Componentes de SW​
+19 
+5.3.2 BD​
+20 
+5.3.3 Interfaz​
+20 
+5.4 Implementación​
+21 
+5.5 Plan de pruebas​
+23 
+6.0 Conclusiones​
+27 
+Anexos​
+29 
+ 
+ 
+
+ 
+Índice de tablas 
+ 
+Tabla 1: Posibles riesgos en el proyecto...................................................................................12 
+Tabla 2: Acciones de mitigación del proyecto......................................................................... 14 
+Tabla 3: Acciones de contingencia del proyecto......................................................................14 
+Tabla 4: Requerimientos funcionales del proyecto.................................................................. 24 
+Tabla 5: Requerimientos no funcionales del proyecto............................................................. 24 
+Tabla 6 - Plan de pruebas 01.................................................................................................... 30 
+Tabla 7 - Plan de pruebas 02.................................................................................................... 30 
+Tabla 8 - Plan de pruebas 03.................................................................................................... 31 
+Tabla 9 - Plan de pruebas 04.................................................................................................... 32 
+Tabla 10 - Plan de pruebas 05.................................................................................................. 32 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+Índice de figuras 
+ 
+Figura 1: Arquitectura lógica de la solución............................................................................ 10 
+Figura 2: Arquitectura física de la solución............................................................................. 10 
+Figura 3: Cronograma del proyecto......................................................................................... 16 
+Figura 4. BPMN Historial........................................................................................................ 18 
+Figura 5. BPMN Captura de datos........................................................................................... 19 
+Figura 6.  BPMN Reportes.......................................................................................................19 
+Figura 7. Casos de uso..............................................................................................................19 
+Figura 8. Pantalla inicio de sesión............................................................................................21 
+Figura 9. Pantalla registro........................................................................................................ 21 
+Figura 10. Pantalla historial de patentes...................................................................................22 
+Figura 11. Pantalla de estadísticas............................................................................................22 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+1.0 Marco general de trabajo 
+1.1 Descripción general de la situación en estudio 
+El proyecto nace por la necesidad de nuestro cliente de poder mantener un registro 
+preciso de todos los vehículos motorizados que posean una patente de identificación y hagan 
+ingreso a su recinto. 
+ 
+El cliente desea contar con los horarios de ingreso y salida, junto a los días del mes en 
+los que se ha encontrado al vehículo en el establecimiento, lo cual no se realiza por el simple 
+hecho de que a los miembros de este establecimiento consideran el proceso ineficiente. 
+ 
+Con esta información recolectada nuestro cliente desearía tener una idea clara de los 
+vehículos que frecuentan el club, tomando en cuenta a quienes realizan un uso adecuado de 
+este espacio. 
+ 
+1.2 Objetivos del proyecto 
+1.2.1 Objetivo general 
+Desarrollar un sistema integral capaz de recolectar datos cruciales acerca de la estadía 
+de los clientes a través de la identificación, almacenamiento y análisis de patentes en los 
+portones de entrada y salida de la empresa para la construcción de estadística que logre 
+apoyar y justificar decisiones financieras dentro de la empresa respecto a la fidelización de 
+sus clientes a través del tiempo. 
+ 
+1.2.2 Objetivos específicos 
+ 
+1. Mejorar la gestión de los estacionamientos de los recintos privados. 
+2. Entregar información estadística al cliente para uso comercial. 
+3. Regular el mal uso de los estacionamientos del recinto. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+2.0 Situación en estudio 
+2.1 Descripción de la situación actual 
+​
+El mal uso de los estacionamientos en los recintos privados ha pasado a ser un tema 
+preocupante para los miembros del Club Naval de Campo las Salinas, ya que afecta tanto a la 
+eficiencia operativa del recinto como a la experiencia de sus socios. A pesar de que se ha 
+solicitado a sus usuarios que eviten este tipo de comportamientos estos no han cesado. Es por 
+esto que nuestro cliente ha requerido la instalación de un sistema de cámaras que permita la 
+identificación de la matrícula vehicular de los automóviles que entren y salgan del recinto. 
+Permitiendo mejorar la gestión de los estacionamientos dentro del recinto, además de 
+entregar información que puede ser crucial para uso comercial.  
+ 
+2.2 Identificación de los problemas detectados 
+​
+Uno de los problemas habituales en el Club Naval de Campo las Salinas es la falta de 
+control sobre quién entra y sale del recinto, lo que resulta en la pérdida de información 
+valiosa. Este dato podría ser fundamental para mejorar la experiencia del usuario, ya que 
+permitiría identificar los días y horas de mayor afluencia y determinar cuáles son los eventos 
+más populares. Con esta información recolectada, el club planea recompensar a los usuarios 
+más frecuentes, incentivando así la lealtad y aumentando la satisfacción de sus miembros. 
+ 
+2.3 Estado del arte  
+La detección de matrículas vehiculares ha evolucionado a lo largo de los años, 
+pasando de los métodos manuales que requerían un montón de esfuerzo y recursos humanos a 
+sistemas automatizados impulsados por los avances tecnológicos en el campo de Computer 
+vision, el reconocimiento óptico de caracteres (OCR) y la inteligencia artificial. 
+Sin embargo, con la aparición de la tecnología ANPR (Automatic Number Plate Recognition) 
+y su implementación en cámaras especializadas, este proceso se ha vuelto mucho más 
+eficiente y preciso. 
+Las cámaras que tienen integrada la tecnología ANPR tienen algoritmos avanzados para 
+capturar imágenes de matrículas vehiculares en tiempo real y reconocer automáticamente los 
+números y letras de las mismas. Estas cámaras pueden operar en una variedad de condiciones 
+de iluminación y a diferentes velocidades, lo que las hace ideales para su implementación en 
+entornos de tráfico vehicular. 
+Un ejemplo destacado es la tecnología ANPR de cámaras Hikvision, según HikPedia. Sus 
+sistemas "aprenden" las matrículas de una escena, lo que les permite reconocer un número 
+mucho mayor de matrículas con una eficiencia significativamente mayor que los sistemas 
+ANPR convencionales. Además, ya no requieren ajustes frecuentes y complicados de la 
+posición de la cámara, lo que simplifica la instalación y reduce la carga de mantenimiento. 
+Esta tecnología, implementada en cámaras especializadas como la Cámara de Vigilancia 
+Hikvision DeepinView Series iDS-2CD7A46G0/P-IZHSY, ha demostrado ser una solución 
+integral y eficaz para la captura y reconocimiento automatizado de matrículas en tiempo real. 
+Al comparar esta cámara con otras metodologías, como el uso de un Jetson Nano junto con 
+un software programado de ANPR, se pueden identificar varias diferencias significativas que 
+resaltan las ventajas de utilizar cámaras especializadas: 
+ 
+1.​ Eficiencia y precisión: Las cámaras ANPR están equipadas con algoritmos avanzados 
+que les permiten capturar imágenes de matrículas y reconocer automáticamente los 
+números y letras de las mismas en tiempo real. En contraste, la implementación de un 
+ 
+
+software de ANPR en un Jetson Nano puede requerir una mayor cantidad de recursos 
+de desarrollo y ajustes para lograr niveles comparables de eficiencia y precisión. 
+ 
+2.​ Facilidad de uso y mantenimiento: Las cámaras especializadas, como la Hikvision 
+DeepinView Series, ofrecen una solución lista para usar, eliminando la necesidad de 
+desarrollar y mantener un software personalizado. Además, su diseño integrado 
+simplifica la instalación y reduce la carga de mantenimiento en comparación con la 
+configuración y mantenimiento de un sistema basado en hardware como el Jetson 
+Nano junto con software personalizado. 
+ 
+3.​ Adaptabilidad y confiabilidad: Las cámaras ANPR están diseñadas para operar en una 
+variedad de condiciones de iluminación y velocidades de vehículos, lo que las hace 
+altamente confiables y adaptables a diferentes entornos de tráfico vehicular. Por otro 
+lado, la eficacia de un sistema basado en Jetson Nano puede depender en gran medida 
+de la calidad del software desarrollado y de la capacidad de adaptarse a cambios en el 
+entorno operativo. 
+ 
+A pesar de estos avances, es importante señalar que hasta el momento, las cámaras ANPR de 
+Hikvision y otras marcas similares no cuentan con una aplicación especializada para 
+visualizar las estadísticas e información importante recopilada. Esta ausencia puede 
+representar una limitación en términos de accesibilidad y conveniencia para los usuarios que 
+desean acceder a estos datos de manera remota. Por lo tanto, aunque la tecnología ANPR ha 
+mejorado significativamente la detección de matrículas vehiculares, aún existen áreas de 
+oportunidad para mejorar la experiencia del usuario en términos de accesibilidad y usabilidad 
+de la información recopilada. Por lo que implementar esta función es de gran aporte a nuestro 
+proyecto. (CAMARA IP ANPR 4MP DEEPINVIEW IDS-2CD7A46G0/P-IZHSY HIKVISIO, s. 
+f.)​
+En conclusión, para alcanzar los objetivos planteados de mejorar la gestión de 
+estacionamientos, entregar información estadística para uso comercial y regular el mal uso de 
+los estacionamientos del recinto, la implementación de cámaras especializadas de 
+reconocimiento automático de matrículas vehiculares, como la Cámara de Vigilancia 
+Hikvision DeepinView Series iDS-2CD7A46G0/P-IZHSY, es la mejor opción. Su capacidad 
+para capturar y reconocer matrículas en tiempo real, junto con su facilidad de instalación y 
+mantenimiento, la convierten en una solución integral y altamente efectiva para las 
+necesidades de nuestro proyecto en el Club Naval de Campo.​
+​
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+3.0 Propuesta de solución 
+3.1 Descripción general de la solución 
+ 
+Nuestro proyecto se basará en solucionar la problemática anteriormente mencionada  
+en el informe, en donde se utilizaran cámaras que cuentan con la tecnología ANPR, más 
+específicamente la cámara Hikvision DeepinView Series iDS-2CD7A46G0/P-IZHSY,, 
+especializada en la captura de matrículas vehiculares, esta funcionalidad viene integrada en el 
+software de la cámara, lo que reducirá el margen de error del proyecto, además de ahorrar 
+tiempo en el desarrollo del software. Estas cámaras capturan datos cada vez que un vehículo 
+entra o sale del recinto, almacenando su matrícula vehicular, junto a su hora de entrada o 
+salida. Esta información será almacenada en una base de datos provista por el mismo club de 
+campo para su procesamiento. 
+Además nuestro cliente solicitó el poder visualizar los datos recopilados a través de 
+una interfaz gráfica, la cual mostrará los datos procesados de manera intuitiva para nuestro 
+cliente. Esto se realizará por medio de consultas a la base de datos, permitiendo una veloz 
+visualización de los datos. Para la elaboración de esta interfaz se utilizará Flutter, un kit de 
+desarrollo creado por Google, el cual facilita la creación de interfaces responsive. 
+Para la conexión entre las cámaras y la base de datos se utilizará node-red, una 
+herramienta de desarrollo creada por IBM, esta herramienta basada en flujos permitirá captar 
+los datos que sean enviados por la cámara, los cuales serán procesados y enviados a la base 
+de datos. En lo que a la conexión entre la aplicación y la base de datos respecta se planea 
+utilizar Firebase, un servicio bases de datos desarrollado por Google, el cual combina 
+perfectamente con Flutter, añadiendo una mayor facilidad en las conexiones debido a que 
+ambos servicios son manejados por Google. 
+ 
+3.2 Propuesta preliminar (por parte del cliente) 
+El cliente principalmente contaba con la idea de poder realizar un software o sistema 
+que tuviese la capacidad de recopilar una foto o dato que almacene la matrícula vehicular del 
+vehículo que ingrese al establecimiento, pasando la barrera principal de entrada. 
+ 
+3.3 Aportes a la solución preliminar (por parte del equipo de 
+desarrollo) 
+Luego de analizar las opciones existentes en base a lo comentado por parte de nuestro 
+cliente, se tuvo en cuenta la realización de un algoritmo de captura de imágenes y la 
+conversión de estas mismas, captando así las matrículas de los vehículos que ingresan al 
+recinto, por medio de cámaras normales. 
+La siguiente opción analizada contaba con las cámaras con tecnología de análisis de 
+matrículas vehiculares ya integrada en estas mismas. 
+ 
+3.4 Modelo de proceso de desarrollo 
+La metodología a utilizar en este proyecto corresponderá a una metodología iterativa, 
+ya que lo que se busca es la satisfacción del cliente con el producto final, por lo que esta 
+metodología nos permitirá refinar el trabajo realizado en cada iteración, logrando que el 
+cliente pueda entregar retroalimentación y que esta se vea reflejada rápidamente en los 
+entregables del proyecto.  
+ 
+ 
+
+3.5 Herramientas de desarrollo 
+Las herramientas de desarrollo a utilizar en  este proyecto fueron elegidas en base a 
+nuestra experiencia, y las sinergias entre sí que presenta cada herramienta. 
+●​ Node-red: Será utilizado para conectar las cámaras que serán las encargadas de 
+recopilar las matrículas vehiculares, con la base de datos, ya que esta herramienta 
+permite un fácil manejo de los datos dentro de los flujos, además de poder adaptarse a 
+distintos motores de bases de datos y tecnologías. (Node-RED, s. f.) 
+●​ Flutter: Esta herramienta será utilizada principalmente para el desarrollo de la 
+interfaz gráfica de nuestra aplicación móvil, se optó por utilizar este framework 
+debido a que permite la rápida construcción de la interfaz por medio del lenguaje Dart 
+y debido a que esta herramienta funciona excepcionalmente bien con una de nuestras 
+opciones como motor de base de datos, Firebase. (Flutter - Build Apps For Any 
+Screen, s. f.) 
+ 
+3.5.1 Lenguaje de programación 
+Al optar por el uso de flutter, se deberá trabajar con el lenguaje de programación Dart, 
+el cual es el lenguaje nativo de la aplicación, teniendo en cuenta que es compilado en código 
+máquina, se nos asegura un rendimiento rápido y eficaz.  
+ 
+3.5.2 Motor de base de datos 
+​
+Se decidió utilizar el motor de base de datos PostgreSQL, un sistema de gestión de 
+bases de datos relacional caracterizado por su robustez, extensibilidad y apego a los 
+estándares SQL. Algunas de las razones por las cuales se eligió este motor son su 
+escalabilidad y su alta disponibilidad. La primera característica nos permitirá construir un 
+software que pueda evolucionar en el futuro, mientras que la segunda asegurará a nuestro 
+cliente un acceso completo a los datos sin interrupciones. 
+ 
+ 
+ 
+3.5.3 Modelado de sistema 
+Para el apartado de modelado tomamos la elección, a partir de nuestra experiencia de 
+uso de estos programas, utilizar los siguientes softwares:  
+ 
+●​ Bizagi modeler (diagrams.net): Para la realización de los BPD, se decidió ocupar este 
+software por su fácil uso y la cantidad de herramientas que posee que nos permiten 
+generar nuestros diagramas de forma rápida y sencilla.  
+●​ Draw.io: Para la realización del modelo arquitectura lógica y física, se decidió ocupar 
+este software porque contaba con las herramientas necesarias para poder desarrollar 
+los diagramas necesario, también destacar su fácil uso que nos permitió un desarrollo 
+rápido de los diagramas.  
+ 
+3.5.4 Otros 
+La comunicación dentro del equipo se acordó que fuese realizada mediante Discord 
+para las reuniones de trabajo, y resolución de temáticas donde debiese haber una 
+comunicación y coordinación más rápida y eficaz, mientras que se utilizara WhatsApp para la 
+coordinación de reuniones, o resolución de problemas puntuales. 
+ 
+ 
+
+3.6 Arquitectura de la solución 
+3.6.1 Arquitectura lógica 
+​
+Figura 1: Arquitectura lógica de la solución 
+ 
+ 
+3.6.2 Arquitectura física 
+ 
+Figura 2: Arquitectura física de la solución 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+4.0 Gestión del proyecto 
+4.1 Estudio de factibilidad   
+​
+Tras un análisis financiero en donde se estimaron los costos de adquisición e 
+instalación de las cámaras a utilizar y su viabilidad de uso en conjunto con otras tecnologías  
+también teniendo en cuenta que se desarrolló un estudio donde se evalúan las tecnologías a 
+ocupar para desarrollar una aplicación móvil que a partir de los datos recopilados por las 
+cámaras genere estadísticas, consideramos que nuestro proyecto es viable luego del análisis 
+de 4 aspectos importantes:  
+ 
+1.​ Estudio de factibilidad técnica: La factibilidad técnica se verá influenciada en gran 
+medida por el uso de cámaras que cuentan con el algoritmo ANPR, y de la 
+disponibilidad y confidencialidad que nos entrega el uso de Flutter, que es un SDK de 
+código abierto que nos permitirá crear una interfaz web que pueda funcionar en 
+múltiples plataformas, además Flutter cuenta con las herramientas necesarias para 
+crear el backend que conectará nuestra aplicación con el motor de base de datos  
+ocupado en el CNCS.  
+2.​ Estudio de factibilidad económica: La factibilidad económica es viable, teniendo en 
+cuenta la necesidad del sistema a realizar, por parte de los recintos privados que 
+cuentan con estacionamientos limitados. La inversión a realizar por parte de nuestro 
+cliente en específico, yace por la necesidad previamente explicada en el documento, 
+donde a pesar de ser una fase inicial con el trabajo de las cámaras ARNP, nuestro 
+cliente busca llevar a cabo siguientes etapas/iteraciones. 
+3.​ Estudio de Factibilidad legal: La ley que encontramos pertinente considerar al 
+momento de desarrollar este proyecto es:  
+a.​ Ley 17336 | Ley de propiedad intelectual: Esta ley nos permitirá, por el solo 
+hecho de crear la aplicación, adquirir los derechos de autor de nuestra 
+aplicación, protegiendo la integridad de esta y evitando que sea plagiada.  (Del 
+Congreso Nacional, s. f.) 
+4.​ Estudio de factibilidad operacional: El equipo de trabajo posee las capacidades para la           
+realización del proyecto, gracias a la capacidad de podernos adaptar al uso de varias 
+herramientas de trabajo y lenguajes de operación, por otra parte contamos con la 
+disposición del Club Naval de campo las Salinas para lo que vendría siendo la 
+instalación de las cámaras, ayudándonos en la logística de implementación de estas y 
+permitiéndonos evaluar el recinto para determinar los lugares estratégicos donde irán 
+instaladas las cámaras, cabe mencionar que el Club Naval cuenta con todas la 
+herramientas para que nosotros podamos hacer efectiva la instalación de las cámaras. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 4.2 Riesgos  
+Tabla 1: Posibles riesgos en el proyecto 
+​
+ 
+ 
+ 
+Impacto en el objetivo del 
+proyecto afectado 
+ 
+ID 
+Riesgo 
+Descripción del 
+efecto o impacto del 
+riesgo 
+Tipo de 
+riesgo 
+Probabilida
+d 
+Impacto Alcanc
+e 
+Tiemp
+o 
+Costo Calida
+d 
+Prioridad 
+1 
+El esfuerzo es 
+mayor que el 
+estimado 
+El personal emplea 
+mayor esfuerzo que 
+el estimado se refiere 
+a líneas de código de 
+más,módulos,etc. 
+Amenaza 
+Muy 
+probable 
+Medio  
+X 
+X 
+X 
+Moderado 
+2 
+Desconocer 
+área del 
+producto 
+Las áreas 
+desconocidas del 
+producto llevan más 
+tiempo del esperado 
+en el diseño y en la 
+implementación. 
+Amenaza 
+Probable 
+Alto 
+X 
+X 
+X 
+ 
+Alto 
+3 
+Variación 
+presupuesto 
+El presupuesto del 
+proyecto varía. 
+Amenaza 
+Poco 
+probable 
+Alto 
+ 
+ 
+X 
+ 
+Alto 
+4 
+Desarrollo de 
+una interfaz 
+inadecuada 
+En caso de 
+desarrollar una 
+interfaz inadecuada 
+requerirá el volver a 
+diseñar e 
+implementar 
+Amenaza 
+Probable 
+Alto 
+ 
+x 
+ 
+ 
+Moderado 
+5 
+Herramientas 
+de desarrollo 
+no 
+disponibles 
+Puede que las 
+herramientas 
+requeridas no lleguen 
+en el tiempo deseado 
+Amenaza 
+Probable 
+Muy alto  
+X 
+ 
+ 
+Alto 
+6 
+Los espacios 
+no están 
+disponibles 
+en el 
+momento 
+necesario. 
+Los espacios 
+necesarios para llevar 
+a cabo el desarrollo 
+del proyecto no se 
+encuentran 
+disponibles 
+Amenaza 
+Poco 
+probable 
+Medio  
+X 
+X 
+ 
+Moderado 
+7 
+Herramientas 
+de desarrollo 
+no son lo 
+esperado 
+Las herramientas de 
+desarrollo no 
+funcionan como se 
+esperaba; el personal 
+de desarrollo necesita 
+tiempo para 
+resolverlo o adaptarse 
+a las nuevas 
+herramientas. 
+Amenaza 
+Probable 
+Alto 
+X 
+X 
+ 
+ 
+Alto 
+8 
+Hardware 
+desconocido 
+Trabajar con un 
+hardware 
+desconocido para el 
+equipo puede causar 
+problemas 
+imprevistos en el 
+proyecto 
+Amenaza 
+Probable 
+Medio  
+X 
+X 
+ 
+Moderado 
+9 
+Nuevas 
+herramientas 
+El personal necesita 
+tiempo para adaptarse 
+a las nuevas 
+herramientas a usar 
+en el proyecto 
+Amenaza Relativament
+e probable 
+Bajo 
+ 
+ 
+ 
+ 
+Bajo 
+
+​
+ 
+ 
+ 
+ 
+10 
+Gestión de 
+proyecto no 
+adecuada 
+Las partes del 
+proyecto que no se 
+han especificado 
+claramente consumen 
+más tiempo del 
+esperado. 
+Amenaza 
+Probable 
+Alto 
+ 
+X 
+X 
+ 
+Alta 
+11 
+Lentitud en 
+comunicación 
+del cliente 
+El tiempo de 
+comunicación del 
+cliente (por ejemplo, 
+tiempo para 
+responder a las 
+preguntas para 
+aclarar los requisitos) 
+es más lento del 
+esperado. 
+Amenaza 
+Probable 
+Bajo 
+X 
+X 
+ 
+X 
+Bajo 
+12 
+Desconocimi
+ento de 
+lenguaje 
+El personal necesita 
+un tiempo extra para 
+aprender un lenguaje 
+de programación 
+nuevo. 
+Amenaza Relativament
+e probable 
+Medio 
+X 
+X 
+ 
+ 
+Moderado 
+13 
+Control de 
+calidad 
+inadecuado 
+Un control de calidad 
+inadecuado puede 
+tener una serie de 
+efectos e impactos 
+negativos 
+significativos a la 
+organización. 
+Amenaza Relativament
+e probable 
+Alto 
+X 
+ 
+ 
+X 
+Alto 
+14 
+Falta de 
+seguimiento 
+La falta de un 
+seguimiento exacto 
+del avance del 
+proyecto hace que se 
+desconozco si el 
+proyecto está 
+atrasado hasta que 
+está muy avanzado 
+Amenaza Relativament
+e probable 
+Medio  
+X 
+ 
+ 
+Moderado 
+15 
+Cliente con 
+poca 
+participación 
+El cliente no 
+participa en los ciclos 
+de revisión de los 
+planes, prototipos y 
+especificaciones, o es 
+incapaz de hacerlo, 
+resultando unos 
+requisitos inestables 
+y la necesidad de 
+realizar unos cambios 
+que consumen 
+tiempo. 
+Amenaza 
+Probable 
+Alto 
+ 
+X 
+X 
+X 
+Alto 
+16 
+Hardware 
+presenta 
+fallas 
+técnicas  
+El hardware presenta 
+fallas técnicas al 
+momento de ser 
+comprado generando 
+retraso en el 
+desarrollo del sistema 
+Amenaza 
+Probable 
+Muy alto  X 
+X 
+X 
+X 
+Alto 
+
+4.3 Acciones de mitigación 
+ 
+Tabla 2: Acciones de mitigación del proyecto 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+4.3 Acciones de contingencia 
+ 
+Tabla 3: Acciones de contingencia del proyecto. 
+ 
+ 
+ID 
+Acción de mitigación 
+Responsable 
+1 
+Definir y respetar las horas de trabajos impuestas como equipo  
+Jefe de proyecto 
+2 
+Dedicar tiempo a otras tareas de la planificación para comprender 
+de mejor manera el aspecto desconocido del producto. 
+Jefe de proyecto 
+3 
+Mantener un fondo de ahorros para cualquier emergencia o 
+variación en los fondos. 
+Jefe de proyecto 
+4 
+Crear un diseño cercano a lo que espera el cliente, en conjunto de 
+este mismo. Mantener reuniones semanales de avances. 
+Jefe de proyecto  
+5 
+Dedicar tiempo a otras áreas de producción para evitar retrasos en la 
+entrega 
+Jefe de proyecto 
+6 
+Pedir con antelación visitas al lugar de trabajo  
+Jefe de proyecto 
+7 
+Planificar tiempos específicos para que los desarrolladores puedan 
+familiarizarse con las herramientas de desarrollo 
+Jefe de proyecto 
+8 
+Revisar documentación e información relacionada al hardware. 
+Documentador 
+9 
+Realizar capacitaciones que permitan a los usuarios adaptarse de 
+forma más rápida a las nuevas herramientas que se realizarán 
+durante el proyecto 
+Jefe de proyecto 
+10 
+Crear una planificación lo más cercana a la realidad en base a las 
+experiencias previas con herramientas y creación de 
+apartados/interfaces. 
+Jefe de proyecto 
+11 
+Mantener agendadas reuniones semanales en la planificación, en 
+conjunto de diferentes medios de comunicación con el cliente, en 
+casos de contar con problemas en la utilización de alguno. 
+Jefe de proyecto 
+12 
+Definir con antelación las herramientas a utilizar, y brindar 
+capacitación a aquellos que no tengan familiaridad con estas 
+herramientas. 
+Jefe de proyecto 
+13 
+Los equipos deberán mostrar avances diarios al departamento de 
+QA para evitar fallos de calidad en el proyecto.  
+Quality assurance 
+14 
+Realizar reuniones semanales con el equipo para ver avances 
+realizados en el proyecto hasta la fecha  
+Jefe de proyecto 
+15 
+Planificar reuniones semanales con el cliente mostrándole los 
+avances realizados hasta el momento.  
+Jefe de proyecto 
+16 
+Comprobar que las tiendas donde se comprarán los materiales 
+tengan planes de devolución con tiempos adecuados en caso de que 
+el producto venga con fallas.  
+Jefe de proyecto 
+ID 
+Acción de contingencia 
+Responsable 
+1 
+Llevar a cabo un extenso estudio respecto a las dificultades y obstáculos 
+primarios del desarrollo, para replantear las horas destinadas a cada 
+desarrollo. 
+Analista, Jefe de proyecto 
+2 
+Durante la planificación consultar con el equipo de desarrollo 
+Jefe de proyecto 
+3 
+Recurrir a opciones más económicas para reducir el presupuesto 
+necesario para el proyecto 
+Jefe de proyecto 
+4 
+En caso de que el cliente decida llevar a cabo cambios, realizar una 
+reunión lo antes posible para recibir los nuevos requerimientos y poder 
+planificar lo más prematuramente la implementación de cambios. 
+Jefe de proyecto 
+5 
+Buscar alternativas de herramientas para que el proyecto no se retrase en 
+caso de que la primera opción falle. 
+Analista 
+
+ 
+ 
+6 
+Buscar una alternativa para trabajar que sea similar al lugar de trabajo 
+inicial. 
+Jefe de proyecto 
+7 
+Dedicar más tiempo de lo esperado para que el equipo de desarrollo 
+pueda capacitarse en el software 
+Jefe de proyecto 
+8 
+Llevar a cabo la contratación de servicios de consultoría para la 
+resolución específica del problema 
+Jefe de proyecto 
+9 
+Detener el desarrollo por unos días, analizar las fallas y complicaciones 
+que se han obtenido hasta el momento, y generar capacitaciones en base 
+a la información recopilada 
+Analista 
+10 
+Volver a planificar los hitos del proyecto para adecuarlos a las nuevas 
+limitaciones temporales, teniendo como prioridad evitar el retraso de la 
+entrega final 
+Jefe de proyecto 
+11 
+Insistir para poder confirmar las respuestas a las preguntas realizadas al 
+cliente.  
+Jefe de proyecto 
+12 
+Realizar capacitaciones y entregar documentación que ayude al equipo a 
+adaptarse y familiarizarse de forma más rápida al nuevo lenguaje de 
+programación.  
+Jefe de proyecto 
+13 
+Realizar la revisión diaria del sistema, en conjunto a las actualizaciones 
+y modificaciones que surgieron ese día. 
+Quality Assurance 
+14 
+Realizar más reuniones entre todo el equipo de proyecto, incluyendo al 
+cliente para mantener al tanto a todos los involucrados. 
+Jefe de proyecto 
+15 
+Insistir al cliente pidiéndole reuniones de avances en donde se le 
+mostrarán los avances hechos. 
+Jefe de proyecto 
+16 
+Llevar a cabo la devolución o reparación del producto de forma 
+inmediata. 
+Jefe de proyecto 
+
+4.4 Carta Gantt 
+ 
+Figura 3: Cronograma del proyecto 
+ 
+ 
+4.5 Minutas 
+ 
+​
+Las minutas se encontrarán en el apartado de los anexos. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+5.0 Desarrollo del proyecto 
+5.1 Identificación requerimientos 
+5.1.1 Requerimientos funcionales: 
+ 
+Tabla 4: Requerimientos funcionales del proyecto. 
+ 
+RF1.0 
+La aplicación web permitirá al usuario acceder a dos módulos, un módulo de reportes y un 
+módulo que contará con el historial de vehículos que han ingresado al recinto. 
+RF1.1 
+La aplicación web generará reportes estadísticos de los datos recopilados por las cámaras 
+ANPR que serán mostrados en el módulo de reportes. 
+RF1.1.1 
+Los informes generados por la aplicación web, deberán ser creados de manera diaria. 
+RF1.1.2 
+Los informes nos mostrarán la información de los vehículos, en específico la matrícula 
+vehicular, horario de entrada y horario de salida 
+RF1.2 
+La aplicación web generará un historial de los vehículos que han ingresado al recinto, que 
+serán mostrados en el módulo de historial. 
+RF1.2.1 
+El módulo historial permitirá filtrar las matrículas vehiculares por su número de patente 
+vehicular. 
+RF1.2.2 
+El módulo historial permitirá ordenar las matrículas vehiculares por la fecha de entrada, fecha 
+de salida, y por tiempo total de estadía. 
+RF 1.2.3 
+El módulo historial generará reportes de las matrículas vehiculares ingresadas al recinto, estos 
+reportes serán por día, por mes y por año. 
+RF 1.2.4 
+El módulo historial permitirá filtrar las matrículas a mostrar por medio de un rango de fechas. 
+RF2.0 
+La aplicación web permitirá extraer desde la base de datos la hora de entrada, la hora de salida, 
+cuánto tiempo permaneció el vehículo en estacionamiento y su matrícula vehicular. 
+RF3.0 
+La aplicación web contará con un sistema de registro e ingreso de usuarios para poder contar 
+con acceso a las funcionalidades del sistema. 
+RF3.1 
+El registro de nuevos usuarios estará sujeto a autorización. 
+RF3.2 
+El registro se hará mediante correo electrónico, contraseña y rol de trabajo. 
+ 
+ 
+5.1.2 Requerimientos no funcionales: 
+ 
+Tabla 5: Requerimientos no funcionales del proyecto 
+ 
+RNF 1.0 
+La aplicación web debe estar conectada a cámaras que cuenten con una buena calidad de 
+imágen para la captura de matrículas. 
+RNF 1.1 
+Las cámaras deberán tener una resolución mayor a 720p para permitir la captura de matrículas. 
+RNF 1.2 
+Las cámaras deberán contar con visión nocturna. 
+RNF 2.0 
+El sistema debe estar conectado a cámaras que contarán con conexión a internet estable y 
+permanente.  
+ 
+
+RNF 3.0 
+La aplicación web será responsive para permitir que sea utilizada en dispositivos móviles.  
+RNF 4.0 
+La aplicación web deberá contar con cámaras que cuenten con protección IP68.  
+RNF 5.0 
+El sistema deberá contar con cámaras con el algoritmo ANPR implementado.  
+RNF 5.1 
+El sistema deberá contar con cámaras ANPR que sean capaces de detectar matrículas 
+vehiculares e ingresarlas a una base de datos. 
+RNF 6.0 
+Se deberá contar con una base de datos capaz de recibir la información proveniente de las 
+cámaras y almacenarla para que pueda ser extraída por la aplicación web. 
+RNF 7.0 
+La aplicación web protegerá los datos recopilados por las cámaras.  
+RNF 8.0 
+La aplicación web mantendrá seguro el ingreso del usuario encriptando en la base de datos su 
+contraseña. 
+ 
+ 
+5.2 Análisis de requerimientos (Modelado) 
+​
+ 
+ 
+Figura 4. BPMN Historial 
+ 
+ 
+ 
+
+Figura 5. BPMN Captura de datos 
+ 
+ 
+ 
+ 
+Figura 6.  BPMN Reportes 
+ 
+ 
+ 
+Figura 7. Casos de uso​
+ 
+ 
+5.3 Diseño 
+5.3.1 Componentes de SW 
+​
+El software realizado cuenta con los siguientes componentes: 
+ 
+1)​ Código fuente: El código fuente se hizo haciendo  uso del lenguaje de programación 
+de dart, esto se debe a la compatibilidad que tenía con Flutter, framework que se 
+utilizó para el desarrollo del proyecto. 
+ 
+
+2)​ Framework: Se hizo uso de Flutter, un framework de código abierto perteneciente a 
+google que permite crear aplicaciones móviles y web, se utilizó particularmente por 
+su facilidad de crear interfaces de usuario y su facilidad de implementación. 
+3)​ Interfaces de usuario: El software cuenta dos módulos, un módulo de historial y un 
+módulo de dashboards, el módulo de historial le mostrará al usuario el historial de 
+vehículos que hicieron ingreso al recinto en un determinado periodo de tiempo, 
+mientras que el módulo de dashboards permitirá al usuario ver gráficos 
+personalizados con la información recopilada.  
+4)​ Documentación: Se entregará un manual de usuarios con todas las instrucciones del 
+software y explicando el paso a paso de como hacer uso de cada módulo para que al 
+cliente se le haga más fácil su uso.  
+5)​ Base de datos: El sistema estará conectado a Supabase para crear y gestionar servicios 
+backend, Supabase utiliza PostgreSQL permitiéndonos generar tablas relacionales de 
+forma fácil gracias a su interfaz.   
+ 
+5.3.2 BD 
+​
+La base de datos implementada está construida en Supabase, una plataforma de 
+desarrollo backend, esta herramienta nos permitirá construir rápidamente la conexión entre 
+nuestra aplicación y la lógica que tiene por detrás, ya que proporciona una base de datos 
+PostgreSQL preconfigurada, lo que nos permitirá entregar el producto rápidamente. 
+(Supabase: Una Alternativa Ágil de Código Abierto - Aplyca, 2023) Adicionalmente cabe 
+recalcar que Supabase es una herramienta de código abierto, lo que nos permitirá modificar el 
+servicio según las necesidades del proyecto. (¿Qué es el Código Abierto? - Explicación del 
+Código Abierto - AWS, s. f.) 
+ 
+ 
+5.3.3 Interfaz 
+En el siguiente apartado, se indicarán los aspectos de usabilidad utilizados a la hora de 
+la creación del sitio web ParkVision. 
+-​
+Simplicidad: El sitio web mantiene un diseño minimalista, utilizando la paleta de 
+colores del actual sitio existente de nuestro cliente. 
+-​
+Facilidad de navegación: Al contar con una interfaz simple, el usuario siempre tendrá 
+el conocimiento del apartado en el que se encuentra, siendo este identificable en la 
+parte superior de la página actual. 
+-​
+Responsividad: El sitio fue programado de manera responsiva para su utilización en 
+dispositivos móviles, como en computadoras, para la comodidad y preferencia del 
+usuario. 
+-​
+Retroalimentación: A la hora de la utilización de los diferentes formularios 
+disponibles, los posibles errores que pudiesen ocurrir son identificables de manera 
+rápida, siendo estos de color rojo y posicionandose debajo del error ocurrido. 
+-​
+Eficiencia: El sitio tiene un tiempo de respuesta bajo, permitiendo al usuario obtener 
+la información necesaria sin mayores inconvenientes. 
+-​
+Interactividad: En el apartado de dashboard, el usuario puede visualizar los datos en 
+forma de gráfico, este variando en base a un periodo de tiempo seleccionado. 
+-​
+Sistemas Externos: El sitio se encontrará conectado a una base de datos, donde podrá 
+consultar los datos obtenidos por las cámaras que trabajarán de forma remota. 
+-​
+Escalabilidad: El sistema al encontrarse en una etapa inicial, tiene la posibilidad de 
+agregar diferentes módulos, herramientas y la posible modificación de los ya 
+existentes módulos, en base a las preferencias del usuario. 
+ 
+
+5.4 Implementación 
+ 
+ 
+Figura 8. Pantalla inicio de sesión 
+ 
+ 
+Figura 9. Pantalla registro 
+ 
+ 
+ 
+
+ 
+Figura 10. Pantalla historial de patentes 
+ 
+ 
+Figura 11. Pantalla de estadísticas 
+ 
+ 
+ 
+ 
+
+ 
+ 
+5.5 Plan de pruebas 
+​
+Tabla 6 - Plan de pruebas 01 
+ 
+Identificación de la prueba. 
+Identificador de la prueba : 
+P01 
+Nombre de la prueba : 
+Navegación por módulos 
+Descripción de la prueba : 
+El usuario debe navegar por los dos módulos con los 
+que cuenta la aplicación.   
+Actores: 
+Usuario 
+Requerimiento(s) funcional(es) asociado(s): 
+RF 1.0, RF 1.1, RF 1.2 
+Pre-condiciones: 
+Estar registrado (P04) e iniciar sesión en el sistema 
+(P05).  
+Actividades. 
+Evento 
+Respuesta del Sistema 
+1. El usuario ingresa al menú desplegable y selecciona el 
+módulo historial  
+3. El usuario ingresa al menú desplegable y selecciona  
+el módulo Dashboard 
+2. El sistema muestra historial de datos sin filtrar. 
+4. El sistema muestra dashboard con los datos 
+recopilados en un mes. 
+Excepciones. 
+ 
+Post-condiciones:  
+ 
+ 
+Tabla 7 - Plan de pruebas 02 
+ 
+Identificación de la prueba. 
+Identificador de la prueba : 
+P02 
+Nombre de la prueba : 
+Visualización de reportes 
+Descripción de la prueba : 
+El usuario debe visualizar los datos estadísticos 
+generados por la aplicación.  
+Actores: 
+Usuario 
+Requerimiento(s) funcional(es) asociado(s): 
+RF 1.1, RF 1.1.2, RF 2.0 
+Pre-condiciones: 
+Estar registrado (P04) e iniciar sesión en el sistema 
+(P05). 
+ 
+
+Actividades. 
+Evento 
+Respuesta del Sistema 
+1. El usuario ingresa al menú desplegable y selecciona el 
+módulo de dashboards. 
+3. Usuario visualiza los reportes. 
+2. El sistema muestra el dashboard con los datos 
+recopilados en un mes. 
+ 
+ 
+Excepciones. 
+ 
+Post-condiciones: 
+ 
+ 
+​
+ 
+Tabla 8 - Plan de pruebas 03 
+ 
+Identificación de la prueba. 
+Identificador de la prueba : 
+P03 
+Nombre de la prueba : 
+Utilización módulo historial 
+Descripción de la prueba : 
+El usuario navegará al módulo historial y hará uso de 
+los distintos filtros que contiene el sistema. 
+Actores: 
+Usuario 
+Requerimiento(s) funcional(es) asociado(s): 
+RF 1.2, RF 1.2.1, RF 1.2.2, RF 1.2.4, RF 2.0 
+Pre-condiciones: 
+Estar registrado (P04) e iniciar sesión en el sistema 
+(P05). 
+Actividades. 
+Evento 
+Respuesta del Sistema 
+1. El Usuario ingresa al menú desplegable y selecciona 
+el módulo de historial. 
+3. Usuario aplica filtro de matricula vehicular 
+5. Usuario aplica filtro para ordenar las matrículas por 
+fecha de entrada.  
+7. Usuario aplica filtro para ordenar las matrículas por 
+fecha de salida. 
+9. Usuario aplica filtro para ordenar las matrículas por 
+tiempo de estadía.   
+11. Usuario filtra la información por el rango de fecha 
+deseado. 
+2. Sistema muestra historial sin filtrar 
+4. Sistema muestra historial filtrado por matrícula 
+6. Sistema muestra historial filtrado por fecha de 
+entrada 
+8. Sistema muestra historial filtrado por fecha de salida 
+10. Sistema muestra historial filtrado por tiempo de 
+estadía 
+12. Sistema muestra historial filtrado por rango de 
+fechas. 
+Excepciones. 
+ 
+Post-condiciones: 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Tabla 9 - Plan de pruebas 04 
+ 
+Identificación de la prueba. 
+Identificador de la prueba : 
+P04 
+Nombre de la prueba : 
+Registro de cuenta 
+Descripción de la prueba : 
+Usuario registra cuenta en sistema  
+Actores: 
+Usuario 
+Requerimiento(s) funcional(es) asociado(s): 
+RF 3.0, RF 3.2 
+Pre-condiciones: 
+Usuario accede al sistema. 
+Actividades 
+Evento 
+Respuesta del sistema 
+1. El usuario accede al sistema mediante el navegador 
+web  y oprime el botón de registro.  
+3. Usuario ingresa datos solicitados en el formulario 
+2. Se muestra formulario de registro y pide nombre de 
+usuario, rol, correo electrónico, contraseña. 
+4. El sistema verifica que los datos del formulario hayan 
+sido ingresados correctamente. 
+5. El registro es ingresado a la base de datos. 
+6. El sistema muestra por pantalla que el usuario fue 
+registrado con éxito. 
+Excepciones. 
+1. Si el formulario de registro se llenó de forma incorrecta el sistema informa que hubo un error al ingresar datos.  
+Post-condiciones: 
+El usuario fue ingresado a la base de datos 
+ 
+Tabla 10 - Plan de pruebas 05 
+ 
+Identificación de la prueba. 
+Identificador de la prueba : 
+P05 
+Nombre de la prueba : 
+Inicio de sesión 
+Descripción de la prueba : 
+El usuario accede al sistema con una cuenta ya creada. 
+Actores: 
+Usuario 
+Requerimiento(s) funcional(es) asociado(s): 
+RF 3.0 
+Pre-condiciones: 
+El usuario debe estar registrado en el sistema (P04). 
+Actividades. 
+ 
+
+Evento 
+Respuesta del Sistema 
+1. El usuario accede al sistema mediante el navegador 
+web.  
+3. El usuario completa el formulario de inicio de sesión. 
+2. El sistema despliega el formulario de inicio de sesión 
+4. El sistema verifica si los datos coinciden con los 
+presentes en la base de datos. 
+5. El sistema permite el acceso del usuario. 
+6. El sistema despliega la página principal. 
+Excepciones. 
+1. Si los datos de inicio de sesión son incorrectos o el usuario no existe, el sistema informa que hubo un error al 
+intentar ingresar. 
+Post-condiciones: 
+El sistema permite el acceso al usuario 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+6.0 Conclusiones 
+ 
+Finalmente, tras el desarrollo del proyecto se puede llegar a las siguientes 
+conclusiones, en cuanto a trabajo en equipo,el trabajar con un cliente real es bastante 
+diferente a realizar proyectos propios o universitarios, ya que al estar bajo la presión de este 
+último es necesario mantenerlo al tanto de los avances del proyecto, como de los 
+inconvenientes que puedan surgir de este. Es por esto que la comunicación entre cliente y 
+equipo de proyecto es vital, ya que ambos deben cumplir con ciertos plazos, y en ocasiones 
+ambos necesitan resolver sus dudas con la otra parte. Por otro lado la ejecución de este 
+proyecto fue bastante compleja, esto se debe a que no solo nos debemos enfocar en un 
+software para nuestro cliente, si no que tambíen debíamos instalar hardware, el cual era la 
+herramienta principal de nuestro proyecto, lo que nos hizo comprender lo ligados que van 
+ambos aspectos en cualquier tipo de proyecto. Otro aspecto a destacar tras el desarrollo del 
+software es la flexibilidad que existe a la hora de desarrollar productos para un cliente en 
+específico, ya que en nuestro caso se necesitaba un software a medida, y si bien había otras 
+opciones ya existentes en el mercado que permitieran realizar algunas de las funcionalidades 
+que ofrece nuestro proyecto, ninguna lo cubría en su totalidad, lo cual deja en evidencia el 
+valor agregado que poseen los sistemas que son desarrollados para los clientes desde un 
+comienzo. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+7.0 Referencias  
+ 
+1)​ Flutter - Build apps for any screen. (s/f). Flutter.dev. Recuperado el 15 de junio de 
+2024, de https://flutter.dev/ 
+2)​ CAMARA IP ANPR 4MP DEEPINVIEW IDS-2CD7A46G0/P-IZHSY HIKVISIO. (s/f). 
+Videovision. 
+Recuperado 
+el 
+15 
+de 
+junio 
+de 
+2024, 
+de 
+https://videovision.cl/tienda/cctv/tecnologia-ip/camaras-tecnologia-ip/camara-ip-anp
+r-4mp-deepinview-ids-2cd7a46go-p-izhsy-hikvisio/  
+3)​ (S/f-b). 
+Hikacademia.com. 
+Recuperado 
+el 
+15 
+de 
+junio 
+de 
+2024, 
+de 
+https://hikpedia.hikacademia.com/bin/view/Soporte/ANPR/ 
+4)​ Node-RED. (s/f). Nodered.org. Recuperado el 15 de junio de 2024, de 
+https://nodered.org/ 
+5)​ Biblioteca del Congreso Nacional. (s/f). Biblioteca del Congreso Nacional. 
+www.bcn.cl/leychile. 
+Recuperado 
+el 
+15 
+de 
+junio 
+de 
+2024, 
+de 
+https://www.bcn.cl/leychile/navegar?idNorma=28933  
+6)​ Supabase: una alternativa ágil de código abierto. (s/f). Aplyca Tecnología SAS. 
+Recuperado 
+el 
+16 
+de 
+junio 
+de 
+2024, 
+de 
+https://www.aplyca.com/blog/blog-supabase-una-alternativa-agil-de-codigo-abierto 
+7)​ ¿Qué es el código abierto? - Explicación del código abierto - AWS. (s. f.). Amazon 
+Web 
+Services, 
+Inc. 
+https://aws.amazon.com/es/what-is/open-source/#:~:text=Se%20denomina%20c%C3
+%B3digo%20abierto%20a,es%20accesible%20de%20manera%20p%C3%BAblica. 
+ 
+ 
+       
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+Anexos 
+ 
+Minutas 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

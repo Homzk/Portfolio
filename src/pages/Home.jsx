@@ -11,8 +11,26 @@ import Stack from "../sections/Stack";
 import Experience from "../sections/Experience";
 import Contact from "../sections/Contact";
 import Footer from "../sections/Footer";
+import { useDocumentMeta } from "../hooks/useDocumentMeta";
+import { useLang } from "../i18n/LangContext";
+
+const HOME_META = {
+  es: {
+    title: "Álvaro Flores Rocha — Desarrollador Full Stack",
+    description:
+      "Portafolio de Álvaro Flores Rocha, Desarrollador Full Stack (React, TypeScript, Python). Dashboards en tiempo real, visión por computador con IA y sitios en producción.",
+  },
+  en: {
+    title: "Álvaro Flores Rocha — Full Stack Developer",
+    description:
+      "Portfolio of Álvaro Flores Rocha, Full Stack Developer (React, TypeScript, Python). Real-time dashboards, AI computer vision and sites shipped to production.",
+  },
+};
 
 export default function Home() {
+  const { lang } = useLang();
+  useDocumentMeta({ ...HOME_META[lang], path: "/" });
+
   return (
     <>
       <Hero />

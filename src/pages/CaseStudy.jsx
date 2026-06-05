@@ -8,6 +8,7 @@
 import { Link, useParams, Navigate } from "react-router";
 import { ArrowLeft, ArrowUpRight, ExternalLink, Lock } from "lucide-react";
 import { useLang } from "../i18n/LangContext";
+import { useDocumentMeta } from "../hooks/useDocumentMeta";
 import { CASES, CASE_LABELS, CASE_ORDER } from "../data/caseStudies";
 import "../styles/case-study.css";
 
@@ -16,6 +17,18 @@ export default function CaseStudy() {
   const { lang } = useLang();
   const L = CASE_LABELS[lang];
   const c = CASES[slug];
+
+  const nameSuffix = lang === "es" ? "Desarrollador Full Stack" : "Full Stack Developer";
+  useDocumentMeta(
+    c
+      ? {
+          title: `${c.name} — Álvaro Flores Rocha`,
+          description: c.lead[lang].replace(/<\/?[^>]+>/g, ""),
+          path: `/proyecto/${slug}`,
+          image: c.cover,
+        }
+      : { title: `Álvaro Flores Rocha — ${nameSuffix}` }
+  );
 
   if (!c) return <Navigate to="/" replace />;
 
