@@ -34,7 +34,7 @@ export const projData = (lang) => [
     metrics:["+97% cobertura","166 tests","CI/CD","E2E Playwright"], chips:["React","TypeScript","Supabase","Leaflet","Recharts","Vitest"],
     cap:"mapa de AirVision en tiempo real", links:[{k:"demo",href:"https://air-vision-xi.vercel.app/"},{k:"code",href:"https://github.com/Homzk/AirVision"}], open:"https://air-vision-xi.vercel.app/" },
   { n:"04", slug:"eventos", name:"Eventos Culturales PUCV", badge: lang==="es"?"Proyecto de título":"Capstone project", live:false,
-    desc: lang==="es"?"App multiplataforma para gestionar eventos universitarios, con preinscripción y control de acceso por QR.":"Cross-platform app to manage university events, with pre-registration and QR-based check-in.",
-    metrics: lang==="es"?["Liderazgo técnico","3 roles: admin · monitor · usuario"]:["Tech lead","3 roles: admin · monitor · user"], chips:["Flutter","Dart","Supabase"],
+    desc: lang==="es"?"CulturaPUCV: app multiplataforma que centraliza la promoción, inscripción y control de acceso por QR de los eventos culturales de la PUCV.":"CulturaPUCV: cross-platform app that centralizes promotion, registration and QR access control for PUCV's cultural events.",
+    metrics: lang==="es"?["Credencial QR en puerta","4 roles","Proyecto de título"]:["QR door credential","4 roles","Capstone"], chips:["FlutterFlow","Flutter","Supabase"],
     cap:"App Cultura PUCV", links:[{k:"case"}], open:"#eventos" },
 ];

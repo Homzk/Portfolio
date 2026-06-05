@@ -279,13 +279,13 @@ export const CASES = {
     name: "Eventos Culturales PUCV",
     badge: { es: "Proyecto de título", en: "Capstone project" },
     lead: {
-      es: "App multiplataforma para gestionar y promocionar eventos culturales universitarios, con preinscripción y control de acceso por QR.",
-      en: "Cross-platform app to manage and promote university cultural events, with pre-registration and QR-based check-in.",
+      es: "CulturaPUCV: app multiplataforma que centraliza la gestión, promoción e inscripción de los eventos culturales de la PUCV, con credencial virtual por QR para el control de acceso.",
+      en: "CulturaPUCV: a cross-platform app that centralizes the management, promotion and registration of PUCV's cultural events, with a virtual QR credential for access control.",
     },
     meta: {
-      rol: { es: "Líder técnico · ciclo completo", en: "Tech lead · full cycle" },
-      cliente: { es: "Proyecto de título · PUCV", en: "Capstone · PUCV" },
-      anio: { es: "Dic 2024", en: "Dec 2024" },
+      rol: { es: "Desarrollo de extremo a extremo · proyecto de título", en: "End-to-end development · capstone" },
+      cliente: { es: "Dirección de Vinculación Artístico Cultural · PUCV", en: "Directorate of Artistic & Cultural Liaison · PUCV" },
+      anio: { es: "2024 · proyecto de título", en: "2024 · capstone" },
     },
     primary: null,
     privateNote: { es: "Proyecto académico · sin enlaces públicos", en: "Academic project · no public links" },
@@ -309,47 +309,47 @@ export const CASES = {
       }},
     ],
     sections: [
-      { k: "context", h2: { es: "Eventos sin una herramienta común", en: "Events without a common tool" }, paras: {
-        es: ["Los eventos culturales universitarios se promocionaban y gestionaban de forma <b>informal</b>: afiches, mensajes sueltos y listas en papel. No había una herramienta única para publicarlos, inscribirse y controlar el acceso."],
-        en: ["University cultural events were promoted and managed <b>informally</b>: posters, scattered messages and paper lists. There was no single tool to publish them, register and control access."],
+      { k: "context", h2: { es: "Gestión cultural dispersa", en: "Fragmented cultural management" }, paras: {
+        es: ["La <b>Dirección de Vinculación Artístico Cultural</b> de la PUCV organiza una amplia gama de eventos artísticos y culturales, gratuitos y abiertos al público. Pero los gestionaba de forma <b>dispersa</b>: la promoción por redes sociales y la inscripción por formularios de Google."],
+        en: ["PUCV's <b>Directorate of Artistic and Cultural Liaison</b> runs a wide range of free, public artistic and cultural events. But it managed them in a <b>fragmented</b> way: promotion over social media and registration through Google Forms."],
       }},
-      { k: "problem", h2: { es: "Publicar, inscribir y controlar acceso", en: "Publish, register and control access" }, paras: {
-        es: ["Se necesitaba una app que permitiera <b>publicar eventos</b>, recibir <b>preinscripción en línea</b> y <b>controlar el acceso en la puerta</b>, con permisos distintos para organizadores, monitores y asistentes."],
-        en: ["We needed an app to <b>publish events</b>, take <b>online pre-registration</b> and <b>control access at the door</b>, with distinct permissions for organizers, monitors and attendees."],
+      { k: "problem", h2: { es: "Información fragmentada, decisiones a ciegas", en: "Fragmented data, blind decisions" }, paras: {
+        es: ["Esa fragmentación <b>degradaba la experiencia</b> de los asistentes y dificultaba recopilar datos de quién asistía, limitando la toma de decisiones estratégicas y la capacidad de atraer a más público. Faltaba una herramienta única para <b>publicar, inscribir, controlar el acceso y medir</b>."],
+        en: ["That fragmentation <b>degraded the attendee experience</b> and made it hard to collect data on who attended, limiting strategic decisions and the ability to attract a wider audience. There was no single tool to <b>publish, register, control access and measure</b>."],
       }},
-      { k: "role", h2: { es: "Liderazgo técnico, ciclo completo", en: "Tech lead, full cycle" }, paras: {
-        es: ["Lideré técnicamente el proyecto de extremo a extremo: <b>requerimientos, arquitectura, construcción y entrega</b>, coordinando el trabajo del equipo."],
-        en: ["I led the project technically end-to-end: <b>requirements, architecture, build and delivery</b>, coordinating the team's work."],
+      { k: "role", h2: { es: "Proyecto de título, de extremo a extremo", en: "Capstone, end-to-end" }, paras: {
+        es: ["Desarrollé <b>CulturaPUCV</b> como mi proyecto de título de Ingeniería en Ejecución Informática (PUCV): desde el <b>levantamiento de requerimientos</b> y el modelado del sistema, hasta el diseño de interfaces, la construcción y la entrega de la <b>versión 1.0</b>."],
+        en: ["I built <b>CulturaPUCV</b> as my Computer Engineering capstone (PUCV): from <b>requirements gathering</b> and system modeling, through interface design, build and delivery of <b>version 1.0</b>."],
       }},
-      { k: "solution", h2: { es: "App multiplataforma con acceso por QR", en: "Cross-platform app with QR access" }, paras: {
-        es: ["App en <b>Flutter + Supabase</b> con preinscripción en línea, <b>control de acceso por escaneo de QR</b> y autenticación con <b>tres roles</b>: admin (CRUD de eventos y roles), monitor (escaneo de QR) y usuario (descubrir e inscribirse)."],
-        en: ["A <b>Flutter + Supabase</b> app with online pre-registration, <b>QR-scan access control</b> and authentication with <b>three roles</b>: admin (event and role CRUD), monitor (QR scanning) and user (discover and register)."],
+      { k: "solution", h2: { es: "App multiplataforma con credencial QR", en: "Cross-platform app with QR credential" }, paras: {
+        es: ["Una app multiplataforma en <b>FlutterFlow + Supabase</b> que centraliza todo el ciclo: registro e inicio de sesión, <b>gestión de roles</b>, cartelera y gestión de eventos, inscripción en línea, <b>credencial virtual con QR</b> para registrar la asistencia en la puerta, listas de asistencia e inscripciones, e historial de eventos. Diseñada para ser <b>accesible a todo público</b>, con especial atención a la tercera edad."],
+        en: ["A cross-platform app in <b>FlutterFlow + Supabase</b> that centralizes the whole cycle: registration and login, <b>role management</b>, event listing and management, online registration, a <b>virtual QR credential</b> to record attendance at the door, attendance and registration lists, and event history. Designed to be <b>accessible to everyone</b>, with special attention to older adults."],
       }},
     ],
     decisions: [
-      { q: { es: "¿Por qué control de acceso por QR?", en: "Why QR-based access control?" }, a: {
-        es: "Un QR por inscripción es barato, funciona bien en la puerta incluso con conexión intermitente y elimina el chequeo manual de listas. Cada asistente lleva su credencial en el teléfono.",
-        en: "A QR per registration is cheap, works well at the door even with spotty connectivity, and removes manual list-checking. Each attendee carries their pass on their phone.",
+      { q: { es: "¿Por qué multiplataforma y no nativo?", en: "Why cross-platform and not native?" }, a: {
+        es: "Una sola base de código para web y móvil acelera el desarrollo, baja el costo y simplifica el mantenimiento — clave para el plazo de un proyecto de título. Tras comparar Flutter, React Native, Ionic y Xamarin, elegí el ecosistema Flutter por su rendimiento e interfaz cercana a la nativa.",
+        en: "A single codebase for web and mobile speeds development, lowers cost and simplifies maintenance — key for a capstone timeline. After comparing Flutter, React Native, Ionic and Xamarin, I chose the Flutter ecosystem for its performance and near-native UI.",
       }},
-      { q: { es: "¿Por qué tres roles diferenciados?", en: "Why three distinct roles?" }, a: {
-        es: "Separar admin, monitor y usuario refleja cómo se opera un evento de verdad y mantiene los permisos limpios: quien organiza no es quien escanea, y quien asiste solo descubre e inscribe.",
-        en: "Separating admin, monitor and user reflects how an event is actually run and keeps permissions clean: the organizer isn't the scanner, and the attendee only discovers and registers.",
+      { q: { es: "¿Por qué FlutterFlow + Supabase?", en: "Why FlutterFlow + Supabase?" }, a: {
+        es: "FlutterFlow dio construcción low-code sobre Flutter para iterar las interfaces rápido, y Supabase aportó autenticación, base de datos Postgres y backend gestionado sin montar ni pagar servidores propios — el tamaño justo para entregar una app real dentro del plazo.",
+        en: "FlutterFlow gave low-code building on top of Flutter to iterate UIs fast, and Supabase provided auth, a Postgres database and a managed backend with no servers to run or pay for — right-sized to ship a real app on time.",
       }},
-      { q: { es: "¿Por qué Flutter + Supabase?", en: "Why Flutter + Supabase?" }, a: {
-        es: "Una sola base de código para Android e iOS más autenticación y Postgres gestionados: el tamaño justo para el plazo de un proyecto de título sin sacrificar una app real y multiplataforma.",
-        en: "A single codebase for Android and iOS plus managed auth and Postgres: right-sized for a capstone timeline without sacrificing a real, cross-platform app.",
+      { q: { es: "¿Por qué credencial virtual con QR?", en: "Why a virtual QR credential?" }, a: {
+        es: "El QR permite verificar la asistencia en segundos en la puerta, reduce los tiempos de espera y elimina las listas en papel. Además deja un registro de asistencia que alimenta los reportes para decisiones futuras.",
+        en: "A QR lets you verify attendance in seconds at the door, cuts waiting times and removes paper lists. It also leaves an attendance record that feeds reports for future decisions.",
       }},
     ],
     results: [
-      { v: "3", k: { es: "Roles: admin · monitor · usuario", en: "Roles: admin · monitor · user" } },
-      { v: "QR", k: { es: "Control de acceso en puerta", en: "Door access control" } },
-      { v: "iOS+And", k: { es: "Multiplataforma (Flutter)", en: "Cross-platform (Flutter)" } },
-      { v: "E2E", k: { es: "Ciclo completo, liderazgo técnico", en: "Full cycle, tech lead" } },
+      { v: "v1.0", k: { es: "Versión entregada · en desarrollo", en: "Delivered v1.0 · in progress" } },
+      { v: "QR", k: { es: "Credencial virtual de acceso", en: "Virtual access credential" } },
+      { v: "11", k: { es: "Requerimientos funcionales", en: "Functional requirements" } },
+      { v: "4", k: { es: "Roles: usuario · monitor · encargado · admin", en: "Roles: user · monitor · staff · admin" } },
     ],
-    stack: ["Flutter", "Dart", "Supabase"],
+    stack: ["FlutterFlow", "Flutter", "Dart", "Supabase", "PostgreSQL"],
     learnings: {
-      es: "Que liderar técnicamente es sobre todo <b>traducir</b>: del requerimiento al diseño, y del diseño a tareas que el equipo pueda tomar. Que un control de acceso simple y robusto vale más que uno sofisticado y frágil. Y que pensar los roles desde el inicio ahorra rehacer permisos después.",
-      en: "That leading technically is mostly about <b>translating</b>: from requirement to design, and from design to tasks the team can pick up. That simple, robust access control beats sophisticated but fragile. And that thinking through roles from the start saves reworking permissions later.",
+      es: "Que centralizar un proceso disperso vale tanto por los <b>datos</b> que captura como por la herramienta en sí: la asistencia por QR no solo agiliza la puerta, también alimenta decisiones. Que comparar las alternativas antes de elegir el stack evita casarse con la primera opción. Y que una <b>v1.0 honesta</b> —con lo que falta anotado— es mejor que prometer un producto terminado.",
+      en: "That centralizing a fragmented process is worth as much for the <b>data</b> it captures as for the tool itself: QR attendance not only speeds up the door, it also feeds decisions. That comparing the alternatives before picking the stack avoids marrying the first option. And that an <b>honest v1.0</b> —with the gaps written down— beats promising a finished product.",
     },
   },
 };
