@@ -6,12 +6,12 @@
 export const HERO = {
   es: { nav: ["Proyectos","Stack","Sobre mí","Contacto"], loc:"Viña del Mar, Chile", sLabel:"Estado", sValue:"Disponible para trabajar",
     eyebrow:"Desarrollador Full Stack", h1a:"Hola, soy ", h1em:"Álvaro",
-    tagline:"Construyo y llevo a producción productos de software, de extremo a extremo — de Chile 🇨🇱. Especializado en el desarrollo de aplicaciones web únicas.",
+    tagline:"Construyo y llevo a producción productos de software, de extremo a extremo — de Chuquicamata 🇨🇱. Especializado en el desarrollo de aplicaciones web únicas.",
     facts:[["Base","Ing. en Informática · PUCV"],["Ahora","Magíster en Informática · en curso"],["Entrego","productos reales, en producción"]],
     cta1:"Ver proyectos", cta2:"Contacto", cta3:"CV", cue:"Proyectos" },
   en: { nav: ["Work","Stack","About","Contact"], loc:"Viña del Mar, Chile", sLabel:"Status", sValue:"Open to work",
     eyebrow:"Full Stack Developer", h1a:"Hi, I'm ", h1em:"Álvaro",
-    tagline:"I build and ship software products end-to-end — from Chile 🇨🇱. Specialized in building unique web applications.",
+    tagline:"I build and ship software products end-to-end — from Chuquicamata 🇨🇱. Specialized in building unique web applications.",
     facts:[["Foundation","Computer Eng. · PUCV"],["Now","MSc in Computer Science · in progress"],["I deliver","real products, in production"]],
     cta1:"View work", cta2:"Contact", cta3:"CV", cue:"Work" },
 };
