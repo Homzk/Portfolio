@@ -117,16 +117,16 @@ export const CASES = {
   /* ============================== LPR ============================== */
   lpr: {
     live: true,
-    name: "Sistema LPR — Club Naval",
-    badge: { es: "Desplegado en terreno", en: "Deployed on-site" },
+    name: "ParkVision — Club Naval",
+    badge: { es: "Cliente real · en terreno", en: "Real client · on-site" },
     lead: {
-      es: "Reconocimiento de patentes con visión por computador sobre hardware Hikvision, con un 95% de detección — y la plataforma que lo convirtió en gestión de accesos.",
-      en: "License-plate recognition with computer vision on Hikvision hardware, at 95% detection — and the platform that turned it into access management.",
+      es: "ParkVision: reconocimiento de patentes (ANPR) sobre cámaras Hikvision para el Club Naval de Campo Las Salinas, que registra las entradas y salidas de vehículos y las convierte en estadísticas de acceso.",
+      en: "ParkVision: license-plate recognition (ANPR) on Hikvision cameras for Club Naval de Campo Las Salinas, logging vehicle entries and exits and turning them into access analytics.",
     },
     meta: {
-      rol: { es: "Ingeniero de desarrollo y sistemas (Proyecto IA)", en: "Development & Systems Engineer (AI project)" },
-      cliente: { es: "Club Naval Las Salinas", en: "Club Naval Las Salinas" },
-      anio: { es: "Abr — Jul 2024 · en terreno", en: "Apr — Jul 2024 · on-site" },
+      rol: { es: "Equipo de 5 · Taller de Ingeniería de Software", en: "Team of 5 · Software Engineering Workshop" },
+      cliente: { es: "Club Naval de Campo Las Salinas", en: "Club Naval de Campo Las Salinas" },
+      anio: { es: "2024", en: "2024" },
     },
     primary: null,
     privateNote: { es: "Sistema interno · sin repo público ni demo", en: "Internal system · no public repo or demo" },
@@ -150,47 +150,47 @@ export const CASES = {
       }},
     ],
     sections: [
-      { k: "context", h2: { es: "El cliente", en: "The client" }, paras: {
-        es: ["El Club Naval Las Salinas necesitaba controlar el acceso vehicular a sus instalaciones. El registro de entradas y salidas era <b>manual</b>, lento y dependiente de personal en la barrera."],
-        en: ["Club Naval Las Salinas needed to control vehicle access to its premises. Logging entries and exits was <b>manual</b>, slow and dependent on staff at the barrier."],
+      { k: "context", h2: { es: "Estacionamientos sin control", en: "Parking without control" }, paras: {
+        es: ["El <b>Club Naval de Campo Las Salinas</b> enfrentaba el mal uso de sus estacionamientos y la falta de control sobre qué vehículos entraban y salían del recinto. El registro era manual e ineficiente, y se perdía información valiosa sobre la afluencia."],
+        en: ["<b>Club Naval de Campo Las Salinas</b> faced misuse of its parking and no control over which vehicles entered and left the grounds. Logging was manual and inefficient, and valuable footfall data was being lost."],
       }},
-      { k: "problem", h2: { es: "Control de accesos manual y lento", en: "Manual, slow access control" }, paras: {
-        es: ["Había que <b>automatizar el reconocimiento de patentes</b> de forma fiable, reutilizando el hardware de cámaras ya instalado, e integrarlo con el control físico de la barrera y la gestión administrativa de los accesos."],
-        en: ["We had to <b>automate license-plate recognition</b> reliably, reusing the already-installed camera hardware, and integrate it with physical barrier control and the administrative management of access."],
+      { k: "problem", h2: { es: "Datos que se perdían en la barrera", en: "Data lost at the barrier" }, paras: {
+        es: ["El club quería <b>identificar las patentes en los portones</b> de entrada y salida, conocer sus días y horas de mayor afluencia y los eventos más populares, y con esos datos premiar a los socios frecuentes y justificar decisiones comerciales. Faltaba un sistema que capturara y analizara esa información de forma automática."],
+        en: ["The club wanted to <b>identify plates at the entry and exit gates</b>, learn its peak days and hours and most popular events, and use that data to reward frequent members and justify commercial decisions. There was no system to capture and analyze that information automatically."],
       }},
-      { k: "role", h2: { es: "Lideré el proyecto de IA, de punta a punta", en: "I led the AI project, end to end" }, paras: {
-        es: ["Levanté requerimientos, construí el <b>pipeline de visión por computador</b>, integré el hardware Hikvision, desarrollé la plataforma de gestión, armé los flujos IoT y realicé el QA y el despliegue en terreno."],
-        en: ["I gathered requirements, built the <b>computer-vision pipeline</b>, integrated the Hikvision hardware, developed the management platform, wired the IoT flows, and ran QA and on-site deployment."],
+      { k: "role", h2: { es: "Proyecto con cliente real, en equipo", en: "A real-client project, as a team" }, paras: {
+        es: ["Lo desarrollamos como un <b>equipo de cinco</b> en el Taller de Ingeniería de Software de la PUCV, con metodología iterativa: levantamiento de requerimientos con el cliente, instalación de las cámaras en terreno, integración de los datos y construcción de la aplicación de gestión."],
+        en: ["We built it as a <b>five-person team</b> in PUCV's Software Engineering Workshop, iteratively: requirements gathering with the client, on-site camera installation, data integration and building the management app."],
       }},
-      { k: "solution", h2: { es: "Visión por computador + gestión + IoT", en: "Computer vision + management + IoT" }, paras: {
-        es: ["LPR con <b>Python y OpenCV</b> sobre cámaras Hikvision alcanzando un <b>95% de detección</b>; una plataforma de gestión integral (Flutter + Supabase) que redujo en <b>40%</b> el tiempo de administración de accesos; y flujos IoT con Node-RED integrados al control de la barrera. Todo probado y desplegado en terreno."],
-        en: ["LPR with <b>Python and OpenCV</b> on Hikvision cameras reaching <b>95% detection</b>; a full management platform (Flutter + Supabase) that cut access-administration time by <b>40%</b>; and Node-RED IoT flows wired into barrier control. All tested and deployed on-site."],
+      { k: "solution", h2: { es: "Cámaras ANPR + Node-RED + app de gestión", en: "ANPR cameras + Node-RED + management app" }, paras: {
+        es: ["Cámaras <b>Hikvision DeepinView con ANPR integrado</b> capturan la patente y la hora cada vez que un vehículo entra o sale. <b>Node-RED</b> toma esos datos y los lleva a una base de datos <b>Supabase (PostgreSQL)</b>. Sobre ella, una app responsive en <b>Flutter</b> con dos módulos: <b>historial</b> (filtrar por patente, ordenar por entrada/salida y tiempo de estadía, rango de fechas) y un <b>dashboard</b> de reportes y gráficos por período."],
+        en: ["<b>Hikvision DeepinView cameras with built-in ANPR</b> capture the plate and timestamp whenever a vehicle enters or exits. <b>Node-RED</b> takes that data into a <b>Supabase (PostgreSQL)</b> database. On top sits a responsive <b>Flutter</b> app with two modules: <b>history</b> (filter by plate, sort by entry/exit and dwell time, date range) and a reports <b>dashboard</b> with charts by period."],
       }},
     ],
     decisions: [
-      { q: { es: "¿Por qué OpenCV sobre el hardware Hikvision existente?", en: "Why OpenCV on the existing Hikvision hardware?" }, a: {
-        es: "Reutilizar las cámaras ya instaladas evitó comprar hardware nuevo y mantuvo el costo bajo. OpenCV da control total del pipeline de detección y corre sobre cómputo estándar, sin atarse a un SDK propietario cerrado.",
-        en: "Reusing the already-installed cameras avoided buying new hardware and kept costs low. OpenCV gives full control over the detection pipeline and runs on commodity compute, without locking into a closed proprietary SDK.",
+      { q: { es: "¿Por qué cámaras con ANPR integrado y no visión por computador propia?", en: "Why cameras with built-in ANPR instead of our own computer vision?" }, a: {
+        es: "Evaluamos construir el reconocimiento con cámaras normales y software propio (por ejemplo, un Jetson Nano con OpenCV), pero las cámaras Hikvision DeepinView traen ANPR integrado: funcionan en distintas condiciones de luz y velocidad, vienen listas para usar y reducen muchísimo el desarrollo y la mantención frente a un sistema de visión hecho a mano.",
+        en: "We weighed building recognition with normal cameras and our own software (e.g. a Jetson Nano with OpenCV), but Hikvision DeepinView cameras ship with built-in ANPR: they work across lighting and speed conditions, are ready to use, and cut development and maintenance dramatically versus a hand-built vision system.",
       }},
-      { q: { es: "¿Por qué Node-RED para los flujos IoT?", en: "Why Node-RED for the IoT flows?" }, a: {
-        es: "El control de barrera y sensores se orquesta visualmente, en bajo código. Eso permitió ajustar la lógica en terreno —tiempos, condiciones— sin recompilar ni redeplegar todo el sistema.",
-        en: "Barrier and sensor control is orchestrated visually, in low-code. That made it possible to tune logic on-site —timings, conditions— without recompiling or redeploying the whole system.",
+      { q: { es: "¿Por qué Node-RED entre las cámaras y la base de datos?", en: "Why Node-RED between the cameras and the database?" }, a: {
+        es: "Node-RED orquesta los flujos de datos en bajo código y se adapta a distintos motores de base de datos. Eso permitió captar lo que envían las cámaras, procesarlo y dejarlo en la base sin escribir ni mantener un servicio a medida.",
+        en: "Node-RED orchestrates data flows in low-code and adapts to different database engines. That let us capture what the cameras send, process it and land it in the database without writing or maintaining a bespoke service.",
       }},
-      { q: { es: "¿Por qué Flutter + Supabase para la gestión?", en: "Why Flutter + Supabase for management?" }, a: {
-        es: "Una sola base de código para la app de gestión más un backend gestionado (Postgres + auth) dejó el foco donde estaba el riesgo real: el problema de visión por computador, no la infraestructura.",
-        en: "A single codebase for the management app plus a managed backend (Postgres + auth) kept focus where the real risk was: the computer-vision problem, not the infrastructure.",
+      { q: { es: "¿Por qué Flutter + Supabase (PostgreSQL)?", en: "Why Flutter + Supabase (PostgreSQL)?" }, a: {
+        es: "Flutter dio una sola base de código responsive para web y móvil, y Supabase aportó una base PostgreSQL preconfigurada con autenticación y, al ser open source, espacio para adaptarla — el tamaño justo para entregar rápido a un cliente real.",
+        en: "Flutter gave a single responsive codebase for web and mobile, and Supabase provided a preconfigured PostgreSQL database with auth and, being open source, room to adapt it — right-sized to deliver fast for a real client.",
       }},
     ],
     results: [
-      { v: "95", small: " %", k: { es: "Detección de patentes", en: "Plate detection" } },
-      { v: "−40", small: " %", k: { es: "Tiempo de administración de accesos", en: "Access-admin time" } },
-      { v: "IoT", k: { es: "Node-RED en el control de barrera", en: "Node-RED in barrier control" } },
-      { v: "En terreno", k: { es: "QA y despliegue en producción", en: "QA and production deployment" } },
+      { v: "ANPR", k: { es: "Reconocimiento por cámara Hikvision", en: "Recognition by Hikvision camera" } },
+      { v: "2", k: { es: "Módulos: historial + reportes", en: "Modules: history + reports" } },
+      { v: "En terreno", k: { es: "Cámaras instaladas en el club", en: "Cameras installed at the club" } },
+      { v: "5", k: { es: "Equipo · Taller de Ing. de Software", en: "Team · Software Eng. Workshop" } },
     ],
-    stack: ["Python", "OpenCV", "Flutter", "Supabase", "Node-RED", "Hikvision"],
+    stack: ["Flutter", "Dart", "Node-RED", "Supabase", "PostgreSQL", "Hikvision ANPR"],
     learnings: {
-      es: "Que un modelo al 95% en el laboratorio y uno al 95% <b>en terreno</b> son problemas distintos: la luz, el clima y los ángulos reales mandan. Que integrar IA con hardware físico obliga a pensar en fallos y reintentos, no solo en el “happy path”. Y que reutilizar lo que el cliente ya tiene suele ser la mejor ingeniería.",
-      en: "That a 95% model in the lab and a 95% one <b>in the field</b> are different problems: real light, weather and angles rule. That integrating AI with physical hardware forces you to design for failures and retries, not just the happy path. And that reusing what the client already has is often the best engineering.",
+      es: "Que trabajar con un <b>cliente real</b> es muy distinto a un proyecto de aula: la comunicación y los plazos mandan. Que un proyecto que mezcla <b>software y hardware</b> obliga a pensarlos juntos — instalar y ubicar bien las cámaras pesó tanto como programar la app. Y que, antes de construir, conviene revisar si la mejor pieza ya existe: el ANPR de la cámara nos ahorró reinventar la visión por computador.",
+      en: "That working with a <b>real client</b> is very different from a classroom project: communication and deadlines rule. That a project mixing <b>software and hardware</b> forces you to think of them together — installing and placing the cameras mattered as much as coding the app. And that, before building, it pays to check whether the best piece already exists: the camera's ANPR saved us from reinventing computer vision.",
     },
   },
 
