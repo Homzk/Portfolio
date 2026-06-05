@@ -27,7 +27,7 @@ export const projData = (lang) => [
     cap:"Maderas Ponotro · sitio en producción", links:[{k:"live",href:"https://maderasponotro.cl"},{k:"priv"}], open:"https://maderasponotro.cl" },
   { n:"02", slug:"lpr", name:"ParkVision — Club Naval", badge: lang==="es"?"Cliente real · en terreno":"Real client · on-site", live:true,
     desc: lang==="es"?"ParkVision: reconocimiento de patentes (ANPR) con cámaras Hikvision para el Club Naval Las Salinas, con app de historial y reportes de accesos.":"ParkVision: license-plate recognition (ANPR) with Hikvision cameras for Club Naval Las Salinas, with a history and access-reports app.",
-    metrics: lang==="es"?["Cámaras ANPR Hikvision","Historial + dashboard","Equipo de 5"]:["Hikvision ANPR cameras","History + dashboard","Team of 5"], chips:["Flutter","Dart","Node-RED","Supabase","Hikvision ANPR"],
+    metrics: lang==="es"?["Cámaras ANPR Hikvision","Historial + dashboard","Jefe de proyecto (equipo de 5)"]:["Hikvision ANPR cameras","History + dashboard","Project lead (team of 5)"], chips:["Flutter","Dart","Node-RED","Supabase","Hikvision ANPR"],
     cap:"historial de patentes detectadas", links:[{k:"case"},{k:"intern"}], open:"#lpr" },
   { n:"03", slug:"airvision", name:"AirVision", feat:true, badge: lang==="es"?"En vivo":"Live", live:true,
     desc: lang==="es"?"Dashboard de calidad del aire de Chile en tiempo real: 169 estaciones, mapa, alertas y arquitectura realtime.":"Realtime air-quality dashboard for Chile: 169 stations, map, alerts and a realtime architecture.",
