@@ -16,7 +16,6 @@ export const CASE_LABELS = {
     rol: "Rol", cliente: "Cliente", anio: "Año",
     eContext: "Contexto", eProblem: "El problema", eRole: "Mi rol", eSolution: "La solución",
     eDecisions: "Decisiones técnicas — el porqué", eResults: "Resultados", eStack: "Stack", eLearnings: "Aprendizajes",
-    draft: "BORRADOR — personalízalo con tu voz",
     next: "Siguiente proyecto →", notFound: "Caso de estudio no encontrado",
   },
   en: {
@@ -24,7 +23,6 @@ export const CASE_LABELS = {
     rol: "Role", cliente: "Client", anio: "Year",
     eContext: "Context", eProblem: "The problem", eRole: "My role", eSolution: "The solution",
     eDecisions: "Technical decisions — the why", eResults: "Results", eStack: "Stack", eLearnings: "Takeaways",
-    draft: "DRAFT — make it yours",
     next: "Next project →", notFound: "Case study not found",
   },
 };
@@ -348,8 +346,8 @@ export const CASES = {
     ],
     stack: ["FlutterFlow", "Flutter", "Dart", "Supabase", "PostgreSQL"],
     learnings: {
-      es: "Que centralizar un proceso disperso vale tanto por los <b>datos</b> que captura como por la herramienta en sí: la asistencia por QR no solo agiliza la puerta, también alimenta decisiones. Que comparar las alternativas antes de elegir el stack evita casarse con la primera opción. Y que una <b>v1.0 honesta</b> —con lo que falta anotado— es mejor que prometer un producto terminado.",
-      en: "That centralizing a fragmented process is worth as much for the <b>data</b> it captures as for the tool itself: QR attendance not only speeds up the door, it also feeds decisions. That comparing the alternatives before picking the stack avoids marrying the first option. And that an <b>honest v1.0</b> —with the gaps written down— beats promising a finished product.",
+      es: "CulturaPUCV fue uno de mis mayores retos: era mi <b>proyecto de título</b> y, a la vez, una aplicación real para mi propia universidad. Aun así, disfruté cada etapa — desde la primera <b>recolección de requerimientos</b> hasta la presentación final.",
+      en: "CulturaPUCV was one of my biggest challenges: it was my <b>capstone</b> and, at the same time, a real application for my own university. Even so, I enjoyed every stage — from the first <b>requirements-gathering</b> session to the final presentation.",
     },
   },
 };

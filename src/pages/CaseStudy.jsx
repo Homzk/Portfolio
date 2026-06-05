@@ -121,7 +121,6 @@ export default function CaseStudy() {
       <div className="container sec">
         <div className="eyebrow">{L.eLearnings}</div>
         <h2>{lang === "es" ? "Lo que me llevo" : "What I take away"}</h2>
-        <span className="draft">{L.draft}</span>
         <p {...html(c.learnings[lang])} />
       </div>
 
