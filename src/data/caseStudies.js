@@ -291,21 +291,21 @@ export const CASES = {
     privateNote: { es: "Proyecto académico · sin enlaces públicos", en: "Academic project · no public links" },
     cover: "/media/cases/eventos-cover.jpg",
     coverCap: {
-      es: "App Cultura PUCV · proyecto de título",
-      en: "App Cultura PUCV · capstone project",
+      es: "Credencial digital con QR para el control de acceso",
+      en: "Digital QR credential for access control",
     },
     gallery: [
-      { src: "/media/cases/eventos-casos.jpg", cap: {
-        es: "Casos de uso: 3 roles (admin · monitor · usuario)",
-        en: "Use cases: 3 roles (admin · monitor · user)",
+      { src: "/media/cases/eventos-bienvenida.jpg", cap: {
+        es: "Bienvenida e inicio de sesión según rol",
+        en: "Welcome and role-based login",
       }},
-      { src: "/media/cases/eventos-flujo.jpg", cap: {
-        es: "Flujo de inscripción y obtención de credencial",
-        en: "Registration and credential flow",
+      { src: "/media/cases/eventos-cartelera.jpg", cap: {
+        es: "Inicio: cartelera de eventos y accesos principales",
+        en: "Home: event listing and main actions",
       }},
-      { src: "/media/cases/eventos-arquitectura.jpg", cap: {
-        es: "Arquitectura: clientes web/móvil sobre una base de datos común",
-        en: "Architecture: web/mobile clients over a shared database",
+      { src: "/media/cases/eventos-monitores.jpg", cap: {
+        es: "Gestión de monitores (rol administrador)",
+        en: "Monitor management (admin role)",
       }},
     ],
     sections: [

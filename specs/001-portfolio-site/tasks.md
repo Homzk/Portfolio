@@ -167,7 +167,7 @@ con `prefers-reduced-motion`: sin animación; sin hover: orbe deriva automático
   - **Maderas** — screenshots del repo `maderas-ponotro` (hero + carrito de cotización, configurador, proceso en aserradero).
   - **AirVision** — screenshots del repo `AirVision` (mapa + charts + alertas), recortadas para quitar email/watermark.
   - **LPR** — fotos del cliente (cámaras Hikvision en terreno como cover; historial con patentes **censuradas por blur**, analítica, login). Imágenes no-16:10 con letterbox de fondo difuminado.
-  - **Eventos** — logo "App Cultura PUCV" (cover) + 3 diagramas del capstone extraídos del `.docx` (casos de uso, flujo, arquitectura) sobre lienzo blanco.
+  - **Eventos** — capturas reales de la app extraídas del anexo del capstone (`ANEXO VERSION 2.0.pdf`, imágenes embebidas vía PyMuPDF): credencial QR (cover) + bienvenida/login, cartelera de eventos y gestión de monitores. Recorte 16:10 que de paso elimina el sello "DEMO" de las esquinas.
 
 ---
 
