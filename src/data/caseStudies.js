@@ -132,10 +132,25 @@ export const CASES = {
     },
     primary: null,
     privateNote: { es: "Sistema interno · sin repo público ni demo", en: "Internal system · no public repo or demo" },
+    cover: "/media/cases/lpr-cover.jpg",
     coverCap: {
-      es: "[webm] sistema LPR detectando patentes en terreno",
-      en: "[webm] LPR system detecting plates on-site",
+      es: "Cámaras Hikvision instaladas en terreno (LPR + IoT)",
+      en: "Hikvision cameras deployed on-site (LPR + IoT)",
     },
+    gallery: [
+      { src: "/media/cases/lpr-historial.jpg", cap: {
+        es: "Historial de patentes detectadas (patentes censuradas)",
+        en: "Detected license-plate history (plates redacted)",
+      }},
+      { src: "/media/cases/lpr-grafico.jpg", cap: {
+        es: "Analítica de accesos: concurrencia y permanencia",
+        en: "Access analytics: concurrency and dwell time",
+      }},
+      { src: "/media/cases/lpr-login.jpg", cap: {
+        es: "Acceso a la plataforma de gestión",
+        en: "Login to the management platform",
+      }},
+    ],
     sections: [
       { k: "context", h2: { es: "El cliente", en: "The client" }, paras: {
         es: ["El Club Naval Las Salinas necesitaba controlar el acceso vehicular a sus instalaciones. El registro de entradas y salidas era <b>manual</b>, lento y dependiente de personal en la barrera."],
@@ -198,10 +213,21 @@ export const CASES = {
     primary: { href: "https://air-vision-xi.vercel.app/", label: { es: "Ver demo en vivo", en: "View live demo" } },
     secondary: { href: "https://github.com/Homzk/AirVision", label: { es: "Código en GitHub", en: "Code on GitHub" } },
     privateNote: null,
+    cover: "/media/cases/airvision-cover.jpg",
     coverCap: {
-      es: "[webm] mapa de AirVision con 169 estaciones en tiempo real",
-      en: "[webm] AirVision map with 169 stations in real time",
+      es: "Mapa en tiempo real con las 169 estaciones de calidad del aire",
+      en: "Real-time map with the 169 air-quality stations",
     },
+    gallery: [
+      { src: "/media/cases/airvision-charts.jpg", cap: {
+        es: "Detalle de estación con tendencias PM2.5 · PM10 · O₃",
+        en: "Station detail with PM2.5 · PM10 · O₃ trends",
+      }},
+      { src: "/media/cases/airvision-alerts.jpg", cap: {
+        es: "Configuración de alertas por umbral",
+        en: "Threshold-based alert configuration",
+      }},
+    ],
     sections: [
       { k: "context", h2: { es: "Datos públicos, ilegibles", en: "Public data, unreadable" }, paras: {
         es: ["Los datos de calidad del aire en Chile son públicos (SINCA, OpenAQ), pero están <b>fragmentados</b> y son difíciles de leer para alguien que no es experto. No existía una vista única, rápida y amable del estado del aire en el país."],
@@ -263,10 +289,25 @@ export const CASES = {
     },
     primary: null,
     privateNote: { es: "Proyecto académico · sin enlaces públicos", en: "Academic project · no public links" },
+    cover: "/media/cases/eventos-cover.jpg",
     coverCap: {
-      es: "[webm] flujo de inscripción y check-in por QR",
-      en: "[webm] registration and QR check-in flow",
+      es: "App Cultura PUCV · proyecto de título",
+      en: "App Cultura PUCV · capstone project",
     },
+    gallery: [
+      { src: "/media/cases/eventos-casos.jpg", cap: {
+        es: "Casos de uso: 3 roles (admin · monitor · usuario)",
+        en: "Use cases: 3 roles (admin · monitor · user)",
+      }},
+      { src: "/media/cases/eventos-flujo.jpg", cap: {
+        es: "Flujo de inscripción y obtención de credencial",
+        en: "Registration and credential flow",
+      }},
+      { src: "/media/cases/eventos-arquitectura.jpg", cap: {
+        es: "Arquitectura: clientes web/móvil sobre una base de datos común",
+        en: "Architecture: web/mobile clients over a shared database",
+      }},
+    ],
     sections: [
       { k: "context", h2: { es: "Eventos sin una herramienta común", en: "Events without a common tool" }, paras: {
         es: ["Los eventos culturales universitarios se promocionaban y gestionaban de forma <b>informal</b>: afiches, mensajes sueltos y listas en papel. No había una herramienta única para publicarlos, inscribirse y controlar el acceso."],

@@ -163,7 +163,11 @@ con `prefers-reduced-motion`: sin animación; sin hover: orbe deriva automático
 - [ ] T044 [P] Ajustar el repo de AirVision en GitHub ("About": descripción/website/topics) y verificar que la cifra de cobertura sea consistente en todo el sitio _(requiere acción en GitHub — Álvaro)_
 - [X] T045 Pase de fidelidad contra la referencia: paleta, tipografías, orbe, `→`/`✦`, orden, sin "con distinción", origin-story aún borrador — fidelidad visual confirmada por el autor
 - [X] T046 Desplegar en Vercel y validar recarga de deep-link (`/proyecto/lpr`) en producción → https://portfolio-sigma-green-54.vercel.app (rutas + CV → 200)
-- [X] T047 Fotos reales en el caso de estudio de Maderas Ponotro (screenshots del repo `maderas-ponotro`): `cover` (hero) + galería de 3 (carrito de cotización, configurador de producto, proceso en el aserradero) en `public/media/cases/`. `CaseStudy.jsx` muestra `<img>` de cover cuando hay `c.cover` (fallback a la animación) y una sección `gallery` condicional; estilos en `case-study.css`
+- [X] T047 Fotos reales en **los 4 casos de estudio** (`cover` + `gallery` en `public/media/cases/`). `CaseStudy.jsx` muestra `<img>` de cover cuando hay `c.cover` (fallback a la animación) y una sección `gallery` condicional (grid `auto-fit`); estilos en `case-study.css`. Fuentes:
+  - **Maderas** — screenshots del repo `maderas-ponotro` (hero + carrito de cotización, configurador, proceso en aserradero).
+  - **AirVision** — screenshots del repo `AirVision` (mapa + charts + alertas), recortadas para quitar email/watermark.
+  - **LPR** — fotos del cliente (cámaras Hikvision en terreno como cover; historial con patentes **censuradas por blur**, analítica, login). Imágenes no-16:10 con letterbox de fondo difuminado.
+  - **Eventos** — logo "App Cultura PUCV" (cover) + 3 diagramas del capstone extraídos del `.docx` (casos de uso, flujo, arquitectura) sobre lienzo blanco.
 
 ---
 
