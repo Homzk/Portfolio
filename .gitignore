@@ -25,3 +25,4 @@ Thumbs.db
 # Vite / test
 .vite/
 coverage/
+.tmp_*.txt
