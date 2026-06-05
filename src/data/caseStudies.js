@@ -124,7 +124,7 @@ export const CASES = {
       en: "ParkVision: license-plate recognition (ANPR) on Hikvision cameras for Club Naval de Campo Las Salinas, logging vehicle entries and exits and turning them into access analytics.",
     },
     meta: {
-      rol: { es: "Jefe de proyecto · equipo de 5 (Taller de Ing. de Software)", en: "Project lead · team of 5 (Software Engineering Workshop)" },
+      rol: { es: "Equipo de 5 · Taller de Ingeniería de Software", en: "Team of 5 · Software Engineering Workshop" },
       cliente: { es: "Club Naval de Campo Las Salinas", en: "Club Naval de Campo Las Salinas" },
       anio: { es: "2024", en: "2024" },
     },
@@ -158,9 +158,9 @@ export const CASES = {
         es: ["El club quería <b>identificar las patentes en los portones</b> de entrada y salida, conocer sus días y horas de mayor afluencia y los eventos más populares, y con esos datos premiar a los socios frecuentes y justificar decisiones comerciales. Faltaba un sistema que capturara y analizara esa información de forma automática."],
         en: ["The club wanted to <b>identify plates at the entry and exit gates</b>, learn its peak days and hours and most popular events, and use that data to reward frequent members and justify commercial decisions. There was no system to capture and analyze that information automatically."],
       }},
-      { k: "role", h2: { es: "Jefe de proyecto de un equipo de cinco", en: "Project lead of a five-person team" }, paras: {
-        es: ["Fui <b>jefe de proyecto</b> de un equipo de cinco en el Taller de Ingeniería de Software de la PUCV: coordiné la planificación, las reuniones con el cliente y el avance del equipo con metodología iterativa — desde el levantamiento de requerimientos y la instalación de las cámaras en terreno hasta la integración de los datos y la app de gestión."],
-        en: ["I was the <b>project lead</b> of a five-person team in PUCV's Software Engineering Workshop: I coordinated planning, client meetings and the team's progress with an iterative methodology — from requirements gathering and on-site camera installation to data integration and the management app."],
+      { k: "role", h2: { es: "Proyecto con cliente real, en equipo", en: "A real-client project, as a team" }, paras: {
+        es: ["Lo desarrollamos como un <b>equipo de cinco</b> en el Taller de Ingeniería de Software de la PUCV, con metodología iterativa: levantamiento de requerimientos con el cliente, instalación de las cámaras en terreno, integración de los datos y construcción de la aplicación de gestión."],
+        en: ["We built it as a <b>five-person team</b> in PUCV's Software Engineering Workshop, iteratively: requirements gathering with the client, on-site camera installation, data integration and building the management app."],
       }},
       { k: "solution", h2: { es: "Cámaras ANPR + Node-RED + app de gestión", en: "ANPR cameras + Node-RED + management app" }, paras: {
         es: ["Cámaras <b>Hikvision DeepinView con ANPR integrado</b> capturan la patente y la hora cada vez que un vehículo entra o sale. <b>Node-RED</b> toma esos datos y los lleva a una base de datos <b>Supabase (PostgreSQL)</b>. Sobre ella, una app responsive en <b>Flutter</b> con dos módulos: <b>historial</b> (filtrar por patente, ordenar por entrada/salida y tiempo de estadía, rango de fechas) y un <b>dashboard</b> de reportes y gráficos por período."],
@@ -185,7 +185,7 @@ export const CASES = {
       { v: "ANPR", k: { es: "Reconocimiento por cámara Hikvision", en: "Recognition by Hikvision camera" } },
       { v: "2", k: { es: "Módulos: historial + reportes", en: "Modules: history + reports" } },
       { v: "En terreno", k: { es: "Cámaras instaladas en el club", en: "Cameras installed at the club" } },
-      { v: "5", k: { es: "Equipo liderado (jefe de proyecto)", en: "Team led (project lead)" } },
+      { v: "5", k: { es: "Equipo · Taller de Ing. de Software", en: "Team · Software Eng. Workshop" } },
     ],
     stack: ["Flutter", "Dart", "Node-RED", "Supabase", "PostgreSQL", "Hikvision ANPR"],
     learnings: {
