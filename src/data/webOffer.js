@@ -6,10 +6,12 @@
    src/i18n/strings.js — aquí solo van los registros de datos.
 
    SITES: los 2 primeros son clientes reales (pesan más, van primero);
-   los 8 siguientes son demos por rubro — ninguno de esos subdominios
-   existe todavía, así que Sites.jsx debe renderizarlos en estado
+   los 8 siguientes son demos por rubro. Las que aún no existen quedan
+   con comingSoon:true — Sites.jsx las renderiza en estado
    "Próximamente" (botón deshabilitado, subdominio como texto plano,
-   nunca un link funcional a *.alvarofr.dev). */
+   nunca un link funcional a *.alvarofr.dev). Una demo publicada
+   (comingSoon:false, kind:"external", href real) se ve y se comporta
+   como cualquier link externo — ver "barberia" más abajo. */
 
 export const SITES = [
   { id:"maderas", kind:"case", slug:"maderas",
@@ -28,11 +30,11 @@ export const SITES = [
     planTag:{ es:"Sitio pyme", en:"Business site" },
     desc:{ es:"Menú, horario y mapa, listo para pedidos por WhatsApp.", en:"Menu, hours and map, ready for WhatsApp orders." },
     comingSoon:true },
-  { id:"barberia", kind:"demo", subdomain:"barberia.alvarofr.dev",
+  { id:"barberia", kind:"external", href:"https://barberia.alvarofr.dev/", subdomain:"barberia.alvarofr.dev",
     name:{ es:"Barbería / Peluquería", en:"Barbershop / Hair Salon" },
     planTag:{ es:"Sitio pyme", en:"Business site" },
     desc:{ es:"Servicios, precios y reserva de hora por WhatsApp.", en:"Services, prices and WhatsApp booking." },
-    comingSoon:true },
+    cover:"/media/cases/barberia-cover.jpg" },
   { id:"dentista", kind:"demo", subdomain:"dentista.alvarofr.dev",
     name:{ es:"Dentista", en:"Dentist" },
     planTag:{ es:"Landing", en:"Landing" },
