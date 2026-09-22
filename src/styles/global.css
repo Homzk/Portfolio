@@ -192,5 +192,9 @@ html{scroll-behavior:smooth}
 .crow{display:flex; align-items:center; justify-content:space-between; padding:15px 4px; border-bottom:1px solid var(--line); font-family:var(--mono); font-size:14px; text-decoration:none; color:var(--ink); transition:padding .2s}
 .crow:hover{padding-left:12px} .crow .lbl{color:var(--muted)}
 .btns{display:flex; flex-wrap:wrap; gap:12px; justify-content:center}
+/* Link discreto hacia /web (checklist del brief de páginas para pymes):
+   no debe competir con las CTAs de reclutamiento de arriba. */
+.biz-link{display:inline-flex; align-items:center; gap:6px; margin-top:24px; font-family:var(--mono); font-size:12.5px; color:var(--dim); text-decoration:none}
+.biz-link:hover{color:var(--ink)}
 .foot{position:relative; z-index:2; border-top:1px solid var(--line); padding:26px 0}
 .foot-in{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; font-family:var(--mono); font-size:12.5px; color:var(--dim)}

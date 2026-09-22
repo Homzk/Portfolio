@@ -6,6 +6,7 @@
 import { createBrowserRouter, Outlet, ScrollRestoration } from "react-router";
 import Home from "./pages/Home";
 import CaseStudy from "./pages/CaseStudy";
+import WebPage from "./pages/Web";
 
 function Root() {
   return (
@@ -23,6 +24,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "proyecto/:slug", element: <CaseStudy /> },
+      { path: "web", element: <WebPage /> },
     ],
   },
 ]);

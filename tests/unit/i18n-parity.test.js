@@ -4,7 +4,7 @@
    cadena existe en un solo idioma. */
 
 import { describe, it, expect } from "vitest";
-import { HERO, PROJ, SEC } from "../../src/i18n/strings";
+import { HERO, PROJ, SEC, WEB } from "../../src/i18n/strings";
 
 function assertParallel(a, b, path) {
   const aArr = Array.isArray(a), bArr = Array.isArray(b);
@@ -37,4 +37,5 @@ describe("i18n parity ES/EN", () => {
   it("HERO tiene paridad total", () => assertParallel(HERO.es, HERO.en, "HERO"));
   it("PROJ tiene paridad total", () => assertParallel(PROJ.es, PROJ.en, "PROJ"));
   it("SEC tiene paridad total", () => assertParallel(SEC.es, SEC.en, "SEC"));
+  it("WEB tiene paridad total", () => assertParallel(WEB.es, WEB.en, "WEB"));
 });

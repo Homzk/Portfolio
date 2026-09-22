@@ -9,3 +9,13 @@ export const CV_URL = "/cv/Alvaro-Flores-Rocha-CV.pdf";
 export const CV_FILENAME = "Alvaro-Flores-Rocha-CV.pdf";
 export const GITHUB_URL = "https://github.com/Homzk";
 export const LINKEDIN_URL = "https://linkedin.com/in/alvaro-flores-rocha";
+export const EMAIL = "f.alvaro.ro@gmail.com";
+export const WHATSAPP_URL = "https://wa.me/56963505529";
+export const WHATSAPP_DISPLAY = "+56 9 6350 5529";
+
+/* Link de WhatsApp con mensaje prellenado (checklist del brief de
+   /web). Uso opcional: WHATSAPP_URL solo (sin mensaje, como en el
+   portfolio principal) o waLink(mensaje) cuando conviene prellenar. */
+export function waLink(message) {
+  return message ? `${WHATSAPP_URL}?text=${encodeURIComponent(message)}` : WHATSAPP_URL;
+}
