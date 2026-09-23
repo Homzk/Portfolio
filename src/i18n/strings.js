@@ -56,7 +56,8 @@ export const SEC = {
 export const WEB = {
   es: {
     meta: { title:"Moonit — Páginas web para tu negocio | alvarofr.dev/web",
-      description:"Sitios web para pymes y negocios locales de la Región de Valparaíso. Landing, sitio pyme o tienda online, listos en días, con WhatsApp y SEO básico incluidos." },
+      description:"Sitios web para pymes y negocios locales de la Región de Valparaíso. Landing, sitio pyme o tienda online, listos en días, con WhatsApp y SEO básico incluidos.",
+      image:"/media/og-web-cover.jpg" },
     nav:{ cta:"Cotizar",
       links:[["Servicios","servicios"],["Trabajos","catalogo"],["Planes","planes"],["Proceso","proceso"],["Contacto","contacto"]] },
     waMessage:"Hola, vi la página de Moonit y me interesa una web para mi negocio",
@@ -114,7 +115,8 @@ export const WEB = {
   },
   en: {
     meta: { title:"Moonit — Websites for your business | alvarofr.dev/web",
-      description:"Websites for small businesses in the Valparaíso Region, Chile. Landing, business site or online store, ready in days, with WhatsApp and basic SEO included." },
+      description:"Websites for small businesses in the Valparaíso Region, Chile. Landing, business site or online store, ready in days, with WhatsApp and basic SEO included.",
+      image:"/media/og-web-cover.jpg" },
     nav:{ cta:"Get a quote",
       links:[["Services","servicios"],["Work","catalogo"],["Plans","planes"],["Process","proceso"],["Contact","contacto"]] },
     waMessage:"Hi, I saw Moonit's page and I'm interested in a website for my business",
