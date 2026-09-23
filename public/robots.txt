@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://alvaro-flores.vercel.app/sitemap.xml
+Sitemap: https://www.alvarofr.dev/sitemap.xml
