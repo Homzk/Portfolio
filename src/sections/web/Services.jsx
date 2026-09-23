@@ -11,7 +11,11 @@
      zoom; las maquetas tienen coreografía propia (búsqueda que se
      escribe, estrellas, checks, candado); tags en cascada.
    - Panel inclinado en 3D siguiendo el mouse (createAnimatable).
-   En móvil el panel sticky se oculta y cada ítem trae su visual estático. */
+   En móvil el panel sticky se oculta y cada ítem trae su propio visual,
+   que recibe la misma coreografía (cortina, maqueta animada, tags, ola
+   del título) cuando entra en pantalla.
+   Los visuales llevan key={lang}: typeIn escribe texto directo en el DOM,
+   así al cambiar de idioma se remontan con el texto correcto. */
 
 import { useLayoutEffect, useRef, useState } from "react";
 import { Search, Star, MapPin, Check, Clock, Lock, Globe, KeyRound, MessageCircle } from "lucide-react";
@@ -128,6 +132,32 @@ export default function Services() {
       onScroll({ target: item, enter: "center top", leave: "center bottom", onEnter: () => setActive(i) });
     });
 
+    if (!self.matches.desktop) {
+      const running = [];
+      const hidden = "inset(100% 0% 0% 0% round 14px)";
+      el.querySelectorAll(".w-svc-item").forEach((item, i) => {
+        const vis = item.querySelector(".w-svc-visual");
+        const tags = item.querySelectorAll(".w-tags span");
+        utils.set(vis, { clipPath: hidden });
+        utils.set(tags, { opacity: 0, y: 14 });
+        let done = false;
+        onScroll({
+          target: vis, enter: "bottom-=60 top",
+          onEnter: () => {
+            if (done) return;
+            done = true;
+            running.push(
+              animate(vis, { clipPath: [hidden, "inset(0% 0% 0% 0% round 14px)"], duration: 850, ease: "inOut(4)" }),
+              ...choreograph(vis, SERVICES[i]),
+              animate(tags, { opacity: 1, y: 0, duration: 550, ease: "out(3)", delay: stagger(70, { start: 350 }) }),
+              animate(item.querySelectorAll(".w-svc-ch"), { y: [0, -10, 0], duration: 520, ease: "out(2)", delay: stagger(22) }),
+            );
+          },
+        });
+      });
+      return () => running.forEach((a) => a.revert());
+    }
+
     const stick = el.querySelector(".w-svc-stick");
     revealUp(cardRef.current, stick, { fromY: 60, scale: [0.94, 1], duration: 1100 });
 
@@ -189,7 +219,7 @@ export default function Services() {
                   <h3 className="w-svc-t" key={`${svc.id}-${lang}`}>{svc.name[lang]}</h3>
                   <p className="w-svc-d">{svc.desc[lang]}</p>
                   <div className="w-svc-inline">
-                    <div className={`w-svc-visual${svc.img ? "" : " is-mock"}`}><Visual s={svc} m={t.mocks} /></div>
+                    <div className={`w-svc-visual${svc.img ? "" : " is-mock"}`}><Visual key={lang} s={svc} m={t.mocks} /></div>
                     <div className="w-tags">{svc.tags[lang].map((tag) => <span key={tag}>{tag}</span>)}</div>
                   </div>
                 </li>
@@ -206,7 +236,7 @@ export default function Services() {
               <div className="w-svc-stage" aria-hidden="true">
                 {SERVICES.map((svc, i) => (
                   <div className={`w-svc-vis${i === active ? " on" : ""}${i === prevActive.current && i !== active ? " prev" : ""}`} key={svc.id}>
-                    <Visual s={svc} m={t.mocks} />
+                    <Visual key={lang} s={svc} m={t.mocks} />
                   </div>
                 ))}
               </div>
