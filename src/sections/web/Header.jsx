@@ -17,6 +17,7 @@ import { WEB } from "../../i18n/strings";
 import { waLink } from "../../data/site";
 import { useAnimeScope } from "../../hooks/useAnimeScope";
 import { scrollToId } from "./scrollTo";
+import { introDone } from "./introSignal";
 
 const MORPH_PX = 140;
 
@@ -29,10 +30,14 @@ export default function Header() {
     const page = el.closest(".web-root");
     const padFrom = window.matchMedia("(max-width: 640px)").matches ? "20px" : "36px";
 
-    animate(el, { y: ["-120%", "0%"], duration: 900, ease: "out(4)" });
-    animate(el.querySelectorAll(".w-logo, .w-nav a, .w-header-r"), {
-      opacity: [0, 1], y: [-12, 0], duration: 600, ease: "out(3)", delay: stagger(50, { start: 300 }),
+    // Entrada tras la intro (Intro.jsx); hasta entonces queda oculto arriba.
+    const drop = animate(el, { y: ["-120%", "0%"], duration: 900, ease: "out(4)", autoplay: false });
+    const items = animate(el.querySelectorAll(".w-logo, .w-nav a, .w-header-r"), {
+      opacity: [0, 1], y: [-12, 0], duration: 600, ease: "out(3)", delay: stagger(50, { start: 300 }), autoplay: false,
     });
+    drop.seek(0); items.seek(0);
+    let alive = true;
+    introDone.then(() => { if (alive) { drop.play(); items.play(); } });
 
     createTimeline({
       defaults: { ease: "linear", duration: 1000 },
@@ -55,6 +60,8 @@ export default function Header() {
       scaleX: [0, 1], ease: "linear",
       autoplay: onScroll({ target: page, enter: "top top", leave: "bottom bottom", sync: true }),
     });
+
+    return () => { alive = false; };
   });
 
   return (

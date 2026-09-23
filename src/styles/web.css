@@ -80,6 +80,21 @@
   mask-image:radial-gradient(ellipse 80% 70% at 50% 45%,#000 20%,transparent 80%); -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 45%,#000 20%,transparent 80%);
   opacity:.55; animation:wdrift 26s linear infinite alternate}
 
+/* ===== Intro (Intro.jsx) =====
+   Fija sobre todo (header z 40, WhatsApp z 50). anime.js sale con
+   clip-path hacia arriba. */
+.w-intro{position:fixed; inset:0; z-index:100; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:28px;
+  background:radial-gradient(ellipse at 50% 45%,#101a2a 0%,var(--wbg) 70%)}
+.w-intro-star{position:absolute; border-radius:50%; background:var(--wtext); box-shadow:0 0 6px rgba(239,237,214,.5); opacity:0}
+.w-intro-star.cyan{background:var(--wstar); box-shadow:0 0 8px var(--wstar-glow)}
+.w-intro-moon{position:relative; width:136px; height:136px; display:grid; place-items:center; opacity:0}
+.w-intro-moon .moon{width:96px; height:96px; filter:drop-shadow(0 0 34px var(--wacc-glow))}
+.w-intro-ring{position:absolute; inset:0; width:100%; height:100%; transform:rotate(90deg)}
+.w-intro-ring path{fill:none; stroke:var(--wacc); stroke-width:1.2; stroke-linecap:round; opacity:.85}
+.w-intro-name{font-weight:800; font-size:22px; letter-spacing:-.02em; color:var(--wtext)}
+.w-intro-name span{display:inline-block; opacity:0}
+.w-intro-name .dot{color:var(--wacc)}
+
 /* ===== Estrellas laterales (SideStars.jsx) =====
    Capa absoluta detrás del contenido (.container es z-index:2). anime.js
    mueve cada estrella en Y con el scroll (parallax), las hace titilar y

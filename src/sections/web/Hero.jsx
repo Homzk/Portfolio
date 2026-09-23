@@ -19,6 +19,7 @@ import { waLink } from "../../data/site";
 import { useAnimeScope } from "../../hooks/useAnimeScope";
 import Moon from "../../components/Moon";
 import { scrollToId } from "./scrollTo";
+import { introDone } from "./introSignal";
 
 export default function Hero() {
   const { lang } = useLang();
@@ -38,7 +39,8 @@ export default function Hero() {
     utils.set($(".w-ast"), { opacity: 0, scale: 0 });
     utils.set($(".w-badge"), { opacity: 0, scale: 0.3, rotate: -140 });
 
-    createTimeline({ defaults: { ease: "out(4)", duration: 800 } })
+    // Espera a que se levante la intro (Intro.jsx) para no animar detrás de ella.
+    const tl = createTimeline({ defaults: { ease: "out(4)", duration: 800 }, autoplay: false })
       .add($(".w-kicker"), { opacity: 1, y: 0 }, 100)
       .add(words, { y: "0%", duration: 1000, delay: stagger(70) }, 180)
       .add(em, { "--u": "100%", duration: 900, ease: "inOut(3)" }, 800)
@@ -52,6 +54,10 @@ export default function Hero() {
     // Luna del sello: recorre sus fases en bucle (sombra de derecha a
     // izquierda: llena → menguante → nueva → creciente → llena).
     animate(el.querySelector(".w-badge-core .moon-shadow"), { cx: [150, -50], duration: 12000, ease: "linear", loop: true });
+
+    let alive = true;
+    introDone.then(() => { if (alive) tl.play(); });
+    return () => { alive = false; };
   }, [lang]);
 
   useEffect(() => {

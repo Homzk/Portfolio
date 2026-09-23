@@ -7,6 +7,7 @@
    viewport, igual que el header flotante — ni overflow:hidden, que
    rompería el panel sticky de Servicios (se usa overflow-x:clip). */
 
+import Intro from "../sections/web/Intro";
 import Header from "../sections/web/Header";
 import Hero from "../sections/web/Hero";
 import Pillars from "../sections/web/Pillars";
@@ -31,6 +32,7 @@ export default function WebPage() {
 
   return (
     <div className="web-root">
+      <Intro />
       <Header />
       <main>
         <Hero />
