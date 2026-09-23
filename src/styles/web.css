@@ -130,12 +130,10 @@
 .w-nav a:hover{color:var(--wtext)}
 .w-nav a:hover::after{transform:scaleX(1)}
 .w-header-r{display:flex; align-items:center; gap:14px}
-.w-header-back{font-family:var(--mono); font-size:12.5px; color:var(--wmuted); text-decoration:none; transition:color .2s}
-.w-header-back:hover{color:var(--wacc2)}
 .w-lang{display:inline-flex; align-items:center; gap:6px; font-family:var(--mono); font-size:12.5px; color:var(--wtext); background:transparent; border:1px solid var(--wline2); border-radius:9px; padding:7px 10px; cursor:pointer; transition:border-color .2s}
 .w-lang:hover{border-color:var(--wacc)}
 @media(max-width:980px){.w-nav{display:none}}
-@media(max-width:560px){.w-header-back{display:none} .w-header-r{gap:10px}}
+@media(max-width:560px){.w-header-r{gap:10px}}
 
 /* ===== HERO ===== */
 .w-hero{position:relative; overflow:hidden; min-height:100vh; display:flex; align-items:center; padding:140px 0 96px}

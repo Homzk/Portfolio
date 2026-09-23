@@ -9,7 +9,6 @@
    Con movimiento reducido no corre nada de esto y el CSS deja la
    píldora fija (legible sobre el contenido). */
 
-import { Link } from "react-router";
 import { Languages, MessageCircle } from "lucide-react";
 import { animate, createTimeline, onScroll, stagger } from "animejs";
 import { useLang } from "../../i18n/LangContext";
@@ -67,14 +66,13 @@ export default function Header() {
   return (
     <header className="w-header" ref={root}>
       <div className="w-header-bar">
-        <a className="w-logo" href="#top" onClick={(e) => scrollToId(e, "top")}>Álvaro Flores<span>.</span></a>
+        <a className="w-logo" href="#top" onClick={(e) => scrollToId(e, "top")}>Moonit<span>.</span></a>
         <nav className="w-nav" aria-label={lang === "es" ? "Secciones" : "Sections"}>
           {t.nav.links.map(([label, id]) => (
             <a key={id} href={`#${id}`} onClick={(e) => scrollToId(e, id)}>{label}</a>
           ))}
         </nav>
         <div className="w-header-r">
-          <Link to="/" className="w-header-back">{t.nav.back}</Link>
           <button className="w-lang" onClick={toggle}><Languages size={14} />{lang === "es" ? "EN" : "ES"}</button>
           <a className="w-btn w-btn-acc w-btn-sm" href={waLink(t.waMessage)} target="_blank" rel="noreferrer">
             <MessageCircle size={15} />{t.nav.cta}

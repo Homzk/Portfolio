@@ -14,7 +14,7 @@ import Moon from "../../components/Moon";
 import { finishIntro } from "./introSignal";
 
 const KEY = "w-intro-seen";
-const NAME = "Álvaro Flores";
+const NAME = "Moonit";
 
 function shouldShow() {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;

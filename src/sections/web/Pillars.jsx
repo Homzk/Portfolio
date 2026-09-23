@@ -21,7 +21,6 @@
    - Divisor inferior con un punto que viaja de lado a lado. */
 
 import { useLayoutEffect, useRef } from "react";
-import { Link } from "react-router";
 import { Target, Code2, PenTool, ArrowRight } from "lucide-react";
 import { animate, onScroll, splitText, stagger, utils, spring } from "animejs";
 import { useLang } from "../../i18n/LangContext";
@@ -164,7 +163,6 @@ export default function Pillars() {
                   <ArrowRight size={16} />{t.cta}
                 </a>
               </span>
-              <Link className="w-link w-cta-item" to="/">{t.link}<ArrowRight size={15} /></Link>
             </div>
           </div>
           </div>
