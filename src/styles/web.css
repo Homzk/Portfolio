@@ -1,155 +1,447 @@
 /* ============================================================
-   /WEB — landing de venta de páginas web para pymes. Mismos tokens
-   :root de global.css (--paper/--ink/--accent/--display/--body/--mono),
-   SIN redeclararlos ni usar @import — idéntica estrategia a
-   src/styles/case-study.css. Todo acotado bajo .web-root para no
-   colisionar con la home. .container/.sec/.h2/.eyebrow/.btn/.lang/.lk/
-   .ar/.ar2/.thumb/.thumb-* son genéricos y ya funcionan tal cual
-   (global.css), así que aquí solo se definen las clases propias de
-   esta página.
+   /WEB — landing de venta para pymes. Tema "luna y estrellas": noche azul
+   medianoche, acento crema lunar (--wacc) y estrellas cian (--wstar). No
+   comparte color con el portafolio personal (solo --mono de global.css).
+   Todo acotado bajo .web-root.
 
-   IMPORTANTE: .web-root nunca debe recibir transform/filter/
-   will-change — WhatsAppFloat (.wa-float) depende de que
-   position:fixed resuelva contra el viewport, no contra un ancestro
-   que cree un containing block nuevo.
+   IMPORTANTE:
+   - .web-root nunca debe recibir transform/filter/will-change:
+     .wa-float (position:fixed) debe resolver contra el viewport.
+   - .web-root usa overflow-x:clip, NO overflow:hidden: hidden crea un
+     contenedor de scroll y rompe position:sticky (header y panel de
+     Servicios).
    ============================================================ */
 
-.web-root{position:relative; overflow:hidden; background:var(--paper); color:var(--ink); font-family:var(--body);
-  /* Gris secundario propio de /web, más oscuro que --muted/--dim del
-     portfolio (que en esta página, sobre --paper/--card, quedaban bajo
-     4.5:1 — difícil de leer). ~6.4:1 sobre --paper, ~7:1 sobre --card. */
-  --w-muted:#57534a}
-.web-grain{position:absolute; inset:0; pointer-events:none; z-index:1; opacity:.30; mix-blend-mode:multiply;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-/* El resto del contenido no necesita z-index propio: .container (global.css)
-   ya es position:relative;z-index:2, así que queda por encima del grain
-   (z-index:1) sin reglas adicionales. .wa-float es position:fixed y escapa
-   del flujo — no lo toca esta capa. */
+.web-root{position:relative; overflow-x:clip; min-height:100vh;
+  --wbg:#060A10; --wbg2:#0A1018;
+  --wcard:#0E1520; --wcard2:#131C29;
+  --wline:#1A2533; --wline2:#253244;
+  --wtext:#EFEDD6; --wmuted:#9AA6B5;
+  --wacc:#E6E0A8; --wacc2:#F5F1CF;
+  --wacc-dim:rgba(230,224,168,.10); --wacc-glow:rgba(230,224,168,.38);
+  --wstar:#48D7E4; --wstar-glow:rgba(72,215,228,.55);
+  --wfont:'Hanken Grotesk',system-ui,sans-serif;
+  --wease:cubic-bezier(.2,.7,.3,1);
+  background:var(--wbg); color:var(--wtext); font-family:var(--wfont)}
+/* .site (layout global, global.css) usa overflow-x:hidden, que lo vuelve
+   contenedor de scroll y rompe todo position:sticky de esta página
+   (Sobre mí, Servicios). En /web se cambia a clip —recorta igual pero no
+   crea contenedor de scroll—, sin tocar el portafolio principal. */
+.site:has(> .web-root){overflow-x:clip}
+.web-root ::selection{background:var(--wacc); color:var(--wbg)}
+/* :where() = especificidad 0: los links heredan color salvo que su clase
+   (botones, .w-link, tags…) defina uno. */
+:where(.web-root) a{color:inherit}
+.web-root :focus-visible{outline:2px solid var(--wacc); outline-offset:3px; border-radius:6px}
+
+/* ===== keyframes ===== */
+@keyframes wspin{to{transform:rotate(360deg)}}
+@keyframes wbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes wdrift{from{transform:translate3d(0,0,0)}to{transform:translate3d(0,-52px,0)}}
+@keyframes wpulse{0%{transform:scale(1); opacity:.55}80%,100%{transform:scale(1.9); opacity:0}}
+@keyframes wtwinkle{0%,100%{opacity:.35}50%{opacity:.8}}
+
+/* Las animaciones de entrada y scroll las hace anime.js (src/sections/web/
+   motion.js + useAnimeScope). Ojo: no poner transition sobre transform/
+   opacity en elementos que anima anime.js — la transición CSS
+   suavizaría cada frame y la animación se vería con retraso. */
+
+/* ===== botones / piezas compartidas ===== */
+.w-btn{display:inline-flex; align-items:center; justify-content:center; gap:9px; font-family:var(--wfont); font-size:15px; font-weight:700; text-decoration:none; padding:14px 24px; border-radius:12px; border:1px solid transparent; cursor:pointer; transition:transform .2s var(--wease), box-shadow .2s, background .2s, border-color .2s, color .2s; white-space:nowrap}
+.w-btn-acc{background:var(--wacc); color:var(--wbg); box-shadow:0 10px 28px rgba(230,224,168,.28)}
+.w-btn-acc:hover{background:var(--wacc2); transform:translateY(-2px); box-shadow:0 14px 34px rgba(230,224,168,.4)}
+.w-btn-line{border-color:var(--wline2); color:var(--wtext); background:rgba(255,255,255,.02)}
+.w-btn-line:hover{border-color:var(--wacc); color:var(--wacc2); transform:translateY(-2px)}
+.w-btn-sm{padding:9px 16px; font-size:13.5px; box-shadow:none}
+.w-btn[disabled]{opacity:.6; cursor:progress; transform:none}
+
+.w-kicker{display:flex; align-items:center; gap:12px; font-family:var(--mono); font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--wmuted); margin-bottom:18px}
+.w-kicker-line{width:28px; height:1px; background:var(--wacc)}
+.w-num{color:var(--wacc); font-weight:500}
+.w-head{margin-bottom:52px}
+.w-h2{font-weight:800; font-size:clamp(32px,4.6vw,54px); line-height:1.04; letter-spacing:-.03em; max-width:820px}
+.w-sub{color:var(--wmuted); font-size:17px; line-height:1.6; max-width:640px; margin-top:18px}
+.w-mini-h{font-family:var(--mono); font-size:12.5px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:var(--wmuted); margin-bottom:18px}
+.w-link{display:inline-flex; align-items:center; gap:7px; font-weight:700; font-size:14.5px; color:var(--wacc2); text-decoration:none; border-bottom:1px solid transparent; transition:border-color .2s, gap .2s}
+.w-link:hover{border-color:var(--wacc2); gap:10px}
+.w-card{background:var(--wcard); border:1px solid var(--wline); border-radius:18px}
+.w-icon{flex:none; width:48px; height:48px; border-radius:14px; display:grid; place-items:center; color:var(--wacc); background:var(--wacc-dim); border:1px solid rgba(230,224,168,.25)}
+.w-icon.sm{width:38px; height:38px; border-radius:11px}
+.w-tags{display:flex; flex-wrap:wrap; gap:8px}
+.w-tags span{font-family:var(--mono); font-size:11.5px; letter-spacing:.03em; color:var(--wacc2); background:var(--wacc-dim); border:1px solid rgba(230,224,168,.22); padding:5px 11px; border-radius:100px}
+
+.w-sec{position:relative; padding:120px 0; border-top:1px solid var(--wline); scroll-margin-top:84px}
+/* Campo de puntos tipo starfield, deriva lenta */
+/* clip y no hidden: hidden rompería los sticky de adentro (Sobre mí) */
+.w-dotted{overflow:clip}
+.w-dotted::before{content:""; position:absolute; inset:-60px 0 -60px 0; pointer-events:none; z-index:0;
+  background-image:radial-gradient(rgba(239,237,214,.2) 1px,transparent 1.4px),radial-gradient(rgba(72,215,228,.6) 1.2px,transparent 1.7px);
+  background-size:38px 38px,113px 97px; background-position:0 0,19px 41px;
+  mask-image:radial-gradient(ellipse 80% 70% at 50% 45%,#000 20%,transparent 80%); -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 45%,#000 20%,transparent 80%);
+  opacity:.55; animation:wdrift 26s linear infinite alternate}
+
+/* ===== Estrellas laterales (SideStars.jsx) =====
+   Capa absoluta detrás del contenido (.container es z-index:2). anime.js
+   mueve cada estrella en Y con el scroll (parallax), las hace titilar y
+   lanza las fugaces a lo largo de su eje (el wrap define la dirección). */
+.w-sidestars{position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden}
+.w-star{position:absolute; border-radius:50%; background:var(--wtext); box-shadow:0 0 6px 1px rgba(239,237,214,.45); opacity:.6}
+.w-star.cyan{background:var(--wstar); box-shadow:0 0 8px 1px var(--wstar-glow)}
+.w-star.big{box-shadow:0 0 12px 3px rgba(239,237,214,.35)}
+.w-star.big.cyan{box-shadow:0 0 14px 3px var(--wstar-glow)}
+.w-shoot-wrap{position:absolute; width:0; height:0}
+/* Trayectoria empinada y corta: se queda en el margen, no cruza el contenido */
+.w-shoot-wrap.left{left:1.5%; top:14%; transform:rotate(62deg)}
+.w-shoot-wrap.right{right:1.5%; top:48%; transform:rotate(118deg)}
+.w-shoot{position:absolute; left:0; top:0; width:110px; height:1.5px; border-radius:2px; opacity:0; transform-origin:left center;
+  background:linear-gradient(90deg,transparent,rgba(239,237,214,.9) 70%,#fff); box-shadow:0 0 8px rgba(239,237,214,.6)}
+@media(max-width:900px){.w-sidestars{display:none}}
+
+/* ===== HEADER flotante =====
+   Estado base = arriba de todo (barra ancha transparente). anime.js
+   (Header.jsx) interpola hacia la "píldora" al hacer scroll; la regla de
+   prefers-reduced-motion al final deja la píldora fija. */
+.w-header{position:fixed; top:0; left:0; right:0; z-index:40; pointer-events:none}
+.w-header-bar{position:relative; pointer-events:auto; display:flex; align-items:center; justify-content:space-between; gap:24px;
+  max-width:1180px; height:76px; margin:0 auto; padding:0 36px; border:1px solid rgba(230,224,168,0); border-radius:0}
+@media(max-width:640px){.w-header-bar{padding:0 22px}}
+.w-header-progress{position:absolute; left:22px; right:22px; bottom:-1px; height:2px; border-radius:2px; transform-origin:left; transform:scaleX(0);
+  background:linear-gradient(90deg,var(--wacc),var(--wacc2)); box-shadow:0 0 10px var(--wacc-glow); pointer-events:none}
+.w-logo{font-weight:800; font-size:18px; letter-spacing:-.02em; text-decoration:none; white-space:nowrap}
+.w-logo span{color:var(--wacc)}
+.w-nav{display:flex; gap:28px}
+.w-nav a{font-size:14.5px; font-weight:600; color:var(--wmuted); text-decoration:none; position:relative; transition:color .2s}
+.w-nav a::after{content:""; position:absolute; left:0; right:0; bottom:-6px; height:2px; background:var(--wacc); transform:scaleX(0); transform-origin:left; transition:transform .25s var(--wease)}
+.w-nav a:hover{color:var(--wtext)}
+.w-nav a:hover::after{transform:scaleX(1)}
+.w-header-r{display:flex; align-items:center; gap:14px}
+.w-header-back{font-family:var(--mono); font-size:12.5px; color:var(--wmuted); text-decoration:none; transition:color .2s}
+.w-header-back:hover{color:var(--wacc2)}
+.w-lang{display:inline-flex; align-items:center; gap:6px; font-family:var(--mono); font-size:12.5px; color:var(--wtext); background:transparent; border:1px solid var(--wline2); border-radius:9px; padding:7px 10px; cursor:pointer; transition:border-color .2s}
+.w-lang:hover{border-color:var(--wacc)}
+@media(max-width:980px){.w-nav{display:none}}
+@media(max-width:560px){.w-header-back{display:none} .w-header-r{gap:10px}}
 
 /* ===== HERO ===== */
-.web-hero{position:relative; overflow:hidden; padding:48px 0 68px; border-bottom:1px solid var(--line)}
-/* Orbe ámbar que sigue el mouse — igual que .orb (global.css) pero a
-   mitad de escala, porque este hero no es de pantalla completa. z-index:0
-   para quedar bajo .web-grain (z-index:1) y el contenido (.container,
-   z-index:2), exactamente como en el hero principal. */
-.web-orb{position:absolute; width:360px; height:360px; border-radius:50%; left:0; top:0; transform:translate(-180px,-180px); z-index:0;
-  background:radial-gradient(circle at center,rgba(242,162,60,.78) 0%,rgba(232,119,14,.5) 26%,rgba(232,119,14,.16) 50%,rgba(232,119,14,0) 70%);
-  filter:blur(8px); pointer-events:none; will-change:transform}
-@media(max-width:680px){.web-orb{width:220px; height:220px; opacity:.55; filter:blur(10px)}}
-.web-nav{display:flex; align-items:center; justify-content:space-between; margin-bottom:34px}
-.web-back{font-family:var(--mono); font-size:13px; color:var(--w-muted); text-decoration:none; border-bottom:1px solid transparent; transition:color .2s, border-color .2s}
-.web-back:hover{color:var(--ink); border-color:var(--ink)}
-.web-eyebrow{font-family:var(--mono); font-size:12.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); opacity:.85; margin-bottom:18px}
-.web-h1{font-family:var(--display); font-weight:600; font-size:clamp(38px,6.5vw,68px); line-height:1.05; letter-spacing:-.02em; max-width:820px; margin-bottom:26px}
+.w-hero{position:relative; overflow:hidden; min-height:100vh; display:flex; align-items:center; padding:140px 0 96px}
+.w-orb{position:absolute; left:0; top:0; width:520px; height:520px; border-radius:50%; z-index:0; pointer-events:none; will-change:transform;
+  background:radial-gradient(circle,rgba(245,241,207,.55) 0%,rgba(230,224,168,.32) 28%,rgba(230,224,168,.1) 52%,rgba(230,224,168,0) 70%); filter:blur(18px)}
+@media(max-width:680px){.w-orb{width:320px; height:320px; opacity:.7}}
+/* Trazos diagonales tipo pincelada detrás del texto */
+.w-strokes{position:absolute; inset:0; z-index:0; pointer-events:none;
+  background:repeating-linear-gradient(118deg,transparent 0 34px,rgba(255,255,255,.035) 34px 36px,transparent 36px 58px,rgba(230,224,168,.05) 58px 59px);
+  mask-image:linear-gradient(100deg,#000 0%,rgba(0,0,0,.7) 45%,transparent 80%); -webkit-mask-image:linear-gradient(100deg,#000 0%,rgba(0,0,0,.7) 45%,transparent 80%)}
+.w-dots{position:absolute; inset:-60px 0; z-index:0; pointer-events:none;
+  background-image:radial-gradient(rgba(239,237,214,.22) 1px,transparent 1.4px),radial-gradient(rgba(72,215,228,.65) 1.3px,transparent 1.8px);
+  background-size:44px 44px,131px 109px; background-position:0 0,23px 57px;
+  mask-image:radial-gradient(ellipse 60% 70% at 78% 50%,#000 10%,transparent 75%); -webkit-mask-image:radial-gradient(ellipse 60% 70% at 78% 50%,#000 10%,transparent 75%);
+  animation:wdrift 30s linear infinite alternate}
+.w-hero-in{display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:48px}
+.w-hero-copy{max-width:760px}
+.w-h1{position:relative; font-weight:800; font-size:clamp(40px,6.4vw,78px); line-height:1.02; letter-spacing:-.035em; margin-bottom:24px}
+/* Subrayado = background cuyo ancho es --u (anime.js lo anima de 0% a
+   100%); sigue el texto aunque la frase se parta en dos líneas. */
+.w-h1 em{font-style:normal; color:var(--wacc); text-shadow:0 0 42px rgba(230,224,168,.35);
+  background:linear-gradient(90deg,var(--wacc),var(--wacc2)) no-repeat 0 94% / var(--u,100%) .08em}
+.w-ast{display:inline-block; margin-left:.2em; font-size:.42em; vertical-align:super}
+.w-ast i{display:inline-block; animation:wbob 5s ease-in-out infinite}
+.w-ast svg{display:block; width:1em; height:1em; filter:drop-shadow(0 0 10px var(--wacc-glow))}
+.w-hero-sub{font-size:clamp(16.5px,1.6vw,19px); line-height:1.6; color:var(--wmuted); max-width:620px; margin-bottom:28px}
+.w-bullets{list-style:none; display:flex; flex-direction:column; gap:10px; margin-bottom:36px}
+.w-bullets li{display:flex; align-items:center; gap:11px; font-size:16px; color:var(--wtext)}
+.w-bullets svg{flex:none; color:var(--wacc); background:var(--wacc-dim); border-radius:50%; padding:3px; width:22px; height:22px}
+.w-ctas{display:flex; flex-wrap:wrap; gap:14px}
 
-.ribbon{display:inline-block; transform:rotate(-2deg); background:var(--ink); padding:12px 24px; margin-bottom:28px}
-.ribbon span{font-family:'Instrument Serif',var(--display); font-style:italic; font-size:clamp(24px,3.2vw,36px); color:var(--accent-2); line-height:1}
+/* Sello giratorio */
+.w-badge{position:relative; width:210px; height:210px; flex:none}
+.w-badge-ring{width:100%; height:100%; animation:wspin 22s linear infinite}
+.w-badge-draw{fill:none; stroke:var(--wacc); stroke-width:1.2; opacity:.85}
+.w-badge-ring text{font-family:var(--mono); font-size:12.5px; letter-spacing:.08em; fill:var(--wtext)}
+.w-badge::before{content:""; position:absolute; inset:18%; border-radius:50%; border:1px solid rgba(230,224,168,.45); box-shadow:0 0 40px rgba(230,224,168,.25), inset 0 0 30px rgba(230,224,168,.12)}
+.w-badge-core{position:absolute; inset:0; display:grid; place-items:center}
+.w-badge-core svg{width:78px; height:78px; filter:drop-shadow(0 0 22px var(--wacc-glow))}
+@media(max-width:900px){.w-hero-in{grid-template-columns:1fr} .w-badge{position:absolute; right:-40px; top:-70px; width:160px; height:160px; opacity:.55}}
+@media(max-width:560px){.w-badge{display:none}}
 
-.wrows{display:flex; flex-direction:column; gap:9px; margin-bottom:32px}
-.wrow{display:flex; align-items:center; gap:10px; font-size:16.5px; flex-wrap:wrap}
-.wrow-l{font-weight:700; color:var(--ink)}
-.wrow-v{color:var(--w-muted)}
-.web-ctas{display:flex; flex-wrap:wrap; gap:12px}
+/* ===== 01 SOBRE MÍ ===== */
+.w-about{padding-top:40px}
+/* Tira de herramientas (anime.js mueve .w-marquee-track en bucle) */
+.w-marquee{position:relative; z-index:1; display:flex; align-items:center; gap:36px; padding:26px 0; margin-bottom:100px; border-top:1px solid var(--wline); border-bottom:1px solid var(--wline)}
+.w-marquee-label{flex:none; max-width:130px; font-family:var(--mono); font-size:11.5px; line-height:1.45; letter-spacing:.06em; text-transform:uppercase; color:var(--wmuted); border-bottom:1px solid var(--wline2); padding-bottom:4px}
+.w-marquee-view{flex:1; overflow:hidden; mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.w-marquee-track{display:flex; width:max-content}
+.w-tool{display:inline-flex; align-items:center; gap:34px; padding-right:34px; font-size:clamp(20px,2.2vw,28px); font-weight:800; letter-spacing:-.02em; color:rgba(244,244,242,.55); white-space:nowrap; transition:color .3s}
+.w-tool:hover{color:var(--wtext)}
+.w-tool-moon{width:.62em; height:.62em; flex:none; filter:drop-shadow(0 0 6px var(--wacc-glow))}
+@media(max-width:640px){.w-marquee{flex-direction:column; align-items:flex-start; gap:16px; margin-bottom:64px} .w-marquee-label{max-width:none} .w-marquee-view{width:100%}}
 
-/* ===== shared section bits ===== */
-.web-sub{color:var(--w-muted); font-size:16px; max-width:620px; margin-top:-6px; margin-bottom:36px}
+/* Escritorio: texto y tarjetas sticky. Cada tarjeta se detiene en su
+   --stick (inline, un poco más abajo que la anterior) y la siguiente la
+   tapa al ritmo del scroll. .w-stack-hold es cuánto dura el mazo completo
+   antes de irse con la sección (contenido, porque sticky ignora padding). */
+@media(min-width:901px){
+  .w-about .w-about-left{position:sticky; top:130px}
+  .w-about .w-pillar{position:sticky; top:var(--stick,130px)}
+  .w-about .w-stack-hold{display:block; height:16vh}
+}
+.w-about-grid{position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); gap:72px; align-items:start}
+.w-about-left .w-head{margin-bottom:24px}
+.w-about-p{color:var(--wtext); font-size:17px; line-height:1.7; max-width:560px; margin-bottom:16px}
+.w-cta-line{position:relative; display:flex; flex-wrap:wrap; align-items:center; gap:14px 26px; margin-top:30px; padding-left:22px}
+.w-cta-bar{position:absolute; left:0; top:-6px; bottom:-6px; width:2px; border-radius:2px; transform-origin:top; background:linear-gradient(var(--wacc2),var(--wacc)); box-shadow:0 0 12px var(--wacc-glow)}
+.w-cta-item{display:inline-flex}
 
-/* ===== SITES (clientes reales + demos combinados) ===== */
-.site-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:22px}
-@media(max-width:1020px){.site-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.site-grid{grid-template-columns:1fr}}
-.site-card{position:relative; background:var(--card); border:1px solid var(--line); border-radius:14px; overflow:hidden; display:flex; flex-direction:column; text-decoration:none; color:inherit; transition:background .2s}
-a.site-card:hover{background:var(--paper-2)}
-.site-thumb{width:100%; aspect-ratio:16/10}
-.site-soon{position:absolute; top:10px; right:10px; z-index:1; font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--paper); background:rgba(24,22,15,.72); padding:4px 8px; border-radius:100px}
-.site-body{padding:18px 18px 20px; display:flex; flex-direction:column; gap:8px}
-/* Tag de rubro/plan destacado (antes un pill gris apagado, difícil de
-   leer) — mismo tratamiento que .feat-tag (global.css): relleno ámbar,
-   texto tinta, alto contraste. */
-.site-tag{align-self:flex-start; font-family:var(--mono); font-size:10.5px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--ink); background:var(--accent-2); padding:4px 10px; border-radius:100px}
-.site-name{font-family:var(--display); font-weight:600; font-size:18px; letter-spacing:-.01em}
-.site-meta{font-family:var(--mono); font-size:11.5px; color:var(--w-muted)}
-.site-desc{font-size:13.5px; color:var(--w-muted); line-height:1.45; flex-grow:1}
-.site-cta{align-self:flex-start; margin-top:4px}
-.site-cta[disabled]{opacity:.55; cursor:not-allowed; pointer-events:none}
-.site-ext{position:absolute; top:16px; right:16px; color:var(--w-muted)}
+/* Tarjetas: z-index inline creciente = la siguiente tapa a la anterior;
+   anime.js achica y oscurece la tapada. */
+.w-stack{position:relative; display:flex; flex-direction:column; gap:24px}
+.w-stack-hold{display:none}
+.w-pillar{position:relative; display:flex; align-items:flex-start; gap:20px; padding:26px 28px 30px; overflow:hidden;
+  background:linear-gradient(180deg,var(--wcard2),var(--wcard)); border:1px solid var(--wline2); border-radius:20px; transform-origin:top center;
+  box-shadow:0 -14px 40px rgba(0,0,0,.6); transition:background .35s, border-color .35s}
+.w-pillar .w-icon{width:52px; height:52px; border-radius:15px; transition:background .35s, color .35s, border-color .35s}
+.w-pillar-txt{flex:1; min-width:0}
+.w-pillar h3{font-size:21px; font-weight:800; letter-spacing:-.02em; margin-bottom:6px; transition:color .35s}
+.w-pillar p{color:var(--wmuted); font-size:15px; line-height:1.6; transition:color .35s}
+.w-pillar-bar{position:absolute; left:0; right:0; bottom:0; height:3px; transform-origin:left; transform:scaleX(0); background:linear-gradient(90deg,var(--wacc),var(--wacc2)); box-shadow:0 0 12px var(--wacc-glow)}
+.w-pillar:hover{background:var(--wacc); border-color:var(--wacc)}
+.w-pillar:hover h3{color:var(--wbg)}
+.w-pillar:hover p{color:rgba(6,10,16,.78)}
+.w-pillar:hover .w-icon{background:var(--wbg); color:var(--wacc); border-color:var(--wbg)}
+.w-pillar:hover .w-pillar-bar{background:var(--wbg); box-shadow:none}
+@media(max-width:900px){.w-about-grid{grid-template-columns:1fr; gap:44px}}
+@media(max-width:480px){.w-pillar{flex-direction:column; gap:14px; padding:22px 22px 26px}}
+@media(prefers-reduced-motion:reduce){.w-pillar-bar{transform:none}}
 
-/* ===== PRICING ===== */
-.price-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-bottom:44px}
-@media(max-width:860px){.price-grid{grid-template-columns:1fr}}
-.price-card{position:relative; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:26px 24px; display:flex; flex-direction:column; gap:6px}
-.price-card.reco{border-color:var(--accent); background:var(--accent-dim)}
-.price-badge{position:absolute; top:-12px; right:20px; font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase; background:var(--accent); color:var(--ink); padding:4px 10px; border-radius:100px}
-.price-name{font-family:var(--display); font-weight:600; font-size:20px}
-.price-amount{font-family:var(--mono); font-size:32px; font-weight:500; margin-top:6px}
-.price-days{font-family:var(--mono); font-size:12.5px; color:var(--w-muted); margin-bottom:8px}
-.price-desc{font-size:14px; color:var(--w-muted); line-height:1.5}
+/* Divisor con punto viajero (anime.js anima left) */
+.w-divider{position:relative; height:1px; margin-top:110px; background:linear-gradient(90deg,transparent,var(--wline2) 15%,var(--wline2) 85%,transparent)}
+.w-divider-dot{position:absolute; top:50%; left:0; width:7px; height:7px; margin:-3.5px 0 0 -3.5px; border-radius:50%; background:var(--wacc); box-shadow:0 0 12px 3px var(--wacc-glow)}
 
-.price-inclusions{margin-bottom:28px}
-.price-inclusions-h{font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--w-muted); margin-bottom:14px}
-.inclusion-list{list-style:none; display:grid; grid-template-columns:repeat(2,1fr); gap:10px 20px}
-@media(max-width:640px){.inclusion-list{grid-template-columns:1fr}}
-.inclusion-list li{display:flex; align-items:center; gap:9px; font-size:14.5px}
-.inclusion-list .ar{flex:none}
 
-.price-referral{display:flex; flex-wrap:wrap; align-items:baseline; gap:10px; border:1px dashed var(--line-2); border-radius:12px; padding:16px 18px; margin-bottom:28px}
-.price-referral-t{font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--accent)}
-.price-referral-b{font-family:var(--display); font-style:italic; font-size:16px}
+/* ===== 02 SERVICES (scrollytelling) =====
+   anime.js (Services.jsx) llena el riel, hace la ola del título activo,
+   la cortina clip-path de cada vista, el scramble del encabezado, la
+   coreografía de las maquetas y la inclinación del panel con el mouse. */
+.w-svc{display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); gap:64px; align-items:start}
+.w-svc-listwrap{position:relative; padding-left:34px}
+.w-svc-rail{position:absolute; left:0; top:21vh; bottom:21vh; width:2px; border-radius:2px; background:var(--wline)}
+.w-svc-rail-fill{position:absolute; inset:0; border-radius:2px; transform-origin:top; transform:scaleY(0); background:linear-gradient(var(--wacc2),var(--wacc)); box-shadow:0 0 14px var(--wacc-glow)}
+.w-svc-list{list-style:none}
+.w-svc-item{min-height:42vh; display:flex; flex-direction:column; justify-content:center; opacity:.28; transition:opacity .45s}
+.w-svc-item.on{opacity:1}
+.w-svc-n{font-weight:800; font-size:46px; line-height:1; letter-spacing:-.03em; color:transparent; -webkit-text-stroke:1px var(--wline2); margin-bottom:12px; transition:color .45s, -webkit-text-stroke-color .45s, text-shadow .45s}
+.w-svc-item.on .w-svc-n{color:var(--wacc); -webkit-text-stroke-color:var(--wacc); text-shadow:0 0 30px rgba(230,224,168,.35)}
+.w-svc-t{font-size:clamp(26px,3vw,38px); font-weight:800; letter-spacing:-.025em; line-height:1.08; margin-bottom:12px}
+.w-svc-ch{display:inline-block}
+.w-svc-d{color:var(--wmuted); font-size:16px; line-height:1.6; max-width:460px}
+.w-svc-inline{display:none}
 
-.price-conditions-h{font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--w-muted); margin-bottom:12px}
-.price-conditions ul{list-style:none; display:flex; flex-direction:column; gap:7px}
-.price-conditions li{font-family:var(--mono); font-size:12.5px; color:var(--w-muted); line-height:1.5}
+/* Panel centrado verticalmente en el área visible bajo el header
+   flotante (~72px): top = header + (resto de la pantalla - alto) / 2. */
+.w-svc-stick{--svc-h:min(560px,calc(100vh - 160px)); --svc-hdr:72px;
+  position:sticky; top:calc(var(--svc-hdr) + (100vh - var(--svc-hdr) - var(--svc-h)) / 2); height:var(--svc-h); perspective:1400px}
+.w-svc-card{height:100%; display:flex; flex-direction:column; gap:16px; padding:18px; border-radius:22px;
+  background:linear-gradient(170deg,var(--wcard2),var(--wcard)); border:1px solid rgba(230,224,168,.28);
+  box-shadow:0 30px 80px rgba(0,0,0,.5), 0 0 60px rgba(230,224,168,.08)}
+.w-svc-head{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:2px 6px 0; font-family:var(--mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--wmuted)}
+.w-svc-name{margin-left:8px; font-weight:500; color:var(--wtext)}
+.w-svc-count{white-space:nowrap}
+.w-svc-count b{font-size:15px; font-weight:500; color:var(--wacc)}
+.w-svc-stage{position:relative; flex:1; min-height:220px; border-radius:14px; overflow:hidden; background:var(--wbg2); border:1px solid var(--wline)}
+.w-svc-vis{position:absolute; inset:0; opacity:0}
+.w-svc-vis.prev{opacity:1; z-index:1}
+.w-svc-vis.on{opacity:1; z-index:2}
+.w-svc-vis > img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+.w-svc-foot{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px 16px; padding:0 6px 4px}
+.w-svc-quote{display:inline-flex; align-items:center; gap:8px; font-size:14px; font-weight:700; color:var(--wbg); text-decoration:none; background:var(--wacc); padding:9px 16px; border-radius:100px; box-shadow:0 8px 24px rgba(230,224,168,.3); transition:background .2s}
+.w-svc-quote:hover{background:var(--wacc2)}
+/* Visual de cada ítem en móvil (el panel sticky se oculta) */
+.w-svc-visual{position:relative; aspect-ratio:16/10; border-radius:14px; overflow:hidden; background:var(--wbg2); border:1px solid var(--wline)}
+.w-svc-visual > img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+@media(max-width:900px){
+  .w-svc{grid-template-columns:1fr; gap:0}
+  .w-svc-stick{display:none}
+  .w-svc-listwrap{padding-left:20px}
+  .w-svc-rail{top:0; bottom:0}
+  .w-svc-item{min-height:0; opacity:1; padding:28px 0}
+  .w-svc-n{font-size:34px}
+  .w-svc-inline{display:flex; flex-direction:column; gap:14px; margin-top:18px}
+}
 
-/* ===== HOW IT WORKS ===== */
-.how-list{list-style:none; display:flex; flex-direction:column; gap:0}
-.how-step{display:flex; gap:20px; padding:22px 0; border-top:1px solid var(--line)}
-.how-step:last-child{border-bottom:1px solid var(--line)}
-.how-n{flex:none; font-family:var(--mono); font-size:14px; color:var(--accent); width:32px; height:32px; border:1px solid var(--accent); border-radius:50%; display:flex; align-items:center; justify-content:center}
-.how-t{display:block; font-family:var(--display); font-weight:600; font-size:18px; margin-bottom:4px}
-.how-b{color:var(--w-muted); font-size:14.5px; max-width:520px; line-height:1.5}
+/* Maquetas CSS de servicios sin captura */
+.mk{position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; gap:14px; padding:28px;
+  background:radial-gradient(circle at 80% 10%,rgba(230,224,168,.16),transparent 55%),var(--wbg2)}
+.mk-search{display:flex; align-items:center; gap:10px; background:var(--wcard2); border:1px solid var(--wline2); border-radius:100px; padding:12px 18px; font-size:14px; color:var(--wtext)}
+.mk-search svg{color:var(--wacc)}
+.mk-result{display:flex; gap:16px; align-items:center; background:var(--wcard); border:1px solid rgba(230,224,168,.35); border-radius:16px; padding:18px}
+.mk-map{flex:none; width:64px; height:64px; border-radius:12px; display:grid; place-items:center; color:var(--wacc); background:repeating-linear-gradient(45deg,rgba(255,255,255,.04) 0 6px,transparent 6px 12px),var(--wcard2)}
+.mk-result strong{display:block; font-size:17px; margin-bottom:4px}
+.mk-stars{display:flex; align-items:center; gap:2px; font-size:12.5px; color:var(--wmuted)}
+.mk-stars svg{color:var(--wacc); fill:var(--wacc)}
+.mk-meta{display:block; font-size:12.5px; color:var(--wstar); margin-top:4px}
+.mk-title{font-family:var(--mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--wmuted)}
+.mk-row{display:flex; align-items:center; gap:12px; background:var(--wcard); border:1px solid var(--wline2); border-radius:12px; padding:13px 16px; font-size:14.5px}
+.mk-ic{flex:none; display:inline-grid; place-items:center; color:var(--wacc)}
+.mk-row > span:not(.mk-ic){flex:1}
+.mk-row em{font-style:normal; font-family:var(--mono); font-size:11.5px; color:var(--wstar)}
+.mk-row.pending em{color:var(--wacc2)}
+.mk-bar{display:flex; align-items:center; gap:10px; background:var(--wcard2); border:1px solid var(--wline2); border-radius:10px; padding:12px 16px; font-family:var(--mono); font-size:15px}
+.mk-bar .mk-ic{color:var(--wstar)}
+.mk-type.typing::after{content:""; display:inline-block; width:2px; height:1em; margin-left:2px; vertical-align:-2px; background:var(--wacc); animation:wblink .8s steps(1) infinite}
+@keyframes wblink{50%{opacity:0}}
 
-/* ===== ABOUT ===== */
-.web-about-role{font-family:var(--mono); font-size:13px; color:var(--w-muted); margin-bottom:16px}
-.web-about-bio{font-size:16px; color:var(--w-muted); max-width:600px; line-height:1.6; margin-bottom:16px}
-.web-about-body{font-size:17px; max-width:560px; line-height:1.6; margin-bottom:20px}
+/* ===== 04 SITES ===== */
+.w-site-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:22px}
+@media(max-width:1060px){.w-site-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.w-site-grid{grid-template-columns:1fr}}
+.w-site-cell{display:flex}
+.w-site{position:relative; flex:1; display:flex; flex-direction:column; background:var(--wcard); border:1px solid var(--wline); border-radius:18px; overflow:hidden; text-decoration:none;
+  transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)); transition:transform .25s ease-out, border-color .3s, box-shadow .3s}
+a.w-site:hover{border-color:rgba(230,224,168,.55); box-shadow:0 24px 60px rgba(0,0,0,.5), 0 0 40px rgba(230,224,168,.12)}
+.w-site.soon{opacity:.55}
+.w-site-thumb{position:relative; aspect-ratio:16/10; overflow:hidden; background:var(--wcard2)}
+.w-site-thumb .thumb-video{transition:transform .6s var(--wease)}
+a.w-site:hover .thumb-video{transform:scale(1.06)}
+.web-root .thumb-cap .ti{background:var(--wacc)}
+.w-site-eye{position:absolute; inset:0; z-index:2; display:grid; place-items:center; background:rgba(6,10,16,.55); opacity:0; transition:opacity .3s}
+.w-site-eye svg{box-sizing:content-box; padding:14px; border-radius:50%; background:var(--wacc); color:var(--wbg); transform:scale(.7); transition:transform .3s var(--wease); box-shadow:0 0 30px rgba(230,224,168,.5)}
+a.w-site:hover .w-site-eye{opacity:1}
+a.w-site:hover .w-site-eye svg{transform:scale(1)}
+.w-site-soon{position:absolute; top:12px; right:12px; z-index:2; font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--wtext); background:rgba(6,10,16,.8); border:1px solid var(--wline2); padding:4px 9px; border-radius:100px}
+.w-site-body{flex:1; display:flex; flex-direction:column; gap:8px; padding:20px}
+.w-site-tag{align-self:flex-start; font-family:var(--mono); font-size:10.5px; font-weight:500; letter-spacing:.06em; text-transform:uppercase; color:var(--wbg); background:var(--wacc); padding:4px 10px; border-radius:100px}
+.w-site-name{font-size:19px; font-weight:800; letter-spacing:-.015em}
+.w-site-meta{font-family:var(--mono); font-size:11.5px; color:var(--wmuted)}
+.w-site-desc{flex:1; color:var(--wmuted); font-size:14px; line-height:1.5}
+.w-site-cta{display:inline-flex; align-items:center; gap:6px; margin-top:6px; font-weight:700; font-size:14px; color:var(--wacc2)}
+.w-site-cta.off{color:var(--wmuted)}
 
-/* ===== FAQ ===== */
-.faq-list{display:flex; flex-direction:column; max-width:720px}
-.faq-item{border-bottom:1px solid var(--line); padding:18px 0}
-.faq-item summary{cursor:pointer; font-family:var(--display); font-weight:600; font-size:16.5px; list-style:none; display:flex; justify-content:space-between; gap:12px}
-.faq-item summary::-webkit-details-marker{display:none}
-.faq-item summary::after{content:"+"; color:var(--accent); font-family:var(--mono); flex:none}
-.faq-item[open] summary::after{content:"–"}
-.faq-item p{color:var(--w-muted); font-size:14.5px; line-height:1.55; margin-top:12px; max-width:600px}
+/* ===== 05 SHOWCASE (burbujas) ===== */
+.w-show{position:relative; z-index:1; min-height:520px; display:grid; place-items:center; margin:0 auto; max-width:1000px}
+.w-bub-pos{position:absolute; transform:translate(-50%,-50%); z-index:1}
+.w-bubs{display:contents}
+.w-bub-in{display:block}
+.w-bub{display:block; width:104px; height:104px; padding:0; border-radius:50%; overflow:hidden; cursor:pointer; background:var(--wcard); border:2px solid var(--wline2);
+  animation:wbob 5.5s ease-in-out infinite; animation-delay:var(--d,0s); transition:border-color .4s, box-shadow .4s, width .4s, height .4s}
+.w-bub img{width:100%; height:100%; object-fit:cover; filter:grayscale(.7) brightness(.75); transition:filter .4s}
+.w-bub:hover img{filter:none}
+.w-bub.on{border-color:var(--wacc); width:122px; height:122px; box-shadow:0 0 0 7px rgba(230,224,168,.16), 0 0 46px rgba(230,224,168,.6)}
+.w-bub.on img{filter:none}
+.w-bub-ring{display:block; border-radius:50%; border:1px solid rgba(230,224,168,.45); box-shadow:0 0 14px rgba(230,224,168,.25); animation:wbob 6s ease-in-out infinite, wtwinkle 4s ease-in-out infinite; animation-delay:var(--d,0s)}
+.w-quote{position:relative; z-index:2; width:min(520px,100%); padding:44px 40px 32px; background:linear-gradient(160deg,var(--wcard2),var(--wcard)); border:1px solid var(--wline2); border-radius:24px; box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.w-quote-mark{position:absolute; top:-34px; left:30px; font-family:Georgia,serif; font-size:110px; line-height:1; color:var(--wacc); text-shadow:0 0 30px rgba(230,224,168,.5)}
+.w-quote-body h3{font-size:26px; font-weight:800; letter-spacing:-.02em; margin:14px 0 10px}
+.w-quote-body p{color:var(--wmuted); font-size:16px; line-height:1.6; margin-bottom:18px}
+.w-quote-dots{display:flex; gap:7px; margin-top:26px}
+.w-quote-dots span{width:22px; height:3px; border-radius:3px; background:var(--wline2); transition:background .3s, width .3s}
+.w-quote-dots span.on{width:40px; background:var(--wacc)}
+@media(max-width:760px){
+  .w-show{min-height:0; display:flex; flex-direction:column; gap:28px}
+  .w-bub-pos.decor{display:none}
+  .w-bubs{display:flex; gap:14px; justify-content:center; flex-wrap:wrap}
+  .w-bubs .w-bub-pos{position:static; transform:none}
+  .w-bub{width:68px; height:68px}
+  .w-bub.on{width:78px; height:78px}
+  .w-quote{padding:40px 24px 26px}
+}
 
-/* ===== CLOSE ===== */
-.web-close{position:relative; overflow:hidden; background:var(--ink); color:var(--paper); padding:56px 0}
-.web-close-orb{position:absolute; width:260px; height:260px; right:-70px; top:-80px; border-radius:50%; filter:blur(6px); pointer-events:none;
-  background:radial-gradient(circle at 35% 32%,var(--accent-2),var(--accent) 60%,transparent 78%); opacity:.5}
-.web-close-in{position:relative; z-index:2; display:flex; align-items:center; justify-content:space-between; gap:40px; flex-wrap:wrap}
-.web-close .h2{color:var(--paper)}
-.web-close-sub{color:#c9c4b2; font-size:15px; margin:8px 0 20px}
-.web-close-wa{display:block; font-family:var(--mono); font-size:12.5px; color:#c9c4b2; margin-top:12px}
-.web-close-back{display:flex; flex-direction:column; align-items:flex-end; gap:10px; text-align:right}
-.web-close-back a{font-family:var(--mono); font-size:13px; color:var(--paper); text-decoration:none; border-bottom:1px solid rgba(255,255,255,.3)}
-.web-close-back a:hover{border-color:var(--paper)}
-.web-close-quote{font-family:'Instrument Serif',var(--display); font-style:italic; font-size:22px; color:var(--accent-2)}
-@media(max-width:640px){.web-close-in{flex-direction:column; align-items:flex-start}.web-close-back{align-items:flex-start; text-align:left}}
-/* Los botones .btn-primary/.btn-ghost (global.css) están pensados para
-   fondo claro: .btn-ghost no fija color de texto (hereda var(--ink)),
-   invisible sobre el fondo tinta de esta banda. .btn-primary también
-   quedaba ink-sobre-ink, sin forma visible de botón. */
-.web-close .btn-primary{background:var(--accent); color:var(--ink)}
-.web-close .btn-primary:hover{background:var(--accent-2); transform:translateY(-1px)}
-.web-close .btn-ghost{color:var(--paper); border-color:rgba(255,255,255,.35)}
-.web-close .btn-ghost:hover{border-color:var(--paper); background:rgba(255,255,255,.06)}
+/* ===== 06 PRICING ===== */
+.w-price-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; align-items:stretch; margin-bottom:64px}
+@media(max-width:900px){.w-price-grid{grid-template-columns:1fr}}
+.w-price{position:relative; display:flex; flex-direction:column; gap:8px; padding:34px 30px 30px; background:var(--wcard); border:1px solid var(--wline); border-radius:22px; transition:border-color .3s}
+.w-price:hover{border-color:var(--wline2)}
+.w-price.reco{background:linear-gradient(170deg,rgba(230,224,168,.14),var(--wcard) 55%); border-color:var(--wacc); box-shadow:0 0 0 1px rgba(230,224,168,.3), 0 30px 70px rgba(230,224,168,.14)}
+.w-price-badge{position:absolute; top:-13px; left:30px; font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--wbg); background:var(--wacc); padding:5px 12px; border-radius:100px; box-shadow:0 0 22px rgba(230,224,168,.5)}
+.w-price-name{font-size:22px; font-weight:800; letter-spacing:-.015em}
+.w-price-amount{font-weight:800; font-size:44px; letter-spacing:-.03em; margin-top:8px; font-variant-numeric:tabular-nums}
+.w-price.reco .w-price-amount{color:var(--wacc)}
+.w-price-days{font-family:var(--mono); font-size:12.5px; color:var(--wmuted); padding-bottom:16px; margin-bottom:8px; border-bottom:1px solid var(--wline)}
+.w-price-desc{flex:1; color:var(--wmuted); font-size:15px; line-height:1.6; margin-bottom:18px}
+.w-price-cta{width:100%}
+.w-incl{margin-bottom:28px}
+.w-incl-grid{list-style:none; display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+@media(max-width:900px){.w-incl-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.w-incl-grid{grid-template-columns:1fr}}
+.w-incl-card{display:flex; align-items:center; gap:14px; padding:16px 18px; background:var(--wcard); border:1px solid var(--wline); border-radius:14px; font-size:15px; line-height:1.4}
+.w-incl-card.feat{border-color:rgba(230,224,168,.55); background:var(--wacc-dim)}
+.w-incl-card.feat .w-icon{background:var(--wacc); color:var(--wbg)}
+.w-notes{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:40px}
+@media(max-width:760px){.w-notes{grid-template-columns:1fr}}
+.w-note{display:flex; flex-direction:column; gap:6px; padding:18px 20px; border:1px dashed var(--wline2); border-radius:14px; color:var(--wmuted); font-size:15px; line-height:1.5}
+.w-note-t{font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--wacc2)}
+.w-conditions ul{list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:10px 28px}
+@media(max-width:760px){.w-conditions ul{grid-template-columns:1fr}}
+.w-conditions li{display:flex; gap:10px; font-size:13.5px; line-height:1.5; color:var(--wmuted)}
+.w-conditions li svg{flex:none; margin-top:3px; color:var(--wacc)}
 
-/* ===== FLOATING WHATSAPP ===== */
-.wa-float{position:fixed; right:18px; bottom:18px; z-index:50; width:54px; height:54px; border-radius:50%;
-  background:var(--accent); color:var(--ink); display:flex; align-items:center; justify-content:center;
-  box-shadow:0 6px 18px rgba(24,22,15,.28); transition:transform .2s}
-.wa-float:hover{transform:translateY(-2px)}
+/* ===== 07 PROCESS (timeline) ===== */
+.w-how{max-width:900px}
+.w-tl{position:relative; z-index:1; list-style:none; padding-left:84px}
+.w-tl-line{position:absolute; left:27px; top:28px; bottom:28px; width:2px; background:var(--wline2); border-radius:2px}
+.w-tl-fill{position:absolute; left:0; top:0; width:100%; height:100%; transform-origin:top; transform:scaleY(0); background:linear-gradient(var(--wacc2),var(--wacc)); border-radius:2px; box-shadow:0 0 14px var(--wacc-glow)}
+.w-tl-step{position:relative; padding-bottom:36px}
+.w-tl-step:last-child{padding-bottom:0}
+.w-tl-node{position:absolute; left:-84px; top:0; width:56px; height:56px; border-radius:50%; display:grid; place-items:center; font-family:var(--mono); font-size:15px; font-weight:500; color:var(--wmuted); background:var(--wbg); border:2px solid var(--wline2); transition:color .5s, background .5s, border-color .5s, box-shadow .5s}
+.w-tl.all-on .w-tl-fill{transform:none}
+.w-tl.all-on .w-tl-node, .w-tl-step.on .w-tl-node{color:var(--wbg); background:var(--wacc); border-color:var(--wacc); box-shadow:0 0 0 7px rgba(230,224,168,.14), 0 0 30px rgba(230,224,168,.55)}
+.w-tl-card{padding:24px 28px; background:var(--wcard); border:1px solid var(--wline); border-radius:18px; opacity:.25; transform:translateX(28px); transition:opacity .7s var(--wease), transform .7s var(--wease), border-color .5s}
+.w-tl.all-on .w-tl-card, .w-tl-step.on .w-tl-card{opacity:1; transform:none; border-color:var(--wline2)}
+.w-tl-card h3{font-size:21px; font-weight:800; letter-spacing:-.015em; margin-bottom:8px}
+.w-tl-card p{color:var(--wmuted); font-size:15.5px; line-height:1.6}
+@media(max-width:560px){.w-tl{padding-left:62px} .w-tl-line{left:20px} .w-tl-node{left:-62px; width:42px; height:42px; font-size:13px} .w-tl-card{padding:20px}}
 
+/* ===== 08 CONTACT + FAQ ===== */
+.w-contact{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:48px; align-items:start}
+@media(max-width:900px){.w-contact{grid-template-columns:1fr}}
+.w-form{display:flex; flex-direction:column; gap:16px; padding:30px}
+.w-form-row{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+@media(max-width:560px){.w-form-row{grid-template-columns:1fr} .w-form{padding:22px}}
+.w-form label{display:flex; flex-direction:column; gap:8px}
+.w-form label span{font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--wmuted)}
+.w-form input, .w-form select, .w-form textarea{width:100%; font:inherit; font-size:15px; color:var(--wtext); background:var(--wbg2); border:1px solid var(--wline2); border-radius:11px; padding:13px 14px; transition:border-color .2s, box-shadow .2s; resize:vertical}
+.w-form select{appearance:none; background-image:linear-gradient(45deg,transparent 50%,var(--wacc) 50%),linear-gradient(135deg,var(--wacc) 50%,transparent 50%); background-position:calc(100% - 20px) 55%,calc(100% - 14px) 55%; background-size:6px 6px; background-repeat:no-repeat}
+.w-form input:focus, .w-form select:focus, .w-form textarea:focus{outline:none; border-color:var(--wacc); box-shadow:0 0 0 3px rgba(230,224,168,.18)}
+.w-form-submit{width:100%; margin-top:4px}
+.w-form-msg{font-size:14px; line-height:1.5; padding:12px 14px; border-radius:10px}
+.w-form-msg.ok{color:var(--wstar); background:rgba(72,215,228,.08); border:1px solid rgba(72,215,228,.3)}
+.w-form-msg.err{color:#FF9B8A; background:rgba(255,155,138,.08); border:1px solid rgba(255,155,138,.3)}
+.w-contact-alt{display:flex; flex-wrap:wrap; gap:10px 24px; margin-top:18px}
+.w-contact-alt a{display:inline-flex; align-items:center; gap:8px; font-size:14.5px; color:var(--wmuted); text-decoration:none; transition:color .2s}
+.w-contact-alt a:hover{color:var(--wacc2)}
+.w-contact-alt svg{color:var(--wacc)}
+.w-tabs{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px}
+.w-tabs button{font:inherit; font-size:14px; font-weight:700; color:var(--wmuted); background:var(--wcard); border:1px solid var(--wline2); border-radius:100px; padding:9px 16px; cursor:pointer; transition:all .25s}
+.w-tabs button:hover{color:var(--wtext); border-color:var(--wacc)}
+.w-tabs button.on{color:var(--wbg); background:var(--wacc); border-color:var(--wacc); box-shadow:0 0 22px rgba(230,224,168,.35)}
+.w-acc{border-top:1px solid var(--wline)}
+.w-acc-item{border-bottom:1px solid var(--wline)}
+.w-acc-q{width:100%; display:flex; align-items:center; gap:16px; padding:20px 4px; font:inherit; font-size:16.5px; font-weight:700; text-align:left; color:var(--wtext); background:none; border:0; cursor:pointer; transition:color .2s}
+.w-acc-q:hover, .w-acc-item.open .w-acc-q{color:var(--wacc2)}
+.w-acc-n{flex:none; font-family:var(--mono); font-size:13px; font-weight:500; color:var(--wacc)}
+.w-acc-t{flex:1}
+.w-acc-ic{flex:none; color:var(--wacc); transition:transform .35s var(--wease)}
+.w-acc-item.open .w-acc-ic{transform:rotate(135deg)}
+.w-acc-a{display:grid; grid-template-rows:0fr; transition:grid-template-rows .4s var(--wease)}
+.w-acc-item.open .w-acc-a{grid-template-rows:1fr}
+.w-acc-a > div{overflow:hidden}
+.w-acc-a p{color:var(--wmuted); font-size:15px; line-height:1.65; padding:0 4px 22px 45px}
+
+/* ===== footer compartido, recoloreado dentro de /web ===== */
+.web-root .foot{border-color:var(--wline)}
+.web-root .foot-in{color:var(--wmuted)}
+
+/* ===== WhatsApp flotante ===== */
+.wa-float{position:fixed; right:20px; bottom:20px; z-index:50; width:58px; height:58px; border-radius:50%;
+  background:var(--wacc); color:var(--wbg); display:flex; align-items:center; justify-content:center;
+  box-shadow:0 10px 30px rgba(230,224,168,.45); transition:transform .2s}
+.wa-float::after{content:""; position:absolute; inset:0; border-radius:50%; border:2px solid var(--wacc); animation:wpulse 2.4s ease-out infinite; pointer-events:none}
+.wa-float:hover{transform:translateY(-3px) scale(1.04)}
+
+/* ===== movimiento reducido ===== */
 @media(prefers-reduced-motion:reduce){
+  .w-header{padding:14px 14px 0}
+  .w-header-bar{max-width:1040px; height:58px; padding:0 22px; border-radius:30px; background:rgba(12,18,28,.9); border-color:rgba(230,224,168,.42); box-shadow:0 18px 50px rgba(0,0,0,.55)}
+  .web-root *, .web-root *::before, .web-root *::after{animation:none!important}
+  .w-tl-card, .w-svc-panel{transition:none!important}
+  .w-site{transform:none!important}
   .wa-float{transition:none}
 }

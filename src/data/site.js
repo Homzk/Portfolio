@@ -13,6 +13,11 @@ export const EMAIL = "f.alvaro.ro@gmail.com";
 export const WHATSAPP_URL = "https://wa.me/56963505529";
 export const WHATSAPP_DISPLAY = "+56 9 6350 5529";
 
+/* Formulario de contacto de /web (Formspree). Pega aquí la URL de tu
+   formulario, p.ej. "https://formspree.io/f/abcdwxyz". Mientras esté
+   vacío, el formulario abre WhatsApp con los datos ya escritos. */
+export const FORM_ENDPOINT = "";
+
 /* Link de WhatsApp con mensaje prellenado (checklist del brief de
    /web). Uso opcional: WHATSAPP_URL solo (sin mensaje, como en el
    portfolio principal) o waLink(mensaje) cuando conviene prellenar. */

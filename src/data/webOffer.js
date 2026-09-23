@@ -67,6 +67,47 @@ export const SITES = [
     comingSoon:true },
 ];
 
+/* SERVICES: lista del panel sticky de Services.jsx. `img` es una
+   captura real de un sitio del catálogo; los que no tienen captura
+   usan `mock` (maqueta dibujada en CSS dentro de Services.jsx, copy en
+   WEB.services.mocks). */
+export const SERVICES = [
+  { id:"landing", img:"/media/cases/barberia-cover.jpg",
+    name:{ es:"Landing page", en:"Landing page" },
+    desc:{ es:"Una página enfocada en un solo objetivo: que te escriban. Ideal para partir o para una campaña puntual.",
+      en:"One page focused on a single goal: getting you messages. Ideal to get started or for a specific campaign." },
+    tags:{ es:["1 página","Botón de WhatsApp","Desde 5 días"], en:["1 page","WhatsApp button","From 5 days"] } },
+  { id:"pyme", img:"/media/cases/restaurante-cover.jpg",
+    name:{ es:"Sitio pyme", en:"Business site" },
+    desc:{ es:"Hasta 5 secciones —inicio, servicios, nosotros, galería y contacto— para mostrar tu negocio completo.",
+      en:"Up to 5 sections —home, services, about, gallery and contact— to present your whole business." },
+    tags:{ es:["Hasta 5 secciones","Formulario","Galería"], en:["Up to 5 sections","Contact form","Gallery"] } },
+  { id:"tienda", img:"/media/cases/maderas-producto.jpg",
+    name:{ es:"Tienda online", en:"Online store" },
+    desc:{ es:"Catálogo con carrito y pagos con Mercado Pago o Webpay, con hasta 30 productos cargados.",
+      en:"Catalog with cart and Mercado Pago or Webpay payments, with up to 30 products loaded." },
+    tags:{ es:["Carrito","Mercado Pago · Webpay","30 productos"], en:["Cart","Mercado Pago · Webpay","30 products"] } },
+  { id:"seo", mock:"seo",
+    name:{ es:"Google Business y SEO", en:"Google Business & SEO" },
+    desc:{ es:"Tu ficha de Google Maps configurada y el sitio optimizado para que te encuentren cuando te buscan en tu comuna.",
+      en:"Your Google Maps listing set up and the site optimized so people find you when they search in your area." },
+    tags:{ es:["Google Maps","SEO básico","En todos los planes"], en:["Google Maps","Basic SEO","In every plan"] } },
+  { id:"mantencion", mock:"care",
+    name:{ es:"Mantención mensual", en:"Monthly maintenance" },
+    desc:{ es:"Cambios de precios, fotos, horarios o promociones sin que tengas que tocar código. Se cotiza según lo que necesites.",
+      en:"Price, photo, hours or promo updates without touching code. Quoted based on what you need." },
+    tags:{ es:["Plan mensual","Cambios rápidos","A cotizar"], en:["Monthly plan","Quick changes","Quoted"] } },
+  { id:"hosting", mock:"domain",
+    name:{ es:"Dominio y hosting", en:"Domain & hosting" },
+    desc:{ es:"Tu dominio .cl y el hosting configurados con https. Todo queda a tu nombre, no amarrado a una plataforma.",
+      en:"Your .cl domain and hosting set up with https. Everything stays in your name, not locked into a platform." },
+    tags:{ es:["Dominio .cl","https","A tu nombre"], en:[".cl domain","https","In your name"] } },
+];
+
+/* TOOLS: tira que se desplaza sola en "Sobre mí". Solo herramientas que
+   de verdad se usan en los sitios (stack, deploy, DNS, pagos, canales). */
+export const TOOLS = ["React", "Vite", "Vercel", "Cloudflare", "Google Business", "Google Maps", "WhatsApp", "Mercado Pago", "Webpay"];
+
 export const PRICING_TIERS = [
   { id:"landing", priceCLP:150000, days:5, recommended:false,
     name:{ es:"Landing", en:"Landing" },

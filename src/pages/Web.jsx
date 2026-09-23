@@ -1,16 +1,21 @@
 /* ---------------- WEB (/web) ----------------
-   Landing de venta de páginas web para pymes. Mismos tokens del
-   portfolio (Dirección B acordada con el usuario); .web-root en
-   web.css NUNCA debe recibir transform/filter/will-change — WhatsAppFloat
-   depende de que position:fixed resuelva contra el viewport. */
+   Landing de venta de páginas web para pymes. Tema oscuro propio con un
+   único acento naranja (src/styles/web.css, tokens bajo .web-root); no
+   comparte el color del portafolio personal, solo sus fuentes.
+   .web-root NUNCA debe recibir transform/filter/will-change —
+   WhatsAppFloat depende de que position:fixed resuelva contra el
+   viewport, igual que el header flotante — ni overflow:hidden, que
+   rompería el panel sticky de Servicios (se usa overflow-x:clip). */
 
+import Header from "../sections/web/Header";
 import Hero from "../sections/web/Hero";
+import Pillars from "../sections/web/Pillars";
+import Services from "../sections/web/Services";
 import Sites from "../sections/web/Sites";
+import Showcase from "../sections/web/Showcase";
 import Pricing from "../sections/web/Pricing";
 import HowItWorks from "../sections/web/HowItWorks";
-import About from "../sections/web/About";
-import Faq from "../sections/web/Faq";
-import Close from "../sections/web/Close";
+import Contact from "../sections/web/Contact";
 import Footer from "../sections/Footer";
 import WhatsAppFloat from "../components/WhatsAppFloat";
 import { useDocumentMeta } from "../hooks/useDocumentMeta";
@@ -22,18 +27,21 @@ import "../styles/web.css";
 export default function WebPage() {
   const { lang } = useLang();
   useDocumentMeta({ ...WEB[lang].meta, path: "/web" });
-  useExternalFont("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap");
+  useExternalFont("https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@800&display=swap");
 
   return (
     <div className="web-root">
-      <div className="web-grain" />
-      <Hero />
-      <Sites />
-      <Pricing />
-      <HowItWorks />
-      <About />
-      <Faq />
-      <Close />
+      <Header />
+      <main>
+        <Hero />
+        <Pillars />
+        <Services />
+        <Sites />
+        <Showcase />
+        <Pricing />
+        <HowItWorks />
+        <Contact />
+      </main>
       <Footer />
       <WhatsAppFloat />
     </div>
