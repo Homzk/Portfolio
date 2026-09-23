@@ -1,26 +1,46 @@
-/* ---------------- web/Pricing (06) ----------------
-   3 planes + inclusiones (grilla con ícono) + mantención + referido +
-   condiciones. Montos en CLP, formateados en el render.
-   anime.js: tarjetas en cascada, los precios cuentan hasta su valor
-   (el JSX ya trae el monto final para movimiento reducido) e
-   inclusiones entrando desde el centro de la grilla. */
+/* ---------------- web/Pricing (05) ----------------
+   3 planes + tabla comparativa (sin franja de inclusiones compartidas —
+   ver nota en webOffer.js) + aviso de precios referenciales + condiciones.
+   Montos en CLP, formateados en el render.
+   anime.js: tarjetas en cascada y precios que cuentan hasta su valor (el
+   JSX ya trae el monto final para movimiento reducido). En la tabla, la
+   luna de cada plan pasa de nueva a su fase (creciente → casi llena →
+   llena, a más plan más luna) y cada fila entra al hacer scroll con sus
+   checks apareciendo con rebote. */
 
-import { Smartphone, MessageCircle, Search, ShieldCheck, RefreshCw, KeyRound, Check } from "lucide-react";
-import { animate, stagger } from "animejs";
+import { Check, CheckCircle2, Minus } from "lucide-react";
+import { animate, stagger, spring, utils } from "animejs";
 import { useLang } from "../../i18n/LangContext";
 import { WEB } from "../../i18n/strings";
-import { PRICING_TIERS } from "../../data/webOffer";
+import { PRICING_TIERS, COMPARISON } from "../../data/webOffer";
 import { waLink } from "../../data/site";
 import { useAnimeScope } from "../../hooks/useAnimeScope";
+import Moon from "../../components/Moon";
 import { onReveal, revealUp } from "./motion";
 import SectionHead from "./SectionHead";
 
 const fmtCLP = (n) => new Intl.NumberFormat("es-CL", { style: "currency", currency: "CLP", maximumFractionDigits: 0 }).format(n);
 
-/* Ícono por posición de WEB.pricing.inclusions (6 textos ES/EN espejados).
-   El 3º (Google Business + SEO) va destacado. */
-const INCLUSION_ICONS = [Smartphone, MessageCircle, Search, ShieldCheck, RefreshCw, KeyRound];
-const INCLUSION_FEATURED = 2;
+/* Fase de la luna de cada plan (cx de la sombra en Moon: 50 = nueva; al
+   correrla a la izquierda se ilumina más: creciente → gibosa → llena). */
+const PLAN_MOON = [22, -14, -60];
+
+function Cell({ v, lang, t }) {
+  if (v === true) return <><CheckCircle2 className="yes" size={20} aria-hidden="true" /><span className="w-sr">{t.included}</span></>;
+  if (v === false) return <><Minus className="no" size={18} aria-hidden="true" /><span className="w-sr">{t.notIncluded}</span></>;
+  return v[lang];
+}
+
+function Row({ row, alt, lang, t }) {
+  return (
+    <div className={`w-cmp-row${alt ? " alt" : ""}`} role="row">
+      <span className="w-cmp-label" role="rowheader">{row.label[lang]}</span>
+      {row.values.map((v, i) => (
+        <span className="w-cmp-cell" role="cell" key={i}><Cell v={v} lang={lang} t={t} /></span>
+      ))}
+    </div>
+  );
+}
 
 export default function Pricing() {
   const { lang } = useLang();
@@ -40,8 +60,21 @@ export default function Pricing() {
       });
     });
 
-    const incl = el.querySelector(".w-incl-grid");
-    revealUp(incl.children, incl, { fromY: 30, scale: [0.9, 1], delay: stagger(80, { from: "center" }) });
+    const head = el.querySelector(".w-cmp-head");
+    revealUp(head.querySelectorAll(".w-cmp-plan"), head, { fromY: 40, duration: 1000, delay: stagger(130) });
+    head.querySelectorAll(".w-cmp-moon .moon-shadow").forEach((shadow, i) => {
+      utils.set(shadow, { cx: 50 });
+      animate(shadow, { cx: PLAN_MOON[i], duration: 1800, ease: "inOut(3)", delay: 400 + i * 180, autoplay: onReveal(head) });
+    });
+
+    el.querySelectorAll(".w-cmp-row").forEach((row) => {
+      revealUp(row, row, { fromY: 18, duration: 700 });
+      const yes = row.querySelectorAll(".yes");
+      if (!yes.length) return;
+      utils.set(yes, { scale: 0 });
+      animate(yes, { scale: 1, ease: spring({ bounce: 0.6 }), delay: stagger(90, { start: 200 }), autoplay: onReveal(row) });
+    });
+
     revealUp(el.querySelectorAll(".w-note, .w-conditions li"), el.querySelector(".w-notes"), { fromY: 20, duration: 700, delay: stagger(50) });
   });
 
@@ -66,24 +99,25 @@ export default function Pricing() {
           ))}
         </div>
 
-        <div className="w-incl">
-          <h3 className="w-mini-h">{t.inclusionsTitle}</h3>
-          <ul className="w-incl-grid">
-            {t.inclusions.map((item, i) => {
-              const Icon = INCLUSION_ICONS[i];
-              return (
-                <li className={`w-incl-card${i === INCLUSION_FEATURED ? " feat" : ""}`} key={item}>
-                  <span className="w-icon sm"><Icon size={17} /></span>
-                  <span>{item}</span>
-                </li>
-              );
-            })}
-          </ul>
+        <div className="w-cmp">
+          <h3 className="w-cmp-title">{t.compareTitle}</h3>
+          <div className="w-cmp-table" role="table" aria-label={t.compareTitle}>
+            <div className="w-cmp-head" role="row">
+              <span className="w-cmp-corner" role="columnheader" />
+              {PRICING_TIERS.map((tier, i) => (
+                <div className={`w-cmp-plan${tier.recommended ? " reco" : ""}`} role="columnheader" key={tier.id}>
+                  <div className="w-cmp-art"><Moon shadowX={PLAN_MOON[i]} className="w-cmp-moon" /></div>
+                  <span className="w-cmp-name">{tier.name[lang]}</span>
+                  <span className="w-cmp-price">{fmtCLP(tier.priceCLP)}</span>
+                </div>
+              ))}
+            </div>
+            {COMPARISON.map((row, r) => <Row row={row} alt={r % 2 === 0} lang={lang} t={t} key={row.id} />)}
+          </div>
         </div>
 
-        <div className="w-notes">
-          <div className="w-note"><span className="w-note-t">{t.addon.title}</span><span>{t.addon.body}</span></div>
-          <div className="w-note"><span className="w-note-t">{t.referral.title}</span><span>{t.referral.body}</span></div>
+        <div className="w-notes w-notes-single">
+          <div className="w-note"><span className="w-note-t">{t.disclaimer.title}</span><span>{t.disclaimer.body}</span></div>
         </div>
 
         <div className="w-conditions">

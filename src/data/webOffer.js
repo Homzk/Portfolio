@@ -81,7 +81,7 @@ export const SERVICES = [
     name:{ es:"Sitio pyme", en:"Business site" },
     desc:{ es:"Hasta 5 secciones —inicio, servicios, nosotros, galería y contacto— para mostrar tu negocio completo.",
       en:"Up to 5 sections —home, services, about, gallery and contact— to present your whole business." },
-    tags:{ es:["Hasta 5 secciones","Formulario","Galería"], en:["Up to 5 sections","Contact form","Gallery"] } },
+    tags:{ es:["Hasta 5 secciones","Reservas en línea","Galería"], en:["Up to 5 sections","Online bookings","Gallery"] } },
   { id:"tienda", img:"/media/cases/maderas-producto.jpg",
     name:{ es:"Tienda online", en:"Online store" },
     desc:{ es:"Catálogo con carrito y pagos con Mercado Pago o Webpay, con hasta 30 productos cargados.",
@@ -111,14 +111,39 @@ export const TOOLS = ["React", "Vite", "Vercel", "Cloudflare", "Google Business"
 export const PRICING_TIERS = [
   { id:"landing", priceCLP:150000, days:5, recommended:false,
     name:{ es:"Landing", en:"Landing" },
-    desc:{ es:"Una página para presentar un servicio o producto: quiénes son, qué ofrecen, contacto. Ideal para partir o para una campaña.",
-      en:"One page to present a service or product: who you are, what you offer, contact. Ideal to get started or for a campaign." } },
+    desc:{ es:"Una página para presentar un servicio o producto: quiénes son, qué ofrecen, y un formulario de contacto. Ideal para partir o para una campaña.",
+      en:"One page to present a service or product: who you are, what you offer, and a contact form. Ideal to get started or for a campaign." } },
   { id:"pyme", priceCLP:250000, days:10, recommended:true,
     name:{ es:"Sitio pyme", en:"Business site" },
-    desc:{ es:"Hasta 5 secciones (inicio, servicios, nosotros, galería, contacto) y formulario de contacto.",
-      en:"Up to 5 sections (home, services, about, gallery, contact) and a contact form." } },
+    desc:{ es:"Hasta 5 secciones (inicio, servicios, nosotros, galería, contacto), formulario de contacto, reservas en línea y mapa con horario.",
+      en:"Up to 5 sections (home, services, about, gallery, contact), contact form, online bookings and a map with opening hours." } },
   { id:"tienda", priceCLP:350000, days:15, recommended:false,
     name:{ es:"Tienda online", en:"Online store" },
     desc:{ es:"Todo lo del sitio pyme, más catálogo y carrito, hasta 30 productos cargados y pagos con Mercado Pago o Webpay.",
       en:"Everything in the business site plan, plus catalog and cart, up to 30 products loaded, with Mercado Pago or Webpay payments." } },
+];
+
+/* Comparación de planes (Pricing.jsx): una sola tabla, sin franja de
+   inclusiones compartidas — a pedido del usuario, lo que antes eran
+   chips arriba (celular, WhatsApp, SEO, https, dominio a tu nombre,
+   capacitación, QR, reseñas) se quitó de la vista; lo que sí importa
+   destacar (dominio/hosting gratis, formulario, rondas de cambio) pasó
+   a ser fila propia, aunque valga true en los tres planes. Una columna
+   por plan en el orden de PRICING_TIERS. Valor: true (incluido), false
+   (no incluido) o texto bilingüe. Cada plan incluye todo lo del anterior. */
+export const COMPARISON = [
+  { id:"alcance", label:{ es:"Alcance", en:"Scope" },
+    values:[{ es:"1 página", en:"1 page" }, { es:"Hasta 5 secciones", en:"Up to 5 sections" }, { es:"Sitio pyme + tienda", en:"Business site + store" }] },
+  { id:"entrega", label:{ es:"Entrega", en:"Delivery" },
+    values:PRICING_TIERS.map((t) => ({ es:`${t.days} días hábiles`, en:`${t.days} business days` })) },
+  { id:"dominio", label:{ es:"Dominio y hosting gratis el primer año", en:"Free domain and hosting for the first year" }, values:[true, true, true] },
+  { id:"formulario", label:{ es:"Formulario de contacto", en:"Contact form" }, values:[true, true, true] },
+  { id:"cambios", label:{ es:"3 rondas de cambios", en:"3 rounds of changes" }, values:[true, true, true] },
+  { id:"galeria", label:{ es:"Galería de fotos", en:"Photo gallery" }, values:[false, true, true] },
+  { id:"reservas", label:{ es:"Reservas u horas en línea", en:"Online bookings" }, values:[false, true, true] },
+  { id:"mapa", label:{ es:"Mapa y horario de atención", en:"Map and opening hours" }, values:[false, true, true] },
+  { id:"catalogo", label:{ es:"Catálogo y carrito de compras", en:"Catalog and shopping cart" }, values:[false, false, true] },
+  { id:"pagos", label:{ es:"Pagos con Mercado Pago o Webpay", en:"Mercado Pago or Webpay payments" }, values:[false, false, true] },
+  { id:"productos", label:{ es:"Productos cargados", en:"Products loaded" },
+    values:[false, false, { es:"Hasta 30", en:"Up to 30" }] },
 ];
