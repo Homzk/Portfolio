@@ -1,18 +1,21 @@
 /* ---------------- web/Hero ----------------
-   Hero oscuro de /web: textura de trazos + puntos, orbe naranja que
-   sigue el mouse (rAF+lerp del Hero principal, sin setState por frame),
-   y sello giratorio con una luna que recorre sus fases (símbolo propio,
+   Hero oscuro de /web: textura de trazos + puntos, luz lunar (orbe) y
+   sello giratorio con una luna que recorre sus fases (símbolo propio,
    src/components/Moon.jsx).
 
    Entrada con anime.js: timeline con el título partido en palabras
    (splitText), subrayado que se dibuja, círculo del sello trazado con
    svg.createDrawable y sello/asterisco con spring. El h1 lleva
    key={lang}: al cambiar de idioma se remonta en vez de parchear texto
-   que splitText ya reemplazó. */
+   que splitText ya reemplazó.
 
-import { useEffect, useRef } from "react";
+   Luz (orbe), scope propio: con mouse lo sigue (createAnimatable, se queda
+   donde quedó al salir); en táctil NO sigue el dedo —hacía saltos al hacer
+   scroll— y flota sola en una deriva lenta en bucle. Su punto de reposo lo
+   da el CSS (70% / 45%), así que con movimiento reducido queda ahí quieta. */
+
 import { MessageCircle, Check, ArrowRight } from "lucide-react";
-import { animate, createTimeline, splitText, stagger, utils, svg, spring } from "animejs";
+import { animate, createAnimatable, createTimeline, splitText, stagger, utils, svg, spring } from "animejs";
 import { useLang } from "../../i18n/LangContext";
 import { WEB } from "../../i18n/strings";
 import { waLink } from "../../data/site";
@@ -24,8 +27,6 @@ import { introDone } from "./introSignal";
 export default function Hero() {
   const { lang } = useLang();
   const t = WEB[lang];
-  const orbRef = useRef(null);
-
   const rootRef = useAnimeScope((self, el) => {
     const $ = (s) => el.querySelectorAll(s);
     const words = [...$(".w-h1-text")].flatMap((n) => splitText(n, { words: { wrap: "clip" } }).words);
@@ -60,44 +61,25 @@ export default function Hero() {
     return () => { alive = false; };
   }, [lang]);
 
-  useEffect(() => {
-    const root = rootRef.current, orb = orbRef.current; if (!root || !orb) return;
-    const half = () => (orb.offsetWidth || 520) / 2;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      const h = half();
-      orb.style.transform = `translate(${root.clientWidth * 0.7 - h}px,${root.clientHeight * 0.45 - h}px)`;
-      return;
+  const orbRef = useAnimeScope((self, orb) => {
+    const hero = orb.parentElement;
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      const follow = createAnimatable(orb, { x: 900, y: 900, ease: "out(3)" });
+      const onMove = (e) => {
+        const r = hero.getBoundingClientRect();
+        follow.x(e.clientX - r.left - r.width * 0.7);
+        follow.y(e.clientY - r.top - r.height * 0.45);
+      };
+      hero.addEventListener("pointermove", onMove, { passive: true });
+      return () => hero.removeEventListener("pointermove", onMove);
     }
-    const hasHover = window.matchMedia("(hover: hover)").matches;
-    let tx = root.clientWidth * 0.7, ty = root.clientHeight * 0.45, cx = tx, cy = ty, raf, active = false;
-    const t0 = performance.now();
-    const setTarget = (x, y) => { const r = root.getBoundingClientRect(); tx = x - r.left; ty = y - r.top; };
-    const onMove = (e) => { active = true; setTarget(e.clientX, e.clientY); };
-    const onEnd = () => { if (!hasHover) active = false; };
-    root.addEventListener("pointermove", onMove, { passive: true });
-    root.addEventListener("pointerdown", onMove, { passive: true });
-    root.addEventListener("pointerup", onEnd, { passive: true });
-    root.addEventListener("pointercancel", onEnd, { passive: true });
-    const loop = (now) => {
-      if (!active && !hasHover) {
-        const s = (now - t0) / 1000;
-        tx = root.clientWidth * (0.6 + 0.2 * Math.sin(s * 0.4));
-        ty = root.clientHeight * (0.45 + 0.18 * Math.cos(s * 0.31));
-      }
-      const h = half();
-      cx += (tx - cx) * 0.06; cy += (ty - cy) * 0.06;
-      orb.style.transform = `translate(${cx - h}px,${cy - h}px)`;
-      raf = requestAnimationFrame(loop);
-    };
-    raf = requestAnimationFrame(loop);
-    return () => {
-      cancelAnimationFrame(raf);
-      root.removeEventListener("pointermove", onMove);
-      root.removeEventListener("pointerdown", onMove);
-      root.removeEventListener("pointerup", onEnd);
-      root.removeEventListener("pointercancel", onEnd);
-    };
-  }, [rootRef]);
+    const w = hero.clientWidth, h = hero.clientHeight;
+    animate(orb, {
+      x: [0, -w * 0.28, -w * 0.1, w * 0.05, 0],
+      y: [0, h * 0.12, -h * 0.15, h * 0.08, 0],
+      duration: 18000, ease: "inOut(2)", loop: true,
+    });
+  });
 
   return (
     <section className="w-hero" id="top" ref={rootRef}>

@@ -94,7 +94,7 @@ function Faq({ t }) {
         {items.map(([q, a], i) => {
           const isOpen = i === open;
           return (
-            <div className={`w-acc-item${isOpen ? " open" : ""}`} key={q}>
+            <div className={`w-acc-item${isOpen ? " is-open" : ""}`} key={q}>
               <button className="w-acc-q" aria-expanded={isOpen} onClick={() => setOpen(isOpen ? -1 : i)}>
                 <span className="w-acc-n">{String(i + 1).padStart(2, "0")}</span>
                 <span className="w-acc-t">{q}</span>

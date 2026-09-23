@@ -67,7 +67,7 @@ export default function Sites() {
 
             const tilt = { onPointerMove: onTilt, onPointerLeave: offTilt };
             let card;
-            if (s.comingSoon) card = <article className="w-site soon">{body}</article>;
+            if (s.comingSoon) card = <article className="w-site is-soon">{body}</article>;
             else if (s.kind === "case") card = <Link className="w-site" to={`/proyecto/${s.slug}`} {...tilt}>{body}</Link>;
             else card = <a className="w-site" href={s.href} target="_blank" rel="noreferrer" {...tilt}>{body}</a>;
 

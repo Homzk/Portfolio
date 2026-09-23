@@ -189,7 +189,7 @@ export default function Services() {
                   <h3 className="w-svc-t" key={`${svc.id}-${lang}`}>{svc.name[lang]}</h3>
                   <p className="w-svc-d">{svc.desc[lang]}</p>
                   <div className="w-svc-inline">
-                    <div className="w-svc-visual"><Visual s={svc} m={t.mocks} /></div>
+                    <div className={`w-svc-visual${svc.img ? "" : " is-mock"}`}><Visual s={svc} m={t.mocks} /></div>
                     <div className="w-tags">{svc.tags[lang].map((tag) => <span key={tag}>{tag}</span>)}</div>
                   </div>
                 </li>
