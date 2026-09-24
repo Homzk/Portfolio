@@ -1,43 +1,72 @@
 # Estado del negocio de páginas web para pymes
 
 > Bitácora de avance del proyecto descrito en [`brief-alvarofr-web-pymes.md`](./brief-alvarofr-web-pymes.md).
-> Última actualización: **22 de septiembre de 2026**.
+> Última actualización: **23 de septiembre de 2026**.
 
 ---
 
 ## 1. Resumen en una línea
 
-La página de venta `/web` está publicada y el catálogo ya tiene **4 de 10 tarjetas
-activas** (2 clientes reales + 2 demos por rubro en sus propios subdominios).
-Faltan **6 demos de rubro** y los pendientes de marketing/medición.
+La página de venta, ahora rebrandeada como **Moonit**, está publicada en `/web`
+con rediseño completo (tema luna y estrellas + animaciones anime.js) y el
+catálogo tiene **4 de 10 tarjetas activas** (2 clientes reales + 2 demos por
+rubro en sus propios subdominios). Faltan **6 demos de rubro**, la compra de
+`moonit.cl` y el split a su propio repo/proyecto.
 
 ---
 
 ## 2. Qué está hecho
 
-### 2.1 Página `/web` (repo `Homzk/Portfolio`)
+### 2.1 Página `/web` (repo `Homzk/Portfolio`) — marca Moonit
 
 Ruta nueva dentro del portfolio, separada del home porque el público es distinto
 (dueños de pyme vs. reclutadores). Bilingüe ES/EN completo.
 
-Secciones: Hero → Catálogo (clientes reales + demos combinados) → Planes y precios
-→ Cómo funciona → Quién soy → FAQ → Cierre, más botón flotante de WhatsApp.
+Secciones actuales: Header flotante (píldora al scrollear + barra de progreso)
+→ Intro con la luna (solo primera visita de la sesión) → Hero → Sobre nosotros
+→ Servicios → Trabajos/Sitios en línea → Planes y precios (con tabla
+comparativa) → Cómo funciona → Contacto (formulario Formspree o WhatsApp) →
+FAQ con pestañas → estrellas laterales con parallax en todo el scroll.
 
-**Decisiones tomadas** (estaban pendientes en el brief):
+**Decisiones tomadas** (reemplazan las del brief original):
 
 | Decisión | Resultado |
 |---|---|
-| Estilo | Tokens del portfolio (hueso + ámbar, Fraunces/Hanken/JetBrains Mono). Del flyer se tomó **solo** la cinta negra con "Yo te la hago." |
+| Marca | Rebrandeada de "Álvaro Flores" a **Moonit** (2026-09-23): logo, intro y `<title>` dicen "Moonit"; copy en primera persona plural ("nosotros"), "Sobre mí" → "Sobre nosotros", Álvaro Flores presentado como **fundador**. Se quitaron todos los enlaces de `/web` de vuelta al portafolio (header, "Sobre nosotros") para que Moonit no arrastre referencias a `alvarofr.dev` cuando se mude a `moonit.cl` |
+| Estilo | Ya **no** usa los tokens hueso+ámbar del portfolio. Tema propio oscuro: noche azul, acento crema lunar, estrellas cian. Símbolo propio: luna SVG con fases (`src/components/Moon.jsx`) en vez del asterisco del portfolio |
 | Idioma | Bilingüe ES/EN desde el inicio, reusando el `LangProvider` existente |
 | Catálogo de rubros | Se unió la lista del brief con los rubros que pidió Álvaro: 8 rubros + 2 clientes reales, todo en un solo grid |
+| Planes y precios | Tabla comparativa estilo product-comparison (encabezado con la luna de cada plan en su fase); sin franja de inclusiones compartidas; dominio/hosting gratis el primer año pasa a ser beneficio de los 3 planes (se quitó el beneficio de referido de Gabriela Flores); nota de mantención reemplazada por aviso de precios referenciales |
 
 **Detalles técnicos:**
-- Todo el CSS nuevo vive en `src/styles/web.css`, acotado bajo `.web-root` — mismo
-  patrón que `case-study.css`. `global.css` casi no se tocó (solo el link discreto
-  hacia `/web` desde Contacto).
-- Datos en `src/data/webOffer.js`; copy en el namespace `WEB` de `src/i18n/strings.js`.
-- El test de paridad ES/EN cubre el namespace `WEB` (15 tests en verde).
-- WhatsApp con mensaje prellenado en los 3 CTA de `/web` (helper `waLink()` en `src/data/site.js`).
+- CSS en `src/styles/web.css`, acotado bajo `.web-root`; `.site` usa
+  `overflow-x:clip` en `/web` para que funcionen los paneles sticky.
+  `global.css` casi no se tocó.
+- Secciones en `src/sections/web/`: `Header`, `Intro`, `Hero`, `Pillars`
+  ("Sobre nosotros"), `Services`, `Showcase`, `Sites`, `Pricing`,
+  `HowItWorks`, `Contact`, `Faq`, `SideStars`, más helpers `motion.js`,
+  `scrollTo.js`, `introSignal.js`.
+- Animaciones con **anime.js** (`src/hooks/useAnimeScope.js`): título
+  partido en palabras, subrayado animado, scrambleText en Servicios,
+  inclinación 3D con el mouse, timeline de proceso ligada al scroll,
+  contador de precios, luna que recorre sus fases.
+- Intro de marca (`Intro.jsx`): la luna pasa de nueva a llena con anillo
+  animado y el nombre letra a letra; espera solo las fuentes (tope 1.6s),
+  sale con cortina; solo primera visita de la sesión y nunca con
+  `prefers-reduced-motion`.
+- Datos en `src/data/webOffer.js`; copy en el namespace `WEB` de
+  `src/i18n/strings.js`. Test de paridad ES/EN cubre el namespace `WEB`.
+- WhatsApp con mensaje prellenado (helper `waLink()` en `src/data/site.js`);
+  los mensajes ya no llevan el nombre de una persona (voz de equipo).
+- Contacto también acepta formulario vía Formspree como alternativa a
+  WhatsApp.
+- SEO: canonical/OG/Twitter/Schema.org/sitemap corregidos para apuntar al
+  dominio real `https://www.alvarofr.dev` (antes apuntaban al alias
+  `alvaro-flores.vercel.app`); `/web` agregado al sitemap. Imagen Open
+  Graph propia (`public/media/og-web-cover.jpg`, 1200×630, tema luna) —
+  antes caía a la imagen del portafolio personal al compartirse.
+- **Vercel Analytics** instalado (`@vercel/analytics`, sin cookies) — mide
+  vistas por página (home y `/web`); solo activo en producción/Vercel.
 
 ### 2.2 Repo de demos: `Homzk/plantillas-rubro` (privado)
 
@@ -90,16 +119,28 @@ publicadas son "Sitio pyme" y se parecen mucho entre sí en alcance; una landing
 real haría visible el contraste entre los tres niveles de precio (fue justo la
 duda que surgió: *"el sitio de la barbería parece mucho a una landing"*).
 
-### 3.2 Pendientes de `/web`
+### 3.2 Pendientes de `/web` / Moonit
 
-- **Imagen Open Graph propia** para `/web` (hoy cae a la del portfolio; funciona,
-  pero no es dedicada).
-- **Analítica de clics** (Vercel Analytics) sobre los botones de WhatsApp y las
-  tarjetas de demo.
+- **Analítica de clics** sobre los botones de WhatsApp y las tarjetas de demo —
+  **postergada a propósito** hasta la migración a `moonit.cl` (ver §3.3); no
+  agregarla antes de eso.
 - **Parámetro `?ref=gabriela`** en el link del flyer, para medir cuántos clientes
-  llegan por ese canal.
+  llegan por ese canal (nota: el beneficio de referido de Gabriela Flores en los
+  planes se quitó del pricing, pero el link de tracking en sí sigue pendiente).
 
-### 3.3 Fuera del código (tareas de Álvaro)
+### 3.3 Migración a Moonit / dominio propio
+
+- Comprar el dominio **moonit.cl**.
+- Cuando esté comprado: **split a repo y proyecto Vercel propios** (Opción A,
+  ya decidida) — no reabrir la discusión Opción A vs B. Mover
+  `src/sections/web/`, `src/components/Moon.jsx`, `src/styles/web.css`,
+  `src/data/webOffer.js`, el namespace `WEB` de `strings.js`, más infraestructura
+  genérica copiada (`LangContext`, `useDocumentMeta`, etc.). DNS/Vercel con el
+  mismo patrón que los subdominios de `plantillas-rubro` (Cloudflare CNAME,
+  DNS-only/nube gris).
+- Recién ahí: activar analítica de clics en WhatsApp/demos.
+
+### 3.4 Fuera del código (tareas de Álvaro)
 
 - Actualizar **flyer y cotización** para que apunten a `alvarofr.dev/web` + QR.
 - Confirmar si `profekarlis.cl` reemplaza a `profekarlis.vercel.app` como URL
@@ -146,3 +187,17 @@ duda que surgió: *"el sitio de la barbería parece mucho a una landing"*).
   Vale la pena mirar cada foto completa antes de usarla.
 - **`background-attachment: fixed`** no se lleva bien con iOS: desactivarlo bajo
   860px (ya está así en la taquería).
+- **Nombres de clase de estado chocan con reglas globales**: `.open` y `.soon`
+  en `/web` colisionaban con reglas globales del portafolio (`.open`, `.soon`)
+  y rompían el FAQ y las tarjetas "Próximamente". Se renombraron a `is-open` /
+  `is-soon`. Al reusar componentes/estilos entre el portfolio y `/web`,
+  preferir nombres de clase con prefijo o namespace propio, no genéricos.
+- **Animación por mouse en táctil**: seguir el cursor con `createAnimatable`
+  (anime.js) para la luz del hero saltaba al hacer tap/scroll en dispositivos
+  táctiles. Fix: solo seguir el mouse con puntero fino (`matchMedia
+  '(pointer: fine)'`); en táctil, deriva lenta automática — mismo patrón que
+  el fallback sin-hover del orbe del portfolio.
+- **`overflow-x` en el layout compartido**: los paneles `sticky` de `/web`
+  (Servicios) necesitan que `.site` tenga `overflow-x: clip` en esa ruta —
+  si el layout raíz usa `overflow: hidden`/auto en un ancestro, los sticky
+  dejan de fijarse.
